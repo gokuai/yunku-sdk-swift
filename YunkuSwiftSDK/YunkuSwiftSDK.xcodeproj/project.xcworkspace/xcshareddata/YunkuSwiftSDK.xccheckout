@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6CEB22F8-13EC-44D1-93B2-549042D13B38</string>
+	<key>IDESourceControlProjectName</key>
+	<string>YunkuSwiftSDK</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1341D24E77E2E3FF049C14256A583DB8DB67905C</key>
+		<string>https://github.com/gokuai/yunku-sdk-swift.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>YunkuSwiftSDK/YunkuSwiftSDK.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1341D24E77E2E3FF049C14256A583DB8DB67905C</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/gokuai/yunku-sdk-swift.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1341D24E77E2E3FF049C14256A583DB8DB67905C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1341D24E77E2E3FF049C14256A583DB8DB67905C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>yunku-sdk-swift</string>
+		</dict>
+	</array>
+</dict>
+</plist>
