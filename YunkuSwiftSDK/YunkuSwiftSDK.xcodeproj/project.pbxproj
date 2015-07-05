@@ -26,7 +26,6 @@
 		CAB037981B331F4100E84824 /* ParentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037781B331F4100E84824 /* ParentEngine.swift */; };
 		CAB037991B331F4100E84824 /* SignAbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037791B331F4100E84824 /* SignAbility.swift */; };
 		CAB0379A1B331F4100E84824 /* UploadCallBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0377B1B331F4100E84824 /* UploadCallBack.swift */; };
-		CAB0379B1B331F4100E84824 /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0377C1B331F4100E84824 /* UploadManager.swift */; };
 		CAB0379C1B331F4100E84824 /* AlgorithmType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0377E1B331F4100E84824 /* AlgorithmType.swift */; };
 		CAB0379D1B331F4100E84824 /* Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0377F1B331F4100E84824 /* Convenience.swift */; };
 		CAB0379E1B331F4100E84824 /* CRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037801B331F4100E84824 /* CRC.swift */; };
@@ -40,6 +39,7 @@
 		CAB037A61B331F4100E84824 /* SHA256.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037881B331F4100E84824 /* SHA256.swift */; };
 		CAB037A71B331F4100E84824 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037891B331F4100E84824 /* Utility.swift */; };
 		CAB037A81B331F4100E84824 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0378A1B331F4100E84824 /* Utils.swift */; };
+		CAC0D1E51B498C500024C8A9 /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAC0D1E41B498C500024C8A9 /* UploadManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,7 +75,6 @@
 		CAB037781B331F4100E84824 /* ParentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentEngine.swift; sourceTree = "<group>"; };
 		CAB037791B331F4100E84824 /* SignAbility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignAbility.swift; sourceTree = "<group>"; };
 		CAB0377B1B331F4100E84824 /* UploadCallBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadCallBack.swift; sourceTree = "<group>"; };
-		CAB0377C1B331F4100E84824 /* UploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
 		CAB0377E1B331F4100E84824 /* AlgorithmType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmType.swift; sourceTree = "<group>"; };
 		CAB0377F1B331F4100E84824 /* Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Convenience.swift; sourceTree = "<group>"; };
 		CAB037801B331F4100E84824 /* CRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRC.swift; sourceTree = "<group>"; };
@@ -89,6 +88,7 @@
 		CAB037881B331F4100E84824 /* SHA256.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA256.swift; sourceTree = "<group>"; };
 		CAB037891B331F4100E84824 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		CAB0378A1B331F4100E84824 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		CAC0D1E41B498C500024C8A9 /* UploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,7 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				CAB0377B1B331F4100E84824 /* UploadCallBack.swift */,
-				CAB0377C1B331F4100E84824 /* UploadManager.swift */,
+				CAC0D1E41B498C500024C8A9 /* UploadManager.swift */,
 			);
 			path = Upload;
 			sourceTree = "<group>";
@@ -288,7 +288,7 @@
 		CA1427CE1B185A1800CC0302 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = goukuai;
 				TargetAttributes = {
 					CA1427D61B185A1800CC0302 = {
@@ -354,6 +354,7 @@
 				CAB0379D1B331F4100E84824 /* Convenience.swift in Sources */,
 				CAB037A11B331F4100E84824 /* Digestible.swift in Sources */,
 				CAB037951B331F4100E84824 /* EntManager.swift in Sources */,
+				CAC0D1E51B498C500024C8A9 /* UploadManager.swift in Sources */,
 				CAB037A31B331F4100E84824 /* HTTPStatusCodes.swift in Sources */,
 				CAB037A01B331F4100E84824 /* DigestBuffer.swift in Sources */,
 				CAB0378E1B331F4100E84824 /* BaseData.swift in Sources */,
@@ -364,7 +365,6 @@
 				CAB037931B331F4100E84824 /* EntFileManager.swift in Sources */,
 				CAB037911B331F4100E84824 /* ReturnResult.swift in Sources */,
 				CAB037921B331F4100E84824 /* SyncMemberData.swift in Sources */,
-				CAB0379B1B331F4100E84824 /* UploadManager.swift in Sources */,
 				CAB037991B331F4100E84824 /* SignAbility.swift in Sources */,
 				CAB037A51B331F4100E84824 /* SHA1.swift in Sources */,
 				CAB0378D1B331F4100E84824 /* Constans.swift in Sources */,
@@ -396,7 +396,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -446,7 +445,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;

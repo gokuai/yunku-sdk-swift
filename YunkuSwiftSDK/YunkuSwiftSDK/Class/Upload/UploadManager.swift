@@ -1,27 +1,25 @@
 //
-//  UploadManager.swift
+//  Uploader.swift
 //  YunkuSwiftSDK
 //
-//  Created by Brandon on 15/6/15.
+//  Created by Brandon on 15/7/6.
 //  Copyright (c) 2015年 goukuai. All rights reserved.
 //
 
 import Foundation
-
-class UploadManager: SignAbility {
-
+public class UploadManager: SignAbility{
     let urlUploadInit = "/upload_init"
     let urlUploadPart = "/upload_part"
     let urlUploadAbort = "/upload_abort"
     let urlUploadFinish = "/upload_finish"
     let rangeSize = 65536
     // 上传分块大小-64K
-
+    
     var _server = ""
     var _session = ""
     var _apiUrl = ""
-
-//    var _data:NSData?
+    
+    //    var _data:NSData?
     var _fullPath = ""
     var _orgClientId = ""
     var _dateline = 0
@@ -33,10 +31,10 @@ class UploadManager: SignAbility {
     var _localPath = ""
     
     var _overWrite = false
-
+    
     var delegate : UploadCallBack?
-
-
+    
+    
     init(apiUrl: String, localPath: String, fullPath: String, opName: String, opId: Int, orgClientId: String, dateline: Int, clientSecret: String, overWirte: Bool) {
         super.init()
         _apiUrl = apiUrl
@@ -49,7 +47,7 @@ class UploadManager: SignAbility {
         _clientSecret = clientSecret
         _overWrite = overWirte
     }
-
+    
     func doUpload() {
         
         var checkValidation = NSFileManager.defaultManager()
@@ -58,20 +56,19 @@ class UploadManager: SignAbility {
         }else{
             if delegate != nil{
                 delegate?.onFail("\(_localPath)  file is not exist")
-                
             }
-        
+            
         }
     }
-
-
+    
+    
     //MARK:开始上传
     private func startUpload() -> Bool {
         
         var handler = NSFileHandle(forReadingAtPath: _localPath)
         var filesize = handler?.seekToEndOfFile()
         handler?.seekToFileOffset(0)
-
+        
         var fullPath = _fullPath
         
         var filehash = Utils.getFileSha1(_localPath)
@@ -93,13 +90,13 @@ class UploadManager: SignAbility {
                 var rangEnd:UInt64 = 0
                 var range = ""
                 
-                while handler?.offsetInFile < filesize{
+                while handler?.offsetInFile < filesize && !self.isStop{
                     var bufferData = handler?.readDataOfLength(rangeSize)
                     
                     //获取crc校验值
                     var crc32 = CRC().crc32Value(bufferData!)
-
-
+                    
+                    
                     //获取偏移量range值
                     rangeStart = UInt64(rangeIndex * rangeSize)
                     rangeEnd = rangeStart + UInt64((bufferData?.length)! - 1)
@@ -142,11 +139,9 @@ class UploadManager: SignAbility {
                         return false
                     }
                     
-                    
-                    
                     rangeIndex++
                 }
-
+                
                 var success = uploadCheck()
                 
                 if !success{
@@ -157,16 +152,15 @@ class UploadManager: SignAbility {
                     delegate?.onProgress(1)
                     delegate?.onSuccess(filehash)
                 }
-
+                
                 return true
                 
-                
             } else {
-
+                
                 if delegate != nil{
                     delegate?.onSuccess(filehash)
                 }
-
+                
                 return true
             }
             
@@ -176,7 +170,7 @@ class UploadManager: SignAbility {
         }
         
     }
-
+    
     //MARK:上传初始化
     private func uploadInit(hash: String, fileName: String, fullPath: String, fileHash: String,fileSize:UInt64) ->Bool {
         let url = _server + urlUploadInit + "?org_client_id=\(_orgClientId)"
@@ -199,7 +193,7 @@ class UploadManager: SignAbility {
         }
         return true
     }
-
+    
     //MARK:分块传输
     private func uploadPart(range:String,data:NSData,dataLength:Int,crc32:UInt32) -> ReturnResult {
         var returnResult = ReturnResult()
@@ -232,13 +226,13 @@ class UploadManager: SignAbility {
         
         return ReturnResult( code: httpcode, result: jsonResult)
     }
-
+    
     //MARK:分块传输
     private func uploadCheck() -> Bool {
         var result = ReturnResult.create(uploadFinish())
         return result.code == HTTPStatusCode.OK.rawValue
     }
-
+    
     //MARK:分块传输
     private func uploadFinish() -> Dictionary<String, AnyObject> {
         let url = _server + urlUploadFinish
@@ -246,14 +240,14 @@ class UploadManager: SignAbility {
         params["x-gk-upload-session"] = _session
         return NetConnection.sendRequest(url, method: "POST", params: nil, headParams: params)
     }
-
+    
     //MARK:分块传输
     private func reGetUploadServer(fileSize: UInt64, fileHash: String, fullPath: String) {
         var returnResult = ReturnResult.create(addFile(fileSize, fileHash: fileHash, fullPath: fullPath))
         var data = FileOperationData.create(returnResult.result!, code: returnResult.code)
         _server = data.server
     }
-
+    
     //MARK:分块传输
     private func uploadAbort() {
         let url = _server + urlUploadAbort
@@ -261,17 +255,17 @@ class UploadManager: SignAbility {
         params["x-gk-upload-session"] = _session
         NetConnection.sendRequest(url, method: "POST", params: nil, headParams: params)
     }
-
+    
     //MARK:添加文件
     private func addFile(fileSize: UInt64, fileHash: String, fullPath: String) -> Dictionary<String, AnyObject> {
-
+        
         let method = "POST"
         let url = _apiUrl
-        var params = Dictionary<String, String>()
+        var params = Dictionary<String, String?>()
         params["org_client_id"] = _orgClientId
         params["dateline"] = String(_dateline)
         params["fullpath"] = fullPath
-
+        
         if _opId > 0 {
             params["op_id"] = String(_opId)
         } else if (!_opName.isEmpty) {
@@ -279,19 +273,19 @@ class UploadManager: SignAbility {
         }
         params["overwrite"] = String(_overWrite ? 1 : 0)
         params["op_name"] = _opName
-        params["sign"] = generateSign(params)
-
+        params["sign"] = self.generateSign(params)
+        
         params["filesize"] = String(fileSize)
         params["filehash"] = fileHash
-
+        
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
     }
-
-    var isStop: Bool?
-
-    private func stop() {
+    
+    var isStop: Bool = false
+    
+    public func stop() {
         isStop = true
     }
-
-
+    
+    
 }

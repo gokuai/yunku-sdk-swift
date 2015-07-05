@@ -12,5 +12,8 @@ import Foundation
     var code: Int! = 0
     var errorMsg: String! = ""
     var errorCode :Int! = 0
+    
+    static let keyErrorcode = "error_code"
+    static let keyErrormsg = "error_msg"
 
 }

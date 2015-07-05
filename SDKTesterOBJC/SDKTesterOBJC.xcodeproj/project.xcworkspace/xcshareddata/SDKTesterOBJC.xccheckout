@@ -10,14 +10,14 @@
 	<string>SDKTesterOBJC</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>1341D24E77E2E3FF049C14256A583DB8DB67905C</key>
+		<key>0EC4E2F65F6118370C80AAA56E63744D918B3C2E</key>
 		<string>github.com:gokuai/yunku-sdk-swift.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>SDKTesterOBJC/SDKTesterOBJC.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>1341D24E77E2E3FF049C14256A583DB8DB67905C</key>
+		<key>0EC4E2F65F6118370C80AAA56E63744D918B3C2E</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>1341D24E77E2E3FF049C14256A583DB8DB67905C</string>
+	<string>0EC4E2F65F6118370C80AAA56E63744D918B3C2E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>1341D24E77E2E3FF049C14256A583DB8DB67905C</string>
+			<string>0EC4E2F65F6118370C80AAA56E63744D918B3C2E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>yunku-sdk-swift</string>
 		</dict>

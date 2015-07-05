@@ -83,19 +83,23 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:文件分块上传
-    public func uploadByBlock(localPath:String,fullPath:String,opName:String,opId:Int,overwrite:Bool,delegate:UploadCallBack) {
+    public func uploadByBlock(localPath:String,fullPath:String,opName:String,opId:Int,overwrite:Bool,delegate:UploadCallBack) -> UploadManager{
+        
+        var uploadManager = UploadManager(apiUrl: self.urlApiCreateFile, localPath: localPath, fullPath: fullPath, opName: opName, opId: opId, orgClientId: self._orgClientId, dateline: Utils.getUnixDateline(), clientSecret: self._clientSecret, overWirte: overwrite)
+        
+        uploadManager.delegate = delegate
         
         dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
             
-            var uploadManager = UploadManager(apiUrl: self.urlApiCreateFile, localPath: localPath, fullPath: fullPath, opName: opName, opId: opId, orgClientId: self._orgClientId, dateline: Utils.getUnixDateline(), clientSecret: self._clientSecret, overWirte: overwrite)
-          
-            uploadManager.delegate = delegate
             uploadManager.doUpload()
             
             dispatch_async(dispatch_get_main_queue()) {
 
             }
         }
+        
+        
+        return uploadManager
 
     }
 

@@ -120,6 +120,7 @@ SWIFT_CLASS("_TtC13YunkuSwiftSDK11SignAbility")
 @end
 
 @protocol UploadCallBack;
+@class UploadManager;
 @class NSData;
 
 SWIFT_CLASS("_TtC13YunkuSwiftSDK14EntFileManager")
@@ -129,7 +130,7 @@ SWIFT_CLASS("_TtC13YunkuSwiftSDK14EntFileManager")
 - (NSDictionary * __nonnull)getUpdateList:(BOOL)isCompare fetchDateline:(NSInteger)fetchDateline;
 - (NSDictionary * __nonnull)getFileInfo:(NSString * __nonnull)fullPath;
 - (NSDictionary * __nonnull)createFolder:(NSString * __nonnull)fullPath opName:(NSString * __nonnull)opName;
-- (void)uploadByBlock:(NSString * __nonnull)localPath fullPath:(NSString * __nonnull)fullPath opName:(NSString * __nonnull)opName opId:(NSInteger)opId overwrite:(BOOL)overwrite delegate:(id <UploadCallBack> __nonnull)delegate;
+- (UploadManager * __nonnull)uploadByBlock:(NSString * __nonnull)localPath fullPath:(NSString * __nonnull)fullPath opName:(NSString * __nonnull)opName opId:(NSInteger)opId overwrite:(BOOL)overwrite delegate:(id <UploadCallBack> __nonnull)delegate;
 - (NSDictionary * __nonnull)createFile:(NSString * __nonnull)fullPath opName:(NSString * __nonnull)opName data:(NSData * __nonnull)data;
 - (NSDictionary * __nonnull)del:(NSString * __nonnull)fullPaths opName:(NSString * __nonnull)opName;
 - (NSDictionary * __nonnull)move:(NSString * __nonnull)fullPath destFullPath:(NSString * __nonnull)destFullPath opName:(NSString * __nonnull)opName;
@@ -199,6 +200,10 @@ SWIFT_CLASS("_TtC13YunkuSwiftSDK17FileOperationData")
 - (SWIFT_NULLABILITY(nonnull) instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+/// HTTP status codes as per http://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+///
+/// The RF2616 standard is completely covered (http://www.ietf.org/rfc/rfc2616.txt)
 typedef SWIFT_ENUM(NSInteger, HTTPStatusCode) {
   HTTPStatusCodeContinue = 100,
   HTTPStatusCodeSwitchingProtocols = 101,
@@ -321,6 +326,12 @@ SWIFT_PROTOCOL("_TtP13YunkuSwiftSDK14UploadCallBack_")
 - (void)onSuccess:(NSString * __nonnull)fileHash;
 - (void)onFail:(NSString * __nonnull)errorMsg;
 - (void)onProgress:(float)percent;
+@end
+
+
+SWIFT_CLASS("_TtC13YunkuSwiftSDK13UploadManager")
+@interface UploadManager : SignAbility
+- (void)stop;
 @end
 
 #pragma clang diagnostic pop

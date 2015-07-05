@@ -9,8 +9,6 @@ public class FileOperationData :BaseData {
     
     static let stateNoupload = 1
     
-    static let keyErrorcode = "error_code"
-    static let keyErrormsg = "error_msg"
     static let keyState = "state"
     static let keyHash = "hash"
     static let keyVersion = "version"

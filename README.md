@@ -1267,4 +1267,8 @@ org_client_secret用于调用库文件相关API签名时的密钥
 	LogLevelWarning //warning级别以上的所有日志
 	LogLevelError //error级别的日志
 	
+## 常见错误
 
+>header '/usr/include/CommonCrypto/CommonCrypto.h' not found
+
+这个有可能是本地没有这个文件，可以尝试更换成类似 “/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk/usr/include/CommonCrypto/CommonCrypto.h” ，这个路径会根据不同环境变化，需要先确保能在机子这个路径上找到这个文件，然后将路径替换成你的本地 CommonCrypto.h 这个文件的全路径
