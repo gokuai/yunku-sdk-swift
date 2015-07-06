@@ -200,10 +200,6 @@ SWIFT_CLASS("_TtC13YunkuSwiftSDK17FileOperationData")
 - (SWIFT_NULLABILITY(nonnull) instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-
-/// HTTP status codes as per http://en.wikipedia.org/wiki/List_of_HTTP_status_codes
-///
-/// The RF2616 standard is completely covered (http://www.ietf.org/rfc/rfc2616.txt)
 typedef SWIFT_ENUM(NSInteger, HTTPStatusCode) {
   HTTPStatusCodeContinue = 100,
   HTTPStatusCodeSwitchingProtocols = 101,
