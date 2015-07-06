@@ -174,7 +174,7 @@ public class UploadManager: SignAbility{
     //MARK:上传初始化
     private func uploadInit(hash: String, fileName: String, fullPath: String, fileHash: String,fileSize:UInt64) ->Bool {
         let url = _server + urlUploadInit + "?org_client_id=\(_orgClientId)"
-        var params = Dictionary<String, String>()
+        var params = Dictionary<String, String?>()
         params["x-gk-upload-pathhash"] = hash
         params["x-gk-upload-filename"] = fileName.urlEncode
         params["x-gk-upload-filehash"] = fileHash
@@ -236,7 +236,7 @@ public class UploadManager: SignAbility{
     //MARK:分块传输
     private func uploadFinish() -> Dictionary<String, AnyObject> {
         let url = _server + urlUploadFinish
-        var params = Dictionary<String, String>()
+        var params = Dictionary<String, String?>()
         params["x-gk-upload-session"] = _session
         return NetConnection.sendRequest(url, method: "POST", params: nil, headParams: params)
     }
@@ -251,7 +251,7 @@ public class UploadManager: SignAbility{
     //MARK:分块传输
     private func uploadAbort() {
         let url = _server + urlUploadAbort
-        var params = Dictionary<String, String>()
+        var params = Dictionary<String, String?>()
         params["x-gk-upload-session"] = _session
         NetConnection.sendRequest(url, method: "POST", params: nil, headParams: params)
     }
