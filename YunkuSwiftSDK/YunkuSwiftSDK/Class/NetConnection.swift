@@ -25,7 +25,7 @@ import Foundation
 
         //生成请求url
         var requestUrl = ""
-        if method == "POST" {
+        if method == "POST" { 
             requestUrl = urlPath
         } else if method == "GET" {
             requestUrl = urlPath + "?" + requestString

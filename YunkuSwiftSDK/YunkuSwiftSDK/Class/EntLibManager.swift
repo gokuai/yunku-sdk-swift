@@ -25,14 +25,15 @@ public class EntLibManager: ParentEngine {
     let urlApiGetInfo = HostConfig.libHost + "/1/org/info"
 
 
-    public init(username: String, password: String, clientId: String, clientSecret: String, token: String) {
-        super.init(username: username, password: password, clientId: clientId, clientSecret: clientSecret)
-        self._token = token
+    public override init(clientId: String, clientSecret: String,isEnt:Bool) {
+        super.init(clientId: clientId, clientSecret: clientSecret,isEnt:isEnt)
+        
 
     }
 
-    public override init(username: String, password: String, clientId: String, clientSecret: String) {
-        super.init(username: username, password: password, clientId: clientId, clientSecret: clientSecret)
+    public init(clientId: String, clientSecret: String,isEnt:Bool,token:String) {
+        super.init(clientId: clientId, clientSecret: clientSecret,isEnt:isEnt)
+        self._token = token
     }
 
     //MARK:创建库
@@ -255,7 +256,7 @@ public class EntLibManager: ParentEngine {
 
     //MARK:复制一个 EntLibManager
     public func clone() -> EntLibManager {
-        return EntLibManager(username: _username, password: _password, clientId: _clientId, clientSecret: _clientId)
+        return EntLibManager(clientId: _clientId, clientSecret: _clientId,isEnt: _isEnt)
     }
 
 }

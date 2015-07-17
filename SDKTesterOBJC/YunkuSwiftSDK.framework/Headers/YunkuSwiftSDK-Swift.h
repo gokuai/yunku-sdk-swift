@@ -96,12 +96,6 @@ typedef SWIFT_ENUM(NSInteger, AuthType) {
   AuthTypeUpload = 3,
 };
 
-
-SWIFT_CLASS("_TtC13YunkuSwiftSDK8BaseData")
-@interface BaseData : NSObject
-- (SWIFT_NULLABILITY(nonnull) instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
 enum LogLevel : NSInteger;
 
 SWIFT_CLASS("_TtC13YunkuSwiftSDK6Config")
@@ -119,7 +113,9 @@ SWIFT_CLASS("_TtC13YunkuSwiftSDK11SignAbility")
 - (SWIFT_NULLABILITY(nonnull) instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+enum NetType : NSInteger;
 @protocol UploadCallBack;
+@class UploadManager;
 @class NSData;
 
 SWIFT_CLASS("_TtC13YunkuSwiftSDK14EntFileManager")
@@ -127,9 +123,9 @@ SWIFT_CLASS("_TtC13YunkuSwiftSDK14EntFileManager")
 - (SWIFT_NULLABILITY(nonnull) instancetype)initWithOrgClientId:(NSString * __nonnull)orgClientId orgClientSecret:(NSString * __nonnull)orgClientSecret OBJC_DESIGNATED_INITIALIZER;
 - (NSDictionary * __nonnull)getFileList:(NSInteger)start fullPath:(NSString * __nonnull)fullPath;
 - (NSDictionary * __nonnull)getUpdateList:(BOOL)isCompare fetchDateline:(NSInteger)fetchDateline;
-- (NSDictionary * __nonnull)getFileInfo:(NSString * __nonnull)fullPath;
+- (NSDictionary * __nonnull)getFileInfo:(NSString * __nonnull)fullPath type:(enum NetType)type;
 - (NSDictionary * __nonnull)createFolder:(NSString * __nonnull)fullPath opName:(NSString * __nonnull)opName;
-- (void)uploadByBlock:(NSString * __nonnull)localPath fullPath:(NSString * __nonnull)fullPath opName:(NSString * __nonnull)opName opId:(NSInteger)opId overwrite:(BOOL)overwrite delegate:(id <UploadCallBack> __nonnull)delegate;
+- (UploadManager * __nonnull)uploadByBlock:(NSString * __nonnull)localPath fullPath:(NSString * __nonnull)fullPath opName:(NSString * __nonnull)opName opId:(NSInteger)opId overwrite:(BOOL)overwrite delegate:(id <UploadCallBack> __nonnull)delegate;
 - (NSDictionary * __nonnull)createFile:(NSString * __nonnull)fullPath opName:(NSString * __nonnull)opName data:(NSData * __nonnull)data;
 - (NSDictionary * __nonnull)del:(NSString * __nonnull)fullPaths opName:(NSString * __nonnull)opName;
 - (NSDictionary * __nonnull)move:(NSString * __nonnull)fullPath destFullPath:(NSString * __nonnull)destFullPath opName:(NSString * __nonnull)opName;
@@ -137,6 +133,8 @@ SWIFT_CLASS("_TtC13YunkuSwiftSDK14EntFileManager")
 - (NSDictionary * __nonnull)sendmsg:(NSString * __nonnull)title text:(NSString * __nonnull)text image:(NSString * __nullable)image linkUrl:(NSString * __nullable)linkUrl opName:(NSString * __nonnull)opName;
 - (NSDictionary * __nonnull)links:(BOOL)fileOnly;
 - (NSDictionary * __nonnull)getUpdateCounts:(NSInteger)beginDateline endDateline:(NSInteger)endDateline showDelete:(BOOL)showDelete;
+- (NSDictionary * __nonnull)createFileByUrl:(NSString * __nonnull)fullPath opId:(NSInteger)opId opName:(NSString * __null_unspecified)opName overwrite:(BOOL)overwrite fileUrl:(NSString * __nonnull)fileUrl;
+- (NSDictionary * __nonnull)getUploadServers;
 - (NSDictionary * __nonnull)getServerSite:(NSString * __nonnull)type;
 - (EntFileManager * __nonnull)clone;
 @end
@@ -144,15 +142,15 @@ SWIFT_CLASS("_TtC13YunkuSwiftSDK14EntFileManager")
 
 SWIFT_CLASS("_TtC13YunkuSwiftSDK12ParentEngine")
 @interface ParentEngine : SignAbility
-- (NSDictionary * __nonnull)accessToken:(BOOL)isEnt;
+- (NSDictionary * __nonnull)accessToken:(NSString * __nonnull)username password:(NSString * __nonnull)password;
 @end
 
 enum MemberType : NSInteger;
 
 SWIFT_CLASS("_TtC13YunkuSwiftSDK13EntLibManager")
 @interface EntLibManager : ParentEngine
-- (SWIFT_NULLABILITY(nonnull) instancetype)initWithUsername:(NSString * __nonnull)username password:(NSString * __nonnull)password clientId:(NSString * __nonnull)clientId clientSecret:(NSString * __nonnull)clientSecret token:(NSString * __nonnull)token OBJC_DESIGNATED_INITIALIZER;
-- (SWIFT_NULLABILITY(nonnull) instancetype)initWithUsername:(NSString * __nonnull)username password:(NSString * __nonnull)password clientId:(NSString * __nonnull)clientId clientSecret:(NSString * __nonnull)clientSecret OBJC_DESIGNATED_INITIALIZER;
+- (SWIFT_NULLABILITY(nonnull) instancetype)initWithClientId:(NSString * __nonnull)clientId clientSecret:(NSString * __nonnull)clientSecret isEnt:(BOOL)isEnt OBJC_DESIGNATED_INITIALIZER;
+- (SWIFT_NULLABILITY(nonnull) instancetype)initWithClientId:(NSString * __nonnull)clientId clientSecret:(NSString * __nonnull)clientSecret isEnt:(BOOL)isEnt token:(NSString * __nonnull)token OBJC_DESIGNATED_INITIALIZER;
 - (NSDictionary * __nonnull)create:(NSString * __nonnull)orgName orgCapacity:(NSString * __nullable)orgCapacity storagePointName:(NSString * __nullable)storagePointName orgDesc:(NSString * __nullable)orgDesc orgLogo:(NSString * __nullable)orgLogo;
 - (NSDictionary * __nonnull)getLibList;
 - (NSDictionary * __nonnull)bindLib:(NSInteger)orgId title:(NSString * __nullable)title linkUrl:(NSString * __nullable)linkUrl;
@@ -175,14 +173,15 @@ SWIFT_CLASS("_TtC13YunkuSwiftSDK13EntLibManager")
 
 SWIFT_CLASS("_TtC13YunkuSwiftSDK10EntManager")
 @interface EntManager : ParentEngine
-- (SWIFT_NULLABILITY(nonnull) instancetype)initWithUsername:(NSString * __nonnull)username password:(NSString * __nonnull)password clientId:(NSString * __nonnull)clientId clientSecret:(NSString * __nonnull)clientSecret OBJC_DESIGNATED_INITIALIZER;
-- (SWIFT_NULLABILITY(nonnull) instancetype)initWithUsername:(NSString * __nonnull)username password:(NSString * __nonnull)password clientId:(NSString * __nonnull)clientId clientSecret:(NSString * __nonnull)clientSecret token:(NSString * __nonnull)token OBJC_DESIGNATED_INITIALIZER;
+- (SWIFT_NULLABILITY(nonnull) instancetype)initWithClientId:(NSString * __nonnull)clientId clientSecret:(NSString * __nonnull)clientSecret isEnt:(BOOL)isEnt OBJC_DESIGNATED_INITIALIZER;
+- (SWIFT_NULLABILITY(nonnull) instancetype)initWithClientId:(NSString * __nonnull)clientId clientSecret:(NSString * __nonnull)clientSecret isEnt:(BOOL)isEnt token:(NSString * __nonnull)token OBJC_DESIGNATED_INITIALIZER;
 - (NSDictionary * __nonnull)getRoles;
 - (NSDictionary * __nonnull)getMembers:(NSInteger)start size:(NSInteger)size;
 - (NSDictionary * __nonnull)getGroups;
 - (NSDictionary * __nonnull)getMemberFileLink:(NSInteger)memberId fileOnly:(BOOL)fileOnly;
-- (NSDictionary * __nonnull)getMemberByOutid:(NSArray * __nonnull)outIds;
-- (NSDictionary * __nonnull)getMemberByUserId:(NSArray * __nonnull)userIds;
+- (NSDictionary * __nonnull)getMemberById:(NSInteger)memberId;
+- (NSDictionary * __nonnull)getMemberByOutId:(NSString * __nonnull)outId;
+- (NSDictionary * __nonnull)getMemberByAccount:(NSString * __nonnull)account;
 - (NSDictionary * __nonnull)addSyncMember:(NSString * __nonnull)oudId memberName:(NSString * __nonnull)memberName account:(NSString * __nonnull)account memberEmail:(NSString * __nullable)memberEmail memberPhone:(NSString * __nullable)memberPhone password:(NSString * __nullable)password;
 - (NSDictionary * __nonnull)delSyncMember:(NSArray * __nonnull)members;
 - (NSDictionary * __nonnull)addSyncGroup:(NSString * __nonnull)outId name:(NSString * __nonnull)name parentOutId:(NSString * __nullable)parentOutId;
@@ -191,12 +190,6 @@ SWIFT_CLASS("_TtC13YunkuSwiftSDK10EntManager")
 - (NSDictionary * __nonnull)delSyncGroupMember:(NSString * __nonnull)groupOutId members:(NSArray * __nonnull)members;
 - (NSDictionary * __nonnull)getGroupMembers:(NSInteger)groupId start:(NSInteger)start size:(NSInteger)size showChild:(BOOL)showChild;
 - (EntManager * __nonnull)clone;
-@end
-
-
-SWIFT_CLASS("_TtC13YunkuSwiftSDK17FileOperationData")
-@interface FileOperationData : BaseData
-- (SWIFT_NULLABILITY(nonnull) instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 typedef SWIFT_ENUM(NSInteger, HTTPStatusCode) {
@@ -299,11 +292,10 @@ typedef SWIFT_ENUM(NSInteger, MemberType) {
 - (NSData * __nonnull)sha1;
 @end
 
-
-SWIFT_CLASS("_TtC13YunkuSwiftSDK9OauthData")
-@interface OauthData : BaseData
-- (SWIFT_NULLABILITY(nonnull) instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
+typedef SWIFT_ENUM(NSInteger, NetType) {
+  NetTypeDefault = 0,
+  NetTypeIn = 1,
+};
 
 
 
@@ -318,9 +310,15 @@ SWIFT_CLASS("_TtC13YunkuSwiftSDK12ReturnResult")
 
 SWIFT_PROTOCOL("_TtP13YunkuSwiftSDK14UploadCallBack_")
 @protocol UploadCallBack
-- (void)onSuccess:(NSString * __nonnull)fileHash;
+- (void)onSuccess:(NSString * __nonnull)fileHash fullPath:(NSString * __nonnull)fullPath;
 - (void)onFail:(NSString * __nonnull)errorMsg;
 - (void)onProgress:(float)percent;
+@end
+
+
+SWIFT_CLASS("_TtC13YunkuSwiftSDK13UploadManager")
+@interface UploadManager : SignAbility
+- (void)stop;
 @end
 
 #pragma clang diagnostic pop

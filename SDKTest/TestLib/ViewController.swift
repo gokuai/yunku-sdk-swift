@@ -25,11 +25,10 @@ class ViewController: UIViewController,UploadCallBack{
         
         //=======库操作========//
         
-        _libManager = EntLibManager(username: OauthConfig.username, password: OauthConfig.password
-            , clientId: OauthConfig.clientId, clientSecret: OauthConfig.clientSecret);
+        _libManager = EntLibManager(clientId: OauthConfig.clientId, clientSecret: OauthConfig.clientSecret, isEnt: true);
         
         //获取token 认证
-                deserializeReturn(_libManager!.accessToken(true))
+//                deserializeReturn(_libManager!.accessToken(OauthConfig.username,password: OauthConfig.password))
         
         
         // 1T="1099511627776" 1G＝“1073741824”
@@ -93,7 +92,7 @@ class ViewController: UIViewController,UploadCallBack{
         _fileManager = EntFileManager(orgClientId: orgClientId, orgClientSecret: orgClientSecret)
         
         //获取文件列表
-        deserializeReturn( _fileManager!.getFileList(0, fullPath: ""))
+//        deserializeReturn( _fileManager!.getFileList(0, fullPath: ""))
         
         //获取更新列表
         //        deserializeReturn(_fileManager!.getUpdateList(false, fetchDateline: 0))
@@ -107,7 +106,7 @@ class ViewController: UIViewController,UploadCallBack{
         //            endDateline: Int(NSDate.new().timeIntervalSince1970*1000) , showDelete: false))
         
         //获取文件(夹)信息
-        //        deserializeReturn(_fileManager!.getFileInfo("test.apk"))
+//                deserializeReturn(_fileManager!.getFileInfo("test.apk",type: NetType.Default))
         
         //创建文件夹
         //        deserializeReturn(_fileManager!.createFolder("test", opName: "Brandon"))
@@ -134,15 +133,20 @@ class ViewController: UIViewController,UploadCallBack{
         
         
         //文件分块上传
-        //        _fileManager?.uploadByBlock("/Users/Brandon/Desktop/gugepinyinshurufa_427.apk",
-        //            fullPath: "test.apk", opName: "Brandon", opId: 0, overwrite: true, delegate: self)
+//                _fileManager?.uploadByBlock("/Users/Brandon/Desktop/gugepinyinshurufa_427.apk",
+//                    fullPath: "test.apk", opName: "Brandon", opId: 0, overwrite: true, delegate: self)
+        
+         //通过链接上传文件
+//        deserializeReturn(_fileManager!.createFileByUrl("中文.jpg", opId: 0, opName: "Brandon", overwrite: true, fileUrl: "http://www.sinaimg.cn/dy/slidenews/1_img/2015_27/2841_589214_521618.jpg"))
+        
+        //WEB直接上传文件 (支持50MB以上文件的上传)
+//        deserializeReturn(_fileManager!.getUploadServers())
         
         //=======企业操作========//
-        _entManager = EntManager(username: OauthConfig.username, password: OauthConfig.password,
-            clientId: OauthConfig.clientId, clientSecret: OauthConfig.clientSecret)
+        _entManager = EntManager(clientId: OauthConfig.clientId, clientSecret: OauthConfig.clientSecret,isEnt:true)
         
         //身份认证
-        //        deserializeReturn(_entManager!.accessToken(true))
+//                deserializeReturn(_entManager!.accessToken(OauthConfig.username,OauthConfig.password))
         
         //获取角色
         //        deserializeReturn(_entManager!.getRoles())
@@ -159,11 +163,14 @@ class ViewController: UIViewController,UploadCallBack{
         //根据成员id获取成员个人库外链
         //        deserializeReturn(_entManager!.getMemberFileLink(52, fileOnly: true))
         
-        //根据外部成员id获取成员信息
-        //        deserializeReturn(_entManager!.getMemberByOutid(["nishuonishuo"]))
+        //根据成员Id查询企业成员信息
+//        deserializeReturn(_entManager!.getMemberById(42))
         
-        //根据外部成员登录帐号获取成员信息（new）
-        //        deserializeReturn(_entManager!.getMemberByUserId(["shipeng3"]))
+        //根据外部系统唯一id查询企业成员信息
+//        deserializeReturn(_entManager!.getMemberByOutId("dqwdqw"))
+        
+        //根据外部系统登录帐号查询企业成员信息
+//        deserializeReturn(_entManager!.getMemberByAccount("nishuonishuo"))
         
         //添加或修改同步成员
         //        deserializeReturn(_entManager!.addSyncMember("MemberTest1", memberName: "Member2", account: "Member1", memberEmail: "123@qq.com", memberPhone: "111", password: ""))
@@ -198,7 +205,7 @@ class ViewController: UIViewController,UploadCallBack{
         
     }
     
-    func onSuccess(fileHash: String) {
+    func onSuccess(fileHash: String,fullPath:String) {
         
         println("onSuccess: \(fileHash)")
         

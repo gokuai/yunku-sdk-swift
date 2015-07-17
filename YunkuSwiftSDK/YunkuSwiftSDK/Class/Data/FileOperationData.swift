@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class FileOperationData :BaseData {
+class FileOperationData :BaseData {
     
     static let stateNoupload = 1
     

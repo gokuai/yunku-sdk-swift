@@ -7,9 +7,13 @@
 //
 
 import Foundation
-extension String {
-    var urlEncode :String! {
-        var customAllowedSet =  NSCharacterSet(charactersInString:"!*'();:@&=+$,/?%#[]").invertedSet
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!
+public extension String {
+//    public var urlEncode :String! {
+//        var customAllowedSet =  NSCharacterSet(charactersInString:"!*'();:@&=+$,/?%#[]^").invertedSet
+//        return self.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!.stringByAddingPercentEscapesUsingEncoding
+//    }
+    
+    public var urlEncode: String! {
+        return self.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-@objc public class BaseData : NSObject {
+@objc class BaseData : NSObject {
     var code: Int! = 0
     var errorMsg: String! = ""
     var errorCode :Int! = 0

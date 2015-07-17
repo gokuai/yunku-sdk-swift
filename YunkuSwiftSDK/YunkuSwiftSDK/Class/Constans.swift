@@ -57,3 +57,16 @@ import Foundation
 
 }
 
+//MARK:文件网络类型
+@objc public enum NetType:Int{
+    
+    case Default = 0, In
+    public var description: String {
+        switch self {
+        case .Default: return "";//外网
+        case .In: return "in";//内网
+        }
+    }
+
+}
+

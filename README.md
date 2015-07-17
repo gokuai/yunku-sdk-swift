@@ -60,34 +60,34 @@ Robots: noindex,nofollow
 ###构造方法
 **swift**
 
-	EntLibManager（username:String,password:String,clientId:String,clientSecret:String）
+	EntLibManager（clientId:String,clientSecret:String,isEnt:Bool）
 
 **objc**
 
-	[[EntLibManager alloc]initWithUsername:(NSString *)username password:(NSString *)password clientId:(NSString *)clientId clientSecret:(NSString *)clientSecret] 
+	[[EntLibManager alloc]initWithClientId:(NSString *)clientId clientSecret:(NSString *)clientSecret inEnt:BOOL] 
 
 
 #### 参数 
 | 参数 | 必须 | 类型 | 说明 |
 | --- | --- | --- | --- |
-| username | 是 | string | 用户名 |
-| password | 是 | string | 密码|
 | clientId | 是 | string | 申请应用时分配的AppKey |
 | clientSecret | 是 | string | 申请应用时分配的AppSecret |
+| isEnt | 是 | boolean | 是否是企业帐号登录|
 
 ---
 
 ### 授权
 **swift**
 
-	accessToken(isEnt:BOOL)
+	accessToken(username:String,password:String)
 **objc**
 	
-	accessToken:(BOOL)isEnt
+	[accessToken:(NSString*)username password:password]
 #### 参数 
 | 参数 | 必须 | 类型 | 说明 |
 | --- | --- | --- | --- |
-| isEnt | 是 | boolean | 是否是企业帐号登录|
+| username | 是 | string | 用户名 |
+| password | 是 | string | 密码|
 
 
 #### 返回结果
@@ -582,6 +582,74 @@ org_client_secret用于调用库文件相关API签名时的密钥
 	}
 
 ---
+### 根据成员Id查询企业成员信息
+	getMemberById(int memberId)
+
+#### 参数 
+	
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| memberId | 是 | int | 成员id |
+
+
+#### 返回结果
+
+	{
+      "member_id": 成员id,
+      "member_name": 成员显示名,
+      "member_email": 成员邮箱,
+      "out_id": 外部系统唯一id,
+      "account": 外部系统登录帐号,
+      "state": 成员状态。1：已接受，2：未接受
+	}
+
+---
+
+### 根据外部系统唯一id查询企业成员信息
+	getMemberByOutId(String outId)
+
+#### 参数 
+	
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| outId | 是 | String | 外部系统唯一id|
+
+
+#### 返回结果
+
+	{
+      "member_id": 成员id,
+      "member_name": 成员显示名,
+      "member_email": 成员邮箱,
+      "out_id": 外部系统唯一id,
+      "account": 外部系统登录帐号,
+      "state": 成员状态。1：已接受，2：未接受
+	}
+
+---
+### 根据外部系统登录帐号查询企业成员信息
+	String getMemberByAccount(String account)
+
+#### 参数 
+	
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| account | 是 | String | 外部系统登录帐号 |
+
+
+#### 返回结果
+
+	{
+      "member_id": 成员id,
+      "member_name": 成员显示名,
+      "member_email": 成员邮箱,
+      "out_id": 外部系统唯一id,
+      "account": 外部系统登录帐号,
+      "state": 成员状态。1：已接受，2：未接受
+	}
+
+---
+
 
 ### 查询库成员信息
 **swift**
@@ -611,6 +679,96 @@ org_client_secret用于调用库文件相关API签名时的密钥
 			},
 			...
 		}
+
+---
+
+### 根据成员Id查询企业成员信息
+**swift**
+
+	getMemberById(memberId:Int)
+	
+**objc**
+
+	getMemberById:(NSInteger)memberId;
+
+#### 参数 
+	
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| memberId | 是 | int | 成员id |
+
+
+#### 返回结果
+
+	{
+      "member_id": 成员id,
+      "member_name": 成员显示名,
+      "member_email": 成员邮箱,
+      "out_id": 外部系统唯一id,
+      "account": 外部系统登录帐号,
+      "state": 成员状态。1：已接受，2：未接受
+	}
+
+---
+
+### 根据外部系统唯一id查询企业成员信息
+
+**swift**
+
+	getMemberByOutId(outId:String)
+	
+**objc**
+
+	getMemberByOutId:(NSString *)outId;
+	
+
+#### 参数 
+	
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| outId | 是 | String | 外部系统唯一id|
+
+
+#### 返回结果
+
+	{
+      "member_id": 成员id,
+      "member_name": 成员显示名,
+      "member_email": 成员邮箱,
+      "out_id": 外部系统唯一id,
+      "account": 外部系统登录帐号,
+      "state": 成员状态。1：已接受，2：未接受
+	}
+
+---
+### 根据外部系统登录帐号查询企业成员信息
+
+**swift**
+
+	getMemberByAccount(account:String)
+	
+**objc**
+
+	getMemberByAccount:(NSString *)account;
+	
+
+#### 参数 
+	
+| 参数 | 必须 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| account | 是 | String | 外部系统登录帐号 |
+
+
+#### 返回结果
+
+	{
+      "member_id": 成员id,
+      "member_name": 成员显示名,
+      "member_email": 成员邮箱,
+      "out_id": 外部系统唯一id,
+      "account": 外部系统登录帐号,
+      "state": 成员状态。1：已接受，2：未接受
+	}
 
 ---
 
@@ -703,60 +861,6 @@ org_client_secret用于调用库文件相关API签名时的密钥
     	},
     	...
 	]
-
----
-###根据外部成员id获取成员信息
-
-**swift**
-
-	getMemberByOutid(outIds:[String])
-
-**objc**
-
-	getMemberByOutid:(NSArray *)outIds;
-
-#### 参数 
-| 参数 | 必须 | 类型 | 说明 |
-| --- | --- | --- | --- |
-| out_ids | 是 | array | 外部成员登录帐号数组 |
-#### 返回结果
-	{
-		out_id:{
-			"member_id": 成员id,
-			"account": 外部账号,
-			"member_name": 成员显示名,
-			"member_email": 成员邮箱,
-			"state": 成员状态。1：已接受，2：未接受
-		},
-		...
-	}
-
----
-
-###根据外部登录帐号获取成员信息
-
-**swift**
-
-	getMemberByUserId(userIds:[String])
-	
-**objc**
-	
-	getMemberByUserId:(NSArray *)userIds;
-#### 参数 
-| 参数 | 必须 | 类型 | 说明 |
-| --- | --- | --- | --- |
-| userIds | 是 | array | 外部成员id数组 |
-#### 返回结果
-	{
-		user_id:{
-			"member_id": 成员id,
-			"account": 外部账号,
-			"member_name": 成员显示名,
-			"member_email": 成员邮箱,
-			"state": 成员状态。1：已接受，2：未接受
-		},
-		...
-	}
 
 ---
 
@@ -1020,16 +1124,18 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 **swift**
 
-	getFileInfo( fullPath: String)
+	getFileInfo( fullPath: String,type:NetType)
 
 **objc**
 
-	getFileInfo:(NSString *)fullPath;
+	getFileInfo:(NSString *)fullPath type:NetType;
 #### 参数 
 | 名称 | 必需 | 类型 | 说明 |
 | --- | --- | --- | --- |
 
 | fullPath | 是 | string | 文件路径 |
+| type | 是 | NetType | 网络类型 Default为外网，In为内容 |
+
 
 #### 返回结果
 
@@ -1110,6 +1216,8 @@ org_client_secret用于调用库文件相关API签名时的密钥
 | fullpath | string | 文件路径 |
 | filehash | string | 文件内容hash |
 | filesize | long | 文件大小 |
+
+
 
 ---
 ###文件分块上传
@@ -1237,6 +1345,56 @@ org_client_secret用于调用库文件相关API签名时的密钥
 	]
 
 ---
+
+###通过链接上传文件
+
+**swift**
+
+	createFileByUrl(fullpath:String, opId:Int, opName:String, overwrite:Bool, url: String)
+	
+**objc**
+	
+	createFileByUrl:(NSString *)fullPath opId:(NSInteger)opId opName:(NSString *)opName overwrite:(BOOL)overwrite fileUrl:(NSString *)fileUrl;
+
+#### 参数 
+| 名称 | 必需 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| fullpath | 是 | string | 文件路径 |
+| opId | 否 | int | 创建人id, 个人库默认是库拥有人id, 如果创建人不是云库用户, 可以用op_name代替|
+| opName | 否 | string | 创建人名称, 如果指定了opId, 就不需要opName|
+| overwrite | 是 | boolean | 是否覆盖同名文件, true覆盖(默认) false不覆盖,文件名后增加数字标识|
+| url | 是 | string | 需要服务端获取的文件url|
+
+#### 返回结果
+	正常返回 HTTP 200 
+
+---
+
+###WEB直接上传文件
+
+**swift**
+
+	getUploadServers()
+
+**objc**
+	
+	getUploadServers
+
+#### 参数 
+
+(无)
+
+#### 返回结果
+	{
+       "upload":
+       [
+          上传服务器地址 如:http://upload.domain.com,
+         ...
+       ]
+	}
+
+---
+
 
 ## SDK日志（**Config.swift** ）
 

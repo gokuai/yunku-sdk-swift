@@ -9,28 +9,28 @@ public class ParentEngine: SignAbility {
     let urlApiToken = HostConfig.oauthHost + "/oauth2/token"
 
     var _clientId = ""
-    var _username = ""
-    var _password = ""
     var _token = ""
+    var _tokenType = ""
+    var _isEnt = false
 
-    init(username: String, password: String, clientId: String, clientSecret: String) {
+    init(clientId: String, clientSecret: String,isEnt:Bool) {
         super.init()
-        _username = username
-        _password = password
         _clientId = clientId
         _clientSecret = clientSecret;
-
+        _isEnt = isEnt
+        _tokenType = isEnt ? "ent":""
     }
 
-    public func accessToken(isEnt: Bool) -> Dictionary<String, AnyObject> {
+    public func accessToken(username:String, password:String) -> Dictionary<String, AnyObject> {
         let url = urlApiToken;
         let methodString = "POST"
         var params = Dictionary<String, String?>()
-        params["username"] = _username
-        params["password"] = _password.md5
+        params["username"] = username
+        params["password"] = password.md5
         params["client_id"] = _clientId
-        params["client_secret"] = _clientSecret
-        params["grant_type"] = isEnt ? "ent_password" : "password"
+        params["grant_type"] = _isEnt ? "ent_password" : "password"
+        params["dateline"] = String(Utils.getUnixDateline())
+        params["sign"] = generateSign(params)
 
         var returnDiction = NetConnection.sendRequest(url, method: methodString, params: params, headParams: nil)
         var returnResult = ReturnResult.create(returnDiction)

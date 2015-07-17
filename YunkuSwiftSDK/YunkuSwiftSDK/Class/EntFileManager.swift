@@ -20,6 +20,8 @@ public class EntFileManager: SignAbility {
     let urlApiGetLink = HostConfig.libHost + "/1/file/links"
     let urlApiUpdateCount = HostConfig.libHost + "/1/file/updates_count"
     let urlApiGetServerSite = HostConfig.libHost + "/1/file/servers"
+    let urlApiCreateFileByUrl = HostConfig.libHost + "/1/file/create_file_by_url"
+    let urlApiUploadSevers = HostConfig.libHost + "/1/file/upload_servers"
 
     var _orgClientId = ""
 
@@ -58,13 +60,21 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:获取文件信息
-    public func getFileInfo(fullPath: String) -> Dictionary<String, AnyObject> {
+    public func getFileInfo(fullPath: String,type:NetType) -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiFileInfo
         var params = Dictionary<String, String?>()
         params["org_client_id"] = _orgClientId
         params["dateline"] = String(Utils.getUnixDateline())
         params["fullpath"] = fullPath
+        
+        switch(type){
+        case .Default:
+            ()
+        case .In:
+            params["net"] = type.description
+            
+        }
         params["sign"] = generateSign(params)
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
     }
@@ -270,6 +280,36 @@ public class EntFileManager: SignAbility {
         params["begin_dateline"] = String(beginDateline)
         params["end_dateline"] = String(endDateline)
         params["showdel"] = String(showDelete ? 1 : 0)
+        params["sign"] = generateSign(params)
+        return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
+    }
+    
+    //MARK:通过链接上传文件
+    public func createFileByUrl(fullPath:String,opId:Int,opName:String!,overwrite:Bool,fileUrl:String) -> Dictionary<String, AnyObject> {
+        let method = "POST"
+        let url = urlApiCreateFileByUrl
+        var params = Dictionary<String, String?>()
+        params["org_client_id"] = _orgClientId
+        params["fullpath"] = fullPath
+        params["dateline"] = String(Utils.getUnixDateline())
+        if opId > 0{
+            params["op_id"] = String(opId)
+        }else{
+            params["op_name"] = opName
+        }
+        params["overwrite"] = String( overwrite ? 1: 0)
+        params["url"] = fileUrl
+        params["sign"] = generateSign(params)
+        return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
+    }
+    
+     //MARK:获取上传地址
+    public func getUploadServers() -> Dictionary<String, AnyObject> {
+        let method = "GET"
+        let url = urlApiUploadSevers
+        var params = Dictionary<String, String?>()
+        params["org_client_id"] = _orgClientId
+        params["dateline"] = String(Utils.getUnixDateline())
         params["sign"] = generateSign(params)
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
     }

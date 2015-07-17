@@ -36,9 +36,9 @@
 
     [Config setLogLevel:LogLevelInfo];
 
-    _entLibManager = [[EntLibManager alloc] initWithUsername:USERNAME password:PASSWORD clientId:CLIENTID clientSecret:CLIENTSECRET];
+    _entLibManager = [[EntLibManager alloc]initWithClientId:CLIENTID clientSecret:CLIENTSECRET isEnt:true];
 
-    [self deserializeReturn:[_entLibManager accessToken:true]];
+    [self deserializeReturn:[_entLibManager accessToken:USERNAME password:PASSWORD]];
 
     // 1T="1099511627776" 1G＝“1073741824”
     //创建库
@@ -115,7 +115,7 @@
 //    [self deserializeReturn:[_entFileManager getUpdateCounts:(NSInteger) twoDaysAgo.timeIntervalSince1970 endDateline:(NSInteger) [NSDate new].timeIntervalSince1970 showDelete:NO]];
 
     //获取文件(夹)信息
-//    [self deserializeReturn:[_entFileManager getFileInfo:@"test.apk"]];
+//    [self deserializeReturn:[_entFileManager getFileInfo:@"test.apk" type:NetTypeDefault]];
 
     //创建文件夹
 //    [self deserializeReturn:[_entFileManager createFolder:@"test" opName:@"Brandon"]];
@@ -144,12 +144,18 @@
     //文件分块上传
 //    [_entFileManager uploadByBlock:@"/Users/Brandon/Desktop/gugepinyinshurufa_427.apk" fullPath:@"test.apk"
 //                            opName:@"Brandon" opId:0 overwrite:YES delegate:self];
-
+    
+    //通过链接上传文件
+//    [_entFileManager createFileByUrl:@"中文.jpg" opId:0 opName:@"Brandon" overwrite:YES fileUrl:@"http://www.sinaimg.cn/dy/slidenews/1_img/2015_27/2841_589214_521618.jpg"];
+    
+    //WEB直接上传文件 (支持50MB以上文件的上传)
+//    [_entFileManager getUploadServers];
+    
     //=======企业操作========//
-    _entManager = [[EntManager alloc] initWithUsername:USERNAME password:PASSWORD clientId:CLIENTID clientSecret:CLIENTSECRET];
+    _entManager = [[EntManager alloc]initWithClientId:CLIENTID clientSecret:CLIENTSECRET isEnt:true];
 
     //身份认证
-    [self deserializeReturn:[_entManager accessToken:YES]];
+//    [self deserializeReturn:[_entManager accessToken:USERNAME password:PASSWORD]];
 
     //获取角色
 //    [self deserializeReturn:[_entManager getRoles]];
@@ -167,11 +173,15 @@
 
 //    [self deserializeReturn:[_entManager getMemberFileLink:52 fileOnly:YES]];
 
-    //根据外部成员id获取成员信息
-//    [self deserializeReturn:[_entManager getMemberByOutid:@[@"nishuonishuo"]]];
 
-    //根据外部成员登录帐号获取成员信息（new）
-//    [self deserializeReturn:[_entManager getMemberByUserId:@[@"shipeng3"]]];
+    //根据成员Id查询企业成员信息
+//    [self deserializeReturn:[_entManager getMemberById:42]];
+    
+    //根据外部系统唯一id查询企业成员信息
+//    [self deserializeReturn:[_entManager getMemberByOutId:@"nishuonishuo"]];
+    
+    //根据外部系统登录帐号查询企业成员信息
+//    [self deserializeReturn:[_entManager getMemberByAccount:@"shipeng3"]];
 
     //添加或修改同步成员
 //    [self deserializeReturn:[_entManager addSyncMember:@"MemberTest1" memberName:@"Member2"
@@ -220,7 +230,7 @@
 
 }
 
-- (void)onSuccess:(NSString *)fileHash {
+- (void)onSuccess:(NSString * __nonnull)fileHash fullPath:(NSString * __nonnull)fullPath {
 
 }
 

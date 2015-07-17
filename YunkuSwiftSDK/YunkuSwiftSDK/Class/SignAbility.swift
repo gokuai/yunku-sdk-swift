@@ -25,5 +25,21 @@ import Foundation
 
         return generateString.sign(HMACAlgorithm.SHA1, key: _clientSecret).urlEncode
     }
+    
+    public class func generateSign(dic:Dictionary<String, String?>, clientSecret:String, encode:Bool ) ->String {
+        var removeEmptyDic = Utils.removeEmptyParmas(dic)
+        
+        let sortedDic = Array(removeEmptyDic).sorted({ $0.0 < $1.0 })
+        
+        var generateString = ""
+        
+        for (index, value) in enumerate(sortedDic) {
+            if value.1 != nil {
+                generateString += value.1! + (index == (sortedDic.count - 1) ? "" : "\n")
+            }
+        }
+        
+        return encode ? generateString.sign(HMACAlgorithm.SHA1, key: clientSecret).urlEncode: generateString.sign(HMACAlgorithm.SHA1, key: clientSecret)
+    }
 
 }

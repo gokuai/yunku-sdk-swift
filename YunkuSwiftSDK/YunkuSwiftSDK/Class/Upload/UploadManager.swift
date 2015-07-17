@@ -55,7 +55,11 @@ public class UploadManager: SignAbility{
             startUpload()
         }else{
             if delegate != nil{
-                delegate?.onFail("\(_localPath)  file is not exist")
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.delegate?.onFail("file is not exist")
+                    LogPrint.error("\(self._localPath) file is not exit")
+                }
+                
             }
             
         }
@@ -68,6 +72,15 @@ public class UploadManager: SignAbility{
         var handler = NSFileHandle(forReadingAtPath: _localPath)
         var filesize = handler?.seekToEndOfFile()
         handler?.seekToFileOffset(0)
+        
+        if self.delegate != nil{
+            if filesize == nil {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.delegate?.onFail("this is error a file")
+                }
+                
+            }
+        }
         
         var fullPath = _fullPath
         
@@ -103,7 +116,10 @@ public class UploadManager: SignAbility{
                     range = "\(rangeStart)-\(rangeEnd)"
                     
                     if delegate != nil{
-                        delegate?.onProgress( Float(rangeStart) / Float(filesize!))
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.delegate?.onProgress( Float(rangeStart) / Float(filesize!))
+                        }
+                        
                     }
                     
                     var returnResult = uploadPart(range, data: bufferData!, dataLength: bufferData!.length, crc32: crc32)
@@ -149,8 +165,10 @@ public class UploadManager: SignAbility{
                 }
                 
                 if delegate != nil{
-                    delegate?.onProgress(1)
-                    delegate?.onSuccess(filehash)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.delegate?.onProgress(1)
+                        self.delegate?.onSuccess(filehash,fullPath:fullPath)
+                    }
                 }
                 
                 return true
@@ -158,7 +176,10 @@ public class UploadManager: SignAbility{
             } else {
                 
                 if delegate != nil{
-                    delegate?.onSuccess(filehash)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.delegate?.onSuccess(filehash,fullPath:fullPath)
+                    }
+                    
                 }
                 
                 return true

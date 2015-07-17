@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class OauthData: BaseData {
+class OauthData: BaseData {
     static let keyAccessToken = "access_token"
     static let keyExpiresIn = "expires_in"
     static let keyError = "error"
