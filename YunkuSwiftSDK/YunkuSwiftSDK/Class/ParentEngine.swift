@@ -6,7 +6,7 @@
 import Foundation
 
 public class ParentEngine: SignAbility {
-    let urlApiToken = HostConfig.oauthHost + "/oauth2/token"
+    let urlApiToken = HostConfig.oauthHost + "/oauth2/token2"
 
     var _clientId = ""
     var _token = ""
