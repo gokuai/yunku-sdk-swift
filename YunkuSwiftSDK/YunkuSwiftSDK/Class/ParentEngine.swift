@@ -26,7 +26,15 @@ public class ParentEngine: SignAbility {
         let methodString = "POST"
         var params = Dictionary<String, String?>()
         params["username"] = username
-        params["password"] = password.md5
+        
+        var passwordEncode:String;
+        if username.rangeOfString("\\") != nil || username.rangeOfString("/") != nil{
+            passwordEncode = Utils.byteArrayToBase64([UInt8](username.utf8))
+        }else{
+            passwordEncode = password.md5
+        }
+        
+        params["password"] = passwordEncode
         params["client_id"] = _clientId
         params["grant_type"] = _isEnt ? "ent_password" : "password"
         params["dateline"] = String(Utils.getUnixDateline())
