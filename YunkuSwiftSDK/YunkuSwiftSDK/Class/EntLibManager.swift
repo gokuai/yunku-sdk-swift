@@ -27,8 +27,6 @@ public class EntLibManager: ParentEngine {
 
     public override init(clientId: String, clientSecret: String,isEnt:Bool) {
         super.init(clientId: clientId, clientSecret: clientSecret,isEnt:isEnt)
-        
-
     }
 
     public init(clientId: String, clientSecret: String,isEnt:Bool,token:String) {
@@ -42,7 +40,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiCreateLib
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["org_name"] = orgName
         params["org_capacity"] = orgCapacity
         params["storage_point_name"] = storagePointName
@@ -58,7 +56,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiGetLibList
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["sign"] = generateSign(params)
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
     }
@@ -69,7 +67,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiBind
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["org_id"] = String(orgId)
         params["title"] = title
         params["url"] = linkUrl
@@ -84,7 +82,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiUnbind
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["org_client_id"] = orgClientId
         params["sign"] = generateSign(params)
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
@@ -96,7 +94,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiGetMembers
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["start"] = String(start)
         params["size"] = String(size)
         params["org_id"] = String(orgId)
@@ -110,7 +108,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiAddMembers
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["role_id"] = String(roleId)
         params["org_id"] = String(orgId)
         params["member_ids"] = ",".join(memberIds)
@@ -124,7 +122,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiSetMemberRole
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["role_id"] = String(roleId)
         params["org_id"] = String(orgId)
         params["member_ids"] = ",".join(memberIds)
@@ -138,7 +136,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiDelMember
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["org_id"] = String(orgId)
         params["member_ids"] = ",".join(memberIds)
         params["sign"] = generateSign(params)
@@ -151,7 +149,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiGetGroups
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["org_id"] = String(orgId)
         params["sign"] = generateSign(params)
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
@@ -163,7 +161,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiAddGroup
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["org_id"] = String(orgId)
         params["group_id"] = String(groupId)
         params["role_id"] = String(roleId)
@@ -177,7 +175,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiDelGroup
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["org_id"] = String(orgId)
         params["group_id"] = String(groupId)
         params["sign"] = generateSign(params)
@@ -190,7 +188,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiSetGroupRole
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["org_id"] = String(orgId)
         params["group_id"] = String(groupId)
         params["role_id"] = String(roleId)
@@ -205,7 +203,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiDestroy
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["org_client_id"] = String(orgClientId)
         params["sign"] = generateSign(params)
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
@@ -218,7 +216,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiSet
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["org_id"] = String(orgId)
         params["org_name"] = orgName
         params["org_capacity"] = orgCapacity
@@ -234,7 +232,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiGetMember
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["org_id"] = String(orgId)
         params["type"] = type.description.lowercaseString
         params["ids"] = ",".join(ids)
@@ -248,7 +246,7 @@ public class EntLibManager: ParentEngine {
         let url = urlApiGetInfo
         var params = Dictionary<String, String?>()
         params["token"] = _token
-        params["token_type"] = "ent"
+        params["token_type"] = _tokenType
         params["org_id"] = String(orgId)
         params["sign"] = generateSign(params)
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
