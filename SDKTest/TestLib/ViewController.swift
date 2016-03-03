@@ -28,7 +28,7 @@ class ViewController: UIViewController,UploadCallBack{
         _libManager = EntLibManager(clientId: OauthConfig.clientId, clientSecret: OauthConfig.clientSecret, isEnt: true);
         
         //获取token 认证
-//                deserializeReturn(_libManager!.accessToken(OauthConfig.username,password: OauthConfig.password))
+        deserializeReturn(_libManager!.accessToken(OauthConfig.username,password: OauthConfig.password))
         
         
         // 1T="1099511627776" 1G＝“1073741824”
@@ -201,35 +201,35 @@ class ViewController: UIViewController,UploadCallBack{
     
     func onFail(errorMsg: String) {
         
-        println("onFail: \(errorMsg)")
+        print("onFail: \(errorMsg)")
         
     }
     
     func onSuccess(fileHash: String,fullPath:String) {
         
-        println("onSuccess: \(fileHash)")
+        print("onSuccess: \(fileHash)")
         
     }
     
     func onProgress(percent: Float) {
         
-        println("onProgress: \(percent)")
+        print("onProgress: \(percent)")
         
     }
 
 
     func deserializeReturn(result: Dictionary<String, AnyObject>) {
-        var returnResult = ReturnResult.create(result)
+        let returnResult = ReturnResult.create(result)
         if returnResult.code == HTTPStatusCode.OK.rawValue {
             //请求成功
-            println("return 200")
+            print("return 200")
 
         } else {
-            var baseData = BaseData.create(returnResult.result!)
-            println("\(baseData.errorCode):\(baseData.errorMsg)")
+            let baseData = BaseData.create(returnResult.result!)
+            print("\(baseData.errorCode):\(baseData.errorMsg)")
         }
 
-        println(returnResult.result)
+        print(returnResult.result)
     }
     
 

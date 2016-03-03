@@ -50,7 +50,7 @@ public class UploadManager: SignAbility{
     
     func doUpload() {
         
-        var checkValidation = NSFileManager.defaultManager()
+        let checkValidation = NSFileManager.defaultManager()
         if checkValidation.fileExistsAtPath(_localPath){
             startUpload()
         }else{
@@ -69,8 +69,8 @@ public class UploadManager: SignAbility{
     //MARK:开始上传
     private func startUpload() -> Bool {
         
-        var handler = NSFileHandle(forReadingAtPath: _localPath)
-        var filesize = handler?.seekToEndOfFile()
+        let handler = NSFileHandle(forReadingAtPath: _localPath)
+        let filesize = handler?.seekToEndOfFile()
         handler?.seekToFileOffset(0)
         
         if self.delegate != nil{
@@ -82,13 +82,13 @@ public class UploadManager: SignAbility{
             }
         }
         
-        var fullPath = _fullPath
+        let fullPath = _fullPath
         
-        var filehash = Utils.getFileSha1(_localPath)
-        var fileName = _fullPath.lastPathComponent
+        let filehash = Utils.getFileSha1(_localPath)
+        let fileName = (_fullPath as NSString).lastPathComponent
         
-        var returnResult = ReturnResult.create(addFile(filesize!, fileHash: filehash, fullPath: fullPath))
-        var data = FileOperationData.create(returnResult.result!, code: returnResult.code)
+        let returnResult = ReturnResult.create(addFile(filesize!, fileHash: filehash, fullPath: fullPath))
+        let data = FileOperationData.create(returnResult.result!, code: returnResult.code)
         
         if data.code == HTTPStatusCode.OK.rawValue{
             
@@ -104,10 +104,10 @@ public class UploadManager: SignAbility{
                 var range = ""
                 
                 while handler?.offsetInFile < filesize && !self.isStop{
-                    var bufferData = handler?.readDataOfLength(rangeSize)
+                    let bufferData = handler?.readDataOfLength(rangeSize)
                     
                     //获取crc校验值
-                    var crc32 = CRC().crc32Value(bufferData!)
+                    let crc32 = CRC().crc32Value(bufferData!)
                     
                     
                     //获取偏移量range值
@@ -122,7 +122,7 @@ public class UploadManager: SignAbility{
                         
                     }
                     
-                    var returnResult = uploadPart(range, data: bufferData!, dataLength: bufferData!.length, crc32: crc32)
+                    let returnResult = uploadPart(range, data: bufferData!, dataLength: bufferData!.length, crc32: crc32)
                     
                     if returnResult.code == HTTPStatusCode.OK.rawValue{
                         
@@ -139,7 +139,7 @@ public class UploadManager: SignAbility{
                     } else if returnResult.code == HTTPStatusCode.Unauthorized.rawValue {
                         //认证失败
                         
-                        var success =  uploadInit(data.uuidHash, fileName: fileName, fullPath: fullPath, fileHash: filehash, fileSize: filesize!)
+                        let success =  uploadInit(data.uuidHash, fileName: fileName, fullPath: fullPath, fileHash: filehash, fileSize: filesize!)
                         
                         if !success{
                             return false
@@ -148,7 +148,7 @@ public class UploadManager: SignAbility{
                     } else if returnResult.code == HTTPStatusCode.Conflict.rawValue {
                         
                         var dic = returnResult.result
-                        var partRangeStart = dic?["expect"] as! UInt64
+                        let partRangeStart = dic?["expect"] as! UInt64
                         rangeStart = partRangeStart
                         
                     } else {
@@ -158,7 +158,7 @@ public class UploadManager: SignAbility{
                     rangeIndex++
                 }
                 
-                var success = uploadCheck()
+                let success = uploadCheck()
                 
                 if !success{
                     return false
@@ -200,8 +200,8 @@ public class UploadManager: SignAbility{
         params["x-gk-upload-filename"] = fileName.urlEncode
         params["x-gk-upload-filehash"] = fileHash
         params["x-gk-upload-filesize"] = String(fileSize)
-        var resultDic = NetConnection.sendRequest(url, method: "POST", params: nil, headParams: params)
-        var retrunResult = ReturnResult.create(resultDic)
+        let resultDic = NetConnection.sendRequest(url, method: "POST", params: nil, headParams: params)
+        let retrunResult = ReturnResult.create(resultDic)
         var returnResultDic = retrunResult.result
         if retrunResult.code == HTTPStatusCode.OK.rawValue {
             _session = returnResultDic?["session"] as! String
@@ -217,10 +217,9 @@ public class UploadManager: SignAbility{
     
     //MARK:分块传输
     private func uploadPart(range:String,data:NSData,dataLength:Int,crc32:UInt32) -> ReturnResult {
-        var returnResult = ReturnResult()
         
-        var url: NSURL = NSURL(string: _server + urlUploadPart)!
-        var request = NSMutableURLRequest(URL: url)
+        let url: NSURL = NSURL(string: _server + urlUploadPart)!
+        let request = NSMutableURLRequest(URL: url)
         
         request.addValue(Config.userAgent, forHTTPHeaderField: "User-Agent")
         request.timeoutInterval = Config.connectTimeOut
@@ -233,12 +232,16 @@ public class UploadManager: SignAbility{
         
         var response: NSURLResponse?
         
-        var dataVal: NSData = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: nil)!
+        let dataVal: NSData = try! NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
         
         //输出返回
         LogPrint.info(NSString(data: dataVal, encoding: NSUTF8StringEncoding))
-        var error: NSError?
-        var jsonResult = NSJSONSerialization.JSONObjectWithData(dataVal, options: NSJSONReadingOptions.MutableContainers, error: &error) as? Dictionary<String, AnyObject>
+        var jsonResult:Dictionary<String, AnyObject>!
+        do{
+            jsonResult = try NSJSONSerialization.JSONObjectWithData(dataVal, options: NSJSONReadingOptions.MutableContainers) as? Dictionary<String, AnyObject>
+        }catch{
+            jsonResult = Dictionary<String, AnyObject>()
+        }
         
         var httpcode: Int = 0
         if let httpResponse = response as? NSHTTPURLResponse {
@@ -250,7 +253,7 @@ public class UploadManager: SignAbility{
     
     //MARK:分块传输
     private func uploadCheck() -> Bool {
-        var result = ReturnResult.create(uploadFinish())
+        let result = ReturnResult.create(uploadFinish())
         return result.code == HTTPStatusCode.OK.rawValue
     }
     
@@ -264,8 +267,8 @@ public class UploadManager: SignAbility{
     
     //MARK:分块传输
     private func reGetUploadServer(fileSize: UInt64, fileHash: String, fullPath: String) {
-        var returnResult = ReturnResult.create(addFile(fileSize, fileHash: fileHash, fullPath: fullPath))
-        var data = FileOperationData.create(returnResult.result!, code: returnResult.code)
+        let returnResult = ReturnResult.create(addFile(fileSize, fileHash: fileHash, fullPath: fullPath))
+        let data = FileOperationData.create(returnResult.result!, code: returnResult.code)
         _server = data.server
     }
     

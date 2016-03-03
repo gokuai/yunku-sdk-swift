@@ -17,6 +17,8 @@
 		CA74CB021B1EF84E00807C5A /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA74CB011B1EF84E00807C5A /* BaseData.swift */; };
 		CAB037C91B332D8200E84824 /* OauthConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037C81B332D8200E84824 /* OauthConfig.swift */; };
 		CABC04451B3A4F2100FCD0C3 /* YunkuSwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CABC043D1B3A4B1100FCD0C3 /* YunkuSwiftSDK.framework */; };
+		CAC65E841C880B010005D36D /* YunkuSwiftSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CABC043D1B3A4B1100FCD0C3 /* YunkuSwiftSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CAC65E851C880B010005D36D /* CommonCrypto.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAC65E681C87FC350005D36D /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +50,35 @@
 			remoteGlobalIDString = CA1427D61B185A1800CC0302;
 			remoteInfo = YunkuSwiftSDK;
 		};
+		CAC65E671C87FC350005D36D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CABC04371B3A4B1100FCD0C3 /* YunkuSwiftSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CAC65E411C87E3EE0005D36D;
+			remoteInfo = CommonCrypto;
+		};
+		CAC65E691C87FC350005D36D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CABC04371B3A4B1100FCD0C3 /* YunkuSwiftSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CAC65E4A1C87E3EE0005D36D;
+			remoteInfo = CommonCryptoTests;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CAC65E7E1C8809A30005D36D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CAC65E841C880B010005D36D /* YunkuSwiftSDK.framework in CopyFiles */,
+				CAC65E851C880B010005D36D /* CommonCrypto.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CA71D9F61B1C32B6004E119A /* SDKTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDKTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,6 +183,8 @@
 			children = (
 				CABC043D1B3A4B1100FCD0C3 /* YunkuSwiftSDK.framework */,
 				CABC043F1B3A4B1100FCD0C3 /* YunkuSwiftSDKTests.xctest */,
+				CAC65E681C87FC350005D36D /* CommonCrypto.framework */,
+				CAC65E6A1C87FC350005D36D /* CommonCryptoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,6 +199,7 @@
 				CA71D9F21B1C32B6004E119A /* Sources */,
 				CA71D9F31B1C32B6004E119A /* Frameworks */,
 				CA71D9F41B1C32B6004E119A /* Resources */,
+				CAC65E7E1C8809A30005D36D /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -202,7 +235,9 @@
 		CA71D9EE1B1C32B6004E119A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastSwiftMigration = 0720;
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = goukuai;
 				TargetAttributes = {
 					CA71D9F51B1C32B6004E119A = {
@@ -252,6 +287,20 @@
 			fileType = wrapper.cfbundle;
 			path = YunkuSwiftSDKTests.xctest;
 			remoteRef = CABC043E1B3A4B1100FCD0C3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAC65E681C87FC350005D36D /* CommonCrypto.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CommonCrypto.framework;
+			remoteRef = CAC65E671C87FC350005D36D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAC65E6A1C87FC350005D36D /* CommonCryptoTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CommonCryptoTests.xctest;
+			remoteRef = CAC65E691C87FC350005D36D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -353,6 +402,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -417,10 +467,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = TestLib/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Brandon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SDKTester;
-				SWIFT_INCLUDE_PATHS = "/Users/Brandon/Documents/workplace/MacProject/yunku-sdk-swift/YunkuSwiftSDK/CommonCrypto";
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
@@ -429,10 +481,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = TestLib/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Brandon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SDKTester;
-				SWIFT_INCLUDE_PATHS = "/Users/Brandon/Documents/workplace/MacProject/yunku-sdk-swift/YunkuSwiftSDK/CommonCrypto";
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
@@ -451,6 +505,7 @@
 				);
 				INFOPLIST_FILE = TestLibTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Brandon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SDKTesterTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestLib.app/TestLib";
 			};
@@ -466,6 +521,7 @@
 				);
 				INFOPLIST_FILE = TestLibTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Brandon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SDKTesterTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestLib.app/TestLib";
 			};

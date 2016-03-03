@@ -166,7 +166,7 @@ public class EntManager :ParentEngine {
         var params = Dictionary<String, String?>()
         params["token"] = _token
         params["token_type"] = "ent"
-        params["members"] = ",".join(members)
+        params["members"] = members.joinWithSeparator(",")
         params["sign"] = generateSign(params)
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
         
@@ -194,7 +194,7 @@ public class EntManager :ParentEngine {
         var params = Dictionary<String, String?>()
         params["token"] = _token
         params["token_type"] = "ent"
-        params["groups"] = ",".join(groups)
+        params["groups"] = groups.joinWithSeparator(",")
         params["sign"] = generateSign(params)
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
         
@@ -208,7 +208,7 @@ public class EntManager :ParentEngine {
         params["token"] = _token
         params["token_type"] = "ent"
         params["group_out_id"] = groupOutId
-        params["members"] = ",".join(members)
+        params["members"] = members.joinWithSeparator(",")
         params["sign"] = generateSign(params)
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
         
@@ -222,7 +222,7 @@ public class EntManager :ParentEngine {
         params["token"] = _token
         params["token_type"] = "ent"
         params["group_out_id"] = groupOutId
-        params["members"] = ",".join(members)
+        params["members"] = members.joinWithSeparator(",")
         params["sign"] = generateSign(params)
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
     }

@@ -15,11 +15,11 @@ internal extension NSData {
 }
 
 internal extension UInt8 {
-    private static let allHexits: [Character] = Array("0123456789abcdef")
+    private static let allHexits: [Character] = Array("0123456789abcdef".characters)
     
     func toHex() -> String {
         let nybbles = [ self >> 4, self & 0x0F ]
-        let hexits = map(nybbles) { nybble in UInt8.allHexits[Int(nybble)] }
+        let hexits = nybbles.map { nybble in UInt8.allHexits[Int(nybble)] }
         return String(hexits)
     }
 }

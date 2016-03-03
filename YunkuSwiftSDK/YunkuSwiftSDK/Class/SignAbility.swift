@@ -11,13 +11,13 @@ import Foundation
 
     func generateSign(dic: Dictionary<String, String?>) -> String {
 
-        var removeEmptyDic = Utils.removeEmptyParmas(dic)
+        let removeEmptyDic = Utils.removeEmptyParmas(dic)
 
-        let sortedDic = Array(removeEmptyDic).sorted({ $0.0 < $1.0 })
+        let sortedDic = Array(removeEmptyDic).sort({ $0.0 < $1.0 })
 
         var generateString = ""
 
-        for (index, value) in enumerate(sortedDic) {
+        for (index, value) in sortedDic.enumerate() {
             if value.1 != nil {
                 generateString += value.1! + (index == (sortedDic.count - 1) ? "" : "\n")
             }
@@ -27,13 +27,13 @@ import Foundation
     }
     
     public class func generateSign(dic:Dictionary<String, String?>, clientSecret:String, encode:Bool ) ->String {
-        var removeEmptyDic = Utils.removeEmptyParmas(dic)
+        let removeEmptyDic = Utils.removeEmptyParmas(dic)
         
-        let sortedDic = Array(removeEmptyDic).sorted({ $0.0 < $1.0 })
+        let sortedDic = Array(removeEmptyDic).sort({ $0.0 < $1.0 })
         
         var generateString = ""
         
-        for (index, value) in enumerate(sortedDic) {
+        for (index, value) in sortedDic.enumerate() {
             if value.1 != nil {
                 generateString += value.1! + (index == (sortedDic.count - 1) ? "" : "\n")
             }

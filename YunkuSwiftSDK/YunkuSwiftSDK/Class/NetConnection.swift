@@ -13,8 +13,8 @@ import Foundation
         //输出参数
         LogPrint.info("urlpath:\(urlPath),headParams:\(headParams),params:\(params)")
 
-        var removedEmptyParams = Utils.removeEmptyParmas(params)
-        var removedEmptyHeadParms = Utils.removeEmptyParmas(headParams)
+        let removedEmptyParams = Utils.removeEmptyParmas(params)
+        let removedEmptyHeadParms = Utils.removeEmptyParmas(headParams)
 
 
         //生成请求参数
@@ -33,9 +33,9 @@ import Foundation
 
         LogPrint.info(requestString)
 
-        var url: NSURL = NSURL(string: requestUrl)!
+        let url: NSURL = NSURL(string: requestUrl)!
 
-        var request = NSMutableURLRequest(URL: url)
+        let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = method
 
         //set httpbod
@@ -46,7 +46,7 @@ import Foundation
         //set head params
         if headParams != nil {
             for (key, value) in removedEmptyHeadParms {
-                request.addValue(value, forHTTPHeaderField: key)
+                request.addValue(value!, forHTTPHeaderField: key)
             }
         }
 
@@ -55,12 +55,17 @@ import Foundation
 
         var response: NSURLResponse?
 
-        var dataVal: NSData = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: nil)!
+        let dataVal: NSData = try! NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
 
         //输出返回
         LogPrint.info(NSString(data: dataVal, encoding: NSUTF8StringEncoding))
-        var error: NSError?
-        var jsonResult:Dictionary<String, AnyObject>! = NSJSONSerialization.JSONObjectWithData(dataVal, options: NSJSONReadingOptions.MutableContainers, error: &error) as? Dictionary<String, AnyObject>
+//        var error: NSError?
+        var jsonResult:Dictionary<String, AnyObject>!
+        do{
+            jsonResult = try NSJSONSerialization.JSONObjectWithData(dataVal, options: NSJSONReadingOptions.MutableContainers) as? Dictionary<String, AnyObject>
+        }catch{
+            jsonResult = Dictionary<String, AnyObject>()
+        }
 
 
         var httpcode: Int = 0

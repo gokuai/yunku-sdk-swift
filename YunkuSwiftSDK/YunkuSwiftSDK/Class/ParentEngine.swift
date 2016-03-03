@@ -40,11 +40,11 @@ public class ParentEngine: SignAbility {
         params["dateline"] = String(Utils.getUnixDateline())
         params["sign"] = generateSign(params)
 
-        var returnDiction = NetConnection.sendRequest(url, method: methodString, params: params, headParams: nil)
-        var returnResult = ReturnResult.create(returnDiction)
+        let returnDiction = NetConnection.sendRequest(url, method: methodString, params: params, headParams: nil)
+        let returnResult = ReturnResult.create(returnDiction)
 
         if returnResult.code == HTTPStatusCode.OK.rawValue {
-            var data = OauthData.create(returnDiction);
+            let data = OauthData.create(returnDiction);
             _token = data.accessToken
         }
 

@@ -111,7 +111,7 @@ public class EntLibManager: ParentEngine {
         params["token_type"] = _tokenType
         params["role_id"] = String(roleId)
         params["org_id"] = String(orgId)
-        params["member_ids"] = ",".join(memberIds)
+        params["member_ids"] = memberIds.joinWithSeparator(",")
         params["sign"] = generateSign(params)
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
     }
@@ -125,7 +125,7 @@ public class EntLibManager: ParentEngine {
         params["token_type"] = _tokenType
         params["role_id"] = String(roleId)
         params["org_id"] = String(orgId)
-        params["member_ids"] = ",".join(memberIds)
+        params["member_ids"] = memberIds.joinWithSeparator(",")
         params["sign"] = generateSign(params)
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
     }
@@ -138,7 +138,7 @@ public class EntLibManager: ParentEngine {
         params["token"] = _token
         params["token_type"] = _tokenType
         params["org_id"] = String(orgId)
-        params["member_ids"] = ",".join(memberIds)
+        params["member_ids"] = memberIds.joinWithSeparator(",")
         params["sign"] = generateSign(params)
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
     }
@@ -235,7 +235,7 @@ public class EntLibManager: ParentEngine {
         params["token_type"] = _tokenType
         params["org_id"] = String(orgId)
         params["type"] = type.description.lowercaseString
-        params["ids"] = ",".join(ids)
+        params["ids"] = ids.joinWithSeparator(",")
         params["sign"] = generateSign(params)
         return NetConnection.sendRequest(url, method: method, params: params, headParams: nil)
     }

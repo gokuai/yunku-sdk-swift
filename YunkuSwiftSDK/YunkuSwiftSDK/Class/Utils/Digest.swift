@@ -88,5 +88,5 @@ public func < (lhs: Digest, rhs: Digest) -> Bool {
         return false
     }
     
-    return lexicographicalCompare(lhs.bytes, rhs.bytes)
+    return lhs.bytes.lexicographicalCompare(rhs.bytes)
 }

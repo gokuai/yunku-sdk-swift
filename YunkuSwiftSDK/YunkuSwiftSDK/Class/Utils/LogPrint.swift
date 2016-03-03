@@ -12,7 +12,7 @@ import Foundation
         if Config.logPrint {
 
             if logLevel.rawValue >= Config.logLevel.rawValue {
-                println("LogLevel:\(logLevel.description), \(log)")
+                print("LogLevel:\(logLevel.description), \(log)")
             }
 
         }

@@ -20,7 +20,7 @@ class FileOperationData :BaseData {
     var server:String! = ""
 
     class func create (dic:Dictionary<String,AnyObject>,code:Int) -> FileOperationData {
-        var data = FileOperationData()
+        let data = FileOperationData()
         data.code = code
         if code == HTTPStatusCode.OK.rawValue {
             data.state = dic[keyState] as? Int

@@ -27,13 +27,13 @@ public class Utils {
     //MARK: Base64 byte array to String
     class func byteArrayToBase64(bytes: [UInt8]) -> String {
         let nsdata = NSData(bytes: bytes, length: bytes.count)
-        let base64Encoded = nsdata.base64EncodedStringWithOptions(nil);
+        let base64Encoded = nsdata.base64EncodedStringWithOptions([]);
         return base64Encoded;
     }
     
     //MARK: Base64String to Array
     class func base64ToByteArray(base64String: String) -> [UInt8]? {
-        if let nsdata = NSData(base64EncodedString: base64String, options: nil) {
+        if let nsdata = NSData(base64EncodedString: base64String, options: []) {
             var bytes = [UInt8](count: nsdata.length, repeatedValue: 0)
             nsdata.getBytes(&bytes, length: bytes.count)
             return bytes
@@ -43,29 +43,29 @@ public class Utils {
     
     //MARK:获取Unix时间
     class func getUnixDateline()->Int {
-      return Int(NSDate.new().timeIntervalSince1970)
+      return Int(NSDate().timeIntervalSince1970)
     }
     
     //MARK: 获取文件
     public class func getFileSha1(path:String)->String {
         
-        var handler = NSFileHandle(forReadingAtPath: path)
-        var fileSize = handler?.seekToEndOfFile()
+        let handler = NSFileHandle(forReadingAtPath: path)
+        let fileSize = handler?.seekToEndOfFile()
         handler?.seekToFileOffset(0)
         let partSize = 65536
         
         var sha1 = SHA1()
         
         while handler?.offsetInFile < fileSize{
-            var readData = handler?.readDataOfLength(partSize)
+            let readData = handler?.readDataOfLength(partSize)
 
             let ptr = UnsafePointer<UInt8>(readData!.bytes)
-             var bytes = UnsafeBufferPointer<UInt8>(start: ptr, count: (readData?.length)!)
+             let bytes = UnsafeBufferPointer<UInt8>(start: ptr, count: (readData?.length)!)
             sha1.append(bytes)
         }
         
         var s:String = "";
-        var  bytesArray = sha1.finish()
+        let  bytesArray = sha1.finish()
         for byte in bytesArray {
             s = s + String(format:"%02x", byte)
         }

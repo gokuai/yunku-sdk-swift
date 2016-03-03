@@ -14,7 +14,7 @@ class OauthData: BaseData {
     var expiresIn: Int = 0
     
     class func create(dic: NSDictionary) -> OauthData {
-        var data = OauthData()
+        let data = OauthData()
         data.code = (dic[ReturnResult.keyCode] as? Int)!
         var returnResult = dic[ReturnResult.keyResult] as? Dictionary<String, AnyObject>;
         if data.code == HTTPStatusCode.OK.rawValue {

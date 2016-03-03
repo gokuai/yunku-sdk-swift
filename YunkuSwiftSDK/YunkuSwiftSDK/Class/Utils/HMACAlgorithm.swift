@@ -6,7 +6,7 @@
 import Foundation
 import CommonCrypto
 
-public enum HMACAlgorithm: Printable {
+public enum HMACAlgorithm: CustomStringConvertible {
     case MD5, SHA1, SHA224, SHA256, SHA384, SHA512
     
     func toCCEnum() -> CCHmacAlgorithm {
@@ -69,7 +69,7 @@ public enum HMACAlgorithm: Printable {
 
 extension String {
     public func sign(algorithm: HMACAlgorithm, key: String) -> String {
-        var data = self.dataUsingEncoding(NSUTF8StringEncoding)
+        let data = self.dataUsingEncoding(NSUTF8StringEncoding)
         return data!.sign(algorithm, key: key)
     }
 
@@ -81,7 +81,7 @@ extension String {
 
         CC_MD5(str!, strLen, result)
 
-        var hash = NSMutableString()
+        let hash = NSMutableString()
         for i in 0..<digestLen {
             hash.appendFormat("%02x", result[i])
         }

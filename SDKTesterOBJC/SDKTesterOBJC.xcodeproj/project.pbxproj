@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CA1729231B3991F100276B22 /* YunkuSwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA1729221B3991F100276B22 /* YunkuSwiftSDK.framework */; };
-		CA1729241B3991F600276B22 /* YunkuSwiftSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CA1729221B3991F100276B22 /* YunkuSwiftSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CAC64FFA1B39392100B4E5B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC64FF91B39392100B4E5B4 /* main.m */; };
 		CAC64FFD1B39392100B4E5B4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC64FFC1B39392100B4E5B4 /* AppDelegate.m */; };
 		CAC650001B39392100B4E5B4 /* SDKTesterOBJC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CAC64FFE1B39392100B4E5B4 /* SDKTesterOBJC.xcdatamodeld */; };
@@ -17,6 +15,10 @@
 		CAC650081B39392100B4E5B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAC650071B39392100B4E5B4 /* Images.xcassets */; };
 		CAC6500B1B39392100B4E5B4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAC650091B39392100B4E5B4 /* LaunchScreen.xib */; };
 		CAC650171B39392100B4E5B4 /* SDKTesterOBJCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC650161B39392100B4E5B4 /* SDKTesterOBJCTests.m */; };
+		CAC65E6D1C88020A0005D36D /* YunkuSwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC65E6C1C88020A0005D36D /* YunkuSwiftSDK.framework */; };
+		CAC65E6F1C88035E0005D36D /* YunkuSwiftSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAC65E6C1C88020A0005D36D /* YunkuSwiftSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CAC65E711C8803970005D36D /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC65E701C8803970005D36D /* CommonCrypto.framework */; };
+		CAC65E721C88039E0005D36D /* CommonCrypto.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAC65E701C8803970005D36D /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +38,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CA1729241B3991F600276B22 /* YunkuSwiftSDK.framework in CopyFiles */,
+				CAC65E721C88039E0005D36D /* CommonCrypto.framework in CopyFiles */,
+				CAC65E6F1C88035E0005D36D /* YunkuSwiftSDK.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,7 +56,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CA1729221B3991F100276B22 /* YunkuSwiftSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YunkuSwiftSDK.framework; sourceTree = "<group>"; };
 		CAC64FF41B39392100B4E5B4 /* SDKTesterOBJC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDKTesterOBJC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAC64FF81B39392100B4E5B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CAC64FF91B39392100B4E5B4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -70,6 +72,8 @@
 		CAC650161B39392100B4E5B4 /* SDKTesterOBJCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDKTesterOBJCTests.m; sourceTree = "<group>"; };
 		CAC650771B39614000B4E5B4 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		CAC650831B3966E400B4E5B4 /* SDKTesterOBJC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SDKTesterOBJC-Bridging-Header.h"; sourceTree = "<group>"; };
+		CAC65E6C1C88020A0005D36D /* YunkuSwiftSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YunkuSwiftSDK.framework; sourceTree = "<group>"; };
+		CAC65E701C8803970005D36D /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CommonCrypto.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +81,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA1729231B3991F100276B22 /* YunkuSwiftSDK.framework in Frameworks */,
+				CAC65E711C8803970005D36D /* CommonCrypto.framework in Frameworks */,
+				CAC65E6D1C88020A0005D36D /* YunkuSwiftSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,7 +99,8 @@
 		CAC64FEB1B39392100B4E5B4 = {
 			isa = PBXGroup;
 			children = (
-				CA1729221B3991F100276B22 /* YunkuSwiftSDK.framework */,
+				CAC65E701C8803970005D36D /* CommonCrypto.framework */,
+				CAC65E6C1C88020A0005D36D /* YunkuSwiftSDK.framework */,
 				CAC64FF61B39392100B4E5B4 /* SDKTesterOBJC */,
 				CAC650131B39392100B4E5B4 /* SDKTesterOBJCTests */,
 				CAC64FF51B39392100B4E5B4 /* Products */,
@@ -200,7 +206,7 @@
 		CAC64FEC1B39392100B4E5B4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = goukuai;
 				TargetAttributes = {
 					CAC64FF31B39392100B4E5B4 = {
@@ -322,6 +328,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -399,6 +406,7 @@
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Brandon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "/Users/Brandon/Documents/workplace/MacProject/yunku-sdk-swift/YunkuSwiftSDK/CommonCrypto";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/Brandon/Documents/workplace/MacProject/yunku-sdk-swift/SDKTesterOBJC/SDKTesterOBJC-Bridging-Header.h";
@@ -423,6 +431,7 @@
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "Brandon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INCLUDE_PATHS = "/Users/Brandon/Documents/workplace/MacProject/yunku-sdk-swift/YunkuSwiftSDK/CommonCrypto";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/Brandon/Documents/workplace/MacProject/yunku-sdk-swift/SDKTesterOBJC/SDKTesterOBJC-Bridging-Header.h";
@@ -443,6 +452,7 @@
 				);
 				INFOPLIST_FILE = SDKTesterOBJCTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Brandon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SDKTesterOBJC.app/SDKTesterOBJC";
 			};
@@ -458,6 +468,7 @@
 				);
 				INFOPLIST_FILE = SDKTesterOBJCTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Brandon.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SDKTesterOBJC.app/SDKTesterOBJC";
 			};
