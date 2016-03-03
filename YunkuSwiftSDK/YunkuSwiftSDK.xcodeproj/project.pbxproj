@@ -840,6 +840,7 @@
 				CAC65E541C87E3EE0005D36D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CAC65E551C87E3EE0005D36D /* Build configuration list for PBXNativeTarget "CommonCryptoTests" */ = {
 			isa = XCConfigurationList;
@@ -848,6 +849,7 @@
 				CAC65E571C87E3EE0005D36D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
