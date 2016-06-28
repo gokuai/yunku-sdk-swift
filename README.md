@@ -95,7 +95,7 @@ Robots: noindex,nofollow
 	{
 		access_token:
 		expires_in:
-		refresh_token:
+		refresh_token:c
 	}
 
 | 字段 | 类型 | 说明 |
@@ -1206,8 +1206,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 |------|------|------|------|
 | fullPath | 是 | string | 文件路径 |
 | opName | 是 | string | 用户名称 |
-| stream | 是 | stream | 文件流 |
-| fileName | 是 | string | 文件名 |
+| data | 是 | NSData | 文件流 |
 
 #### 返回结果
 | 字段 | 类型 | 说明 |
