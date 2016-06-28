@@ -141,7 +141,7 @@ public class EntFileManager: SignAbility {
 
             postData += "--\(boundary)\r\n"
             postData += "Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n"
-            postData += "\(value)\r\n"
+            postData += "\(value!)\r\n"
         }
 
         //添加签名
