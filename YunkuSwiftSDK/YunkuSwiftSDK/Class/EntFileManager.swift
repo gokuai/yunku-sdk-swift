@@ -169,9 +169,15 @@ public class EntFileManager: SignAbility {
         request.HTTPBody = postBody
         request.HTTPMethod = "POST"
 
-        var response: NSURLResponse?
-
-        let dataVal: NSData = try! NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+        var response: NSURLResponse? = nil
+        
+        let dataVal: NSData!
+        
+        do{
+            dataVal = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+        }catch{
+            dataVal = NSData()
+        }
 
         //输出返回
         LogPrint.info(NSString(data: dataVal, encoding: NSUTF8StringEncoding))

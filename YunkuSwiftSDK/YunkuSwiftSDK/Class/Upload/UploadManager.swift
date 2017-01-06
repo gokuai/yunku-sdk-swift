@@ -155,7 +155,7 @@ public class UploadManager: SignAbility{
                         return false
                     }
                     
-                    rangeIndex++
+                    rangeIndex += 1
                 }
                 
                 let success = uploadCheck()
@@ -230,9 +230,15 @@ public class UploadManager: SignAbility{
         request.addValue( String(crc32), forHTTPHeaderField: "x-gk-upload-crc")
         request.HTTPBody = data
         
-        var response: NSURLResponse?
+        var response: NSURLResponse? = nil
         
-        let dataVal: NSData = try! NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+        let dataVal: NSData!
+        
+        do{
+            dataVal = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+        }catch{
+            dataVal = NSData()
+        }
         
         //输出返回
         LogPrint.info(NSString(data: dataVal, encoding: NSUTF8StringEncoding))
