@@ -53,10 +53,16 @@ import Foundation
         request.addValue(Config.userAgent, forHTTPHeaderField: "User-Agent")
         request.timeoutInterval = Config.connectTimeOut
 
-        var response: NSURLResponse?
+        var response: NSURLResponse? = nil
 
-        let dataVal: NSData = try! NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
-
+        let dataVal: NSData!
+        
+        do{
+            dataVal = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+        }catch{
+            dataVal = NSData()
+        }
+        
         //输出返回
         LogPrint.info(NSString(data: dataVal, encoding: NSUTF8StringEncoding))
 //        var error: NSError?
