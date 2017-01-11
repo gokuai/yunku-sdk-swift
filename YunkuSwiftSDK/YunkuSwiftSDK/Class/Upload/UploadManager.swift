@@ -56,7 +56,7 @@ public class UploadManager: SignAbility{
         }else{
             if delegate != nil{
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.delegate?.onFail("file is not exist")
+                    self.delegate?.onFail("file not exist",errorCode: UploadError.SDKInnerError.rawValue)
                     LogPrint.error("\(self._localPath) file is not exit")
                 }
                 
@@ -67,7 +67,7 @@ public class UploadManager: SignAbility{
     
     
     //MARK:开始上传
-    private func startUpload() -> Bool {
+    private func startUpload() -> Void {
         
         let handler = NSFileHandle(forReadingAtPath: _localPath)
         let filesize = handler?.seekToEndOfFile()
@@ -76,7 +76,7 @@ public class UploadManager: SignAbility{
         if self.delegate != nil{
             if filesize == nil {
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.delegate?.onFail("this is error a file")
+                    self.delegate?.onFail("this is error  file", errorCode: UploadError.SDKInnerError.rawValue)
                 }
                 
             }
@@ -142,7 +142,7 @@ public class UploadManager: SignAbility{
                         let success =  uploadInit(data.uuidHash, fileName: fileName, fullPath: fullPath, fileHash: filehash, fileSize: filesize!)
                         
                         if !success{
-                            return false
+                            onUploadError("upload Unauthorized", errorCode: UploadError.SDKInnerError.rawValue)
                         }
                         
                     } else if returnResult.code == HTTPStatusCode.Conflict.rawValue {
@@ -152,7 +152,7 @@ public class UploadManager: SignAbility{
                         rangeStart = partRangeStart
                         
                     } else {
-                        return false
+                        onUploadError(data.errorMsg, errorCode: UploadError.SDKInnerError.rawValue)
                     }
                     
                     rangeIndex += 1
@@ -161,7 +161,7 @@ public class UploadManager: SignAbility{
                 let success = uploadCheck()
                 
                 if !success{
-                    return false
+                    onUploadError("upload check fail", errorCode: UploadError.SDKInnerError.rawValue)
                 }
                 
                 if delegate != nil{
@@ -170,8 +170,6 @@ public class UploadManager: SignAbility{
                         self.delegate?.onSuccess(filehash,fullPath:fullPath)
                     }
                 }
-                
-                return true
                 
             } else {
                 
@@ -182,12 +180,21 @@ public class UploadManager: SignAbility{
                     
                 }
                 
-                return true
             }
             
         }else {
             LogPrint.error("upload error:\(data.errorCode):\(data.errorMsg)")
-            return false
+            
+            onUploadError(data.errorMsg,errorCode: data.code)
+        }
+        
+    }
+    
+    //MARK: 上传失败
+    private func onUploadError(errorString:String, errorCode:Int) -> Void{
+        LogPrint.error("onUploadError:\(errorCode):\(errorString)")
+        if self.delegate != nil {
+            self.delegate?.onFail(errorString,errorCode:errorCode)
         }
         
     }

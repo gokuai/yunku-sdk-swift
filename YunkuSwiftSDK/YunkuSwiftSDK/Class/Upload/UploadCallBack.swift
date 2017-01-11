@@ -9,7 +9,7 @@ import Foundation
 
     func onSuccess(fileHash: String,fullPath:String)
 
-    func onFail(errorMsg: String)
+    func onFail(errorMsg: String,errorCode:Int)
 
     func onProgress(percent: Float)
 
