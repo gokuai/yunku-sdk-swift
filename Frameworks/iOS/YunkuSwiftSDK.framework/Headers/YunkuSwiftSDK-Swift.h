@@ -305,6 +305,10 @@ typedef SWIFT_ENUM(NSInteger, MemberType) {
 - (NSData * _Nonnull)sha1;
 @end
 
+typedef SWIFT_ENUM(NSInteger, NetError) {
+  NetErrorSDKInnerError = 10001,
+};
+
 typedef SWIFT_ENUM(NSInteger, NetType) {
   NetTypeDefault = 0,
   NetTypeIn = 1,
@@ -324,7 +328,7 @@ SWIFT_CLASS("_TtC13YunkuSwiftSDK12ReturnResult")
 SWIFT_PROTOCOL("_TtP13YunkuSwiftSDK14UploadCallBack_")
 @protocol UploadCallBack
 - (void)onSuccess:(NSString * _Nonnull)fileHash fullPath:(NSString * _Nonnull)fullPath;
-- (void)onFail:(NSString * _Nonnull)errorMsg;
+- (void)onFail:(NSString * _Nullable)errorMsg errorCode:(NSInteger)errorCode;
 - (void)onProgress:(float)percent;
 @end
 
