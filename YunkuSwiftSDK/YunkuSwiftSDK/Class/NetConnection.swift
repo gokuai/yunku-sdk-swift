@@ -6,7 +6,10 @@
 import Foundation
 
 @objc class NetConnection:NSObject {
+    
+    static let logTag = "NetConnection"
 
+    //MARK:发送请求
     class func sendRequest(urlPath: String, method: String, params: Dictionary<String, String?>?, headParams: Dictionary<String, String?>?) -> Dictionary<String, AnyObject> {
 
 
@@ -29,9 +32,11 @@ import Foundation
             requestUrl = urlPath
         } else if method == "GET" {
             requestUrl = urlPath + "?" + requestString
+            
+              LogPrint.info("getUrl:\(requestUrl)")
         }
 
-        LogPrint.info(requestString)
+      
 
         let url: NSURL = NSURL(string: requestUrl)!
 
@@ -52,36 +57,51 @@ import Foundation
 
         request.addValue(Config.userAgent, forHTTPHeaderField: "User-Agent")
         request.timeoutInterval = Config.connectTimeOut
-
+       
+        return NetConnection.sendRequest(request)
+    }
+    
+    //MARK:发送请求
+     class func sendRequest(request:NSMutableURLRequest)  -> Dictionary<String, AnyObject> {
         var response: NSURLResponse? = nil
-
-        let dataVal: NSData!
+        var jsonResult:Dictionary<String, AnyObject>!
+        var httpcode: Int = 0
+        var dataVal: NSData? = nil
         
         do{
             dataVal = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
-        }catch{
-            dataVal = NSData()
+            
+            if let httpResponse = response as? NSHTTPURLResponse {
+                httpcode = httpResponse.statusCode
+            }
+            
+        }catch(let e){
+            
+            LogPrint.error(NetConnection.logTag,e)
+            
+            if let error = e as? NSError {
+                if error.code == NSURLErrorTimedOut {
+                    httpcode = HTTPStatusCode.RequestTimeout.rawValue
+                }
+            }
+
         }
         
-        //输出返回
-        LogPrint.info(NSString(data: dataVal, encoding: NSUTF8StringEncoding))
-//        var error: NSError?
-        var jsonResult:Dictionary<String, AnyObject>!
-        do{
-            jsonResult = try NSJSONSerialization.JSONObjectWithData(dataVal, options: NSJSONReadingOptions.MutableContainers) as? Dictionary<String, AnyObject>
-        }catch{
-            jsonResult = Dictionary<String, AnyObject>()
+        if dataVal != nil {
+            do{
+                //输出返回
+                LogPrint.info(NSString(data: dataVal!, encoding: NSUTF8StringEncoding))
+                jsonResult = try NSJSONSerialization.JSONObjectWithData(dataVal!, options: NSJSONReadingOptions.MutableContainers) as? Dictionary<String, AnyObject>
+            }catch(let e){
+                LogPrint.error(logTag,e)
+            }
+            
         }
-
-
-        var httpcode: Int = 0
-        if let httpResponse = response as? NSHTTPURLResponse {
-            httpcode = httpResponse.statusCode
-        }
-
+        
         var returnResult = Dictionary<String, AnyObject>()
         returnResult[ReturnResult.keyCode] = httpcode
         returnResult[ReturnResult.keyResult] = jsonResult
         return returnResult
+ 
     }
 }

@@ -25,7 +25,7 @@ import Foundation
         let code = dic[keyCode] as? Int
         var result = dic[keyResult] as? Dictionary<String,AnyObject>
         
-        if result == NSNull(){
+        if result == NSNull() || result == nil{
             result = Dictionary<String,AnyObject>()
         }
         

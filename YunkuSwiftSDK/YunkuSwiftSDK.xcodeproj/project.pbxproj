@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CA1427DD1B185A1800CC0302 /* YunkuSwiftSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CA1427DC1B185A1800CC0302 /* YunkuSwiftSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CA1427E31B185A1800CC0302 /* YunkuSwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA1427D71B185A1800CC0302 /* YunkuSwiftSDK.framework */; };
-		CA1427EA1B185A1800CC0302 /* YunkuSwiftSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1427E91B185A1800CC0302 /* YunkuSwiftSDKTests.swift */; };
+		CA6A5C941E2E2C9F00842BFA /* NetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6A5C931E2E2C9F00842BFA /* NetError.swift */; };
 		CAB0378B1B331F4100E84824 /* Dictionary+BlocksAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0376A1B331F4100E84824 /* Dictionary+BlocksAdditions.swift */; };
 		CAB0378C1B331F4100E84824 /* String+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0376B1B331F4100E84824 /* String+Encode.swift */; };
 		CAB0378D1B331F4100E84824 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0376C1B331F4100E84824 /* Constans.swift */; };
@@ -46,13 +45,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CA1427E41B185A1800CC0302 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CA1427CE1B185A1800CC0302 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CA1427D61B185A1800CC0302;
-			remoteInfo = YunkuSwiftSDK;
-		};
 		CAC65E4C1C87E3EE0005D36D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CA1427CE1B185A1800CC0302 /* Project object */;
@@ -66,9 +58,9 @@
 		CA1427D71B185A1800CC0302 /* YunkuSwiftSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YunkuSwiftSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1427DB1B185A1800CC0302 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA1427DC1B185A1800CC0302 /* YunkuSwiftSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YunkuSwiftSDK.h; sourceTree = "<group>"; };
-		CA1427E21B185A1800CC0302 /* YunkuSwiftSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YunkuSwiftSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1427E81B185A1800CC0302 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA1427E91B185A1800CC0302 /* YunkuSwiftSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YunkuSwiftSDKTests.swift; sourceTree = "<group>"; };
+		CA6A5C931E2E2C9F00842BFA /* NetError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetError.swift; sourceTree = "<group>"; };
 		CAB0376A1B331F4100E84824 /* Dictionary+BlocksAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+BlocksAdditions.swift"; sourceTree = "<group>"; };
 		CAB0376B1B331F4100E84824 /* String+Encode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Encode.swift"; sourceTree = "<group>"; };
 		CAB0376C1B331F4100E84824 /* Constans.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
@@ -123,14 +115,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CA1427DF1B185A1800CC0302 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CA1427E31B185A1800CC0302 /* YunkuSwiftSDK.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		CAC65E3D1C87E3EE0005D36D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -165,7 +149,6 @@
 			isa = PBXGroup;
 			children = (
 				CA1427D71B185A1800CC0302 /* YunkuSwiftSDK.framework */,
-				CA1427E21B185A1800CC0302 /* YunkuSwiftSDKTests.xctest */,
 				CAC65E411C87E3EE0005D36D /* CommonCrypto.framework */,
 				CAC65E4A1C87E3EE0005D36D /* CommonCryptoTests.xctest */,
 			);
@@ -210,6 +193,7 @@
 		CAB037681B331F4100E84824 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				CA6A5C931E2E2C9F00842BFA /* NetError.swift */,
 				CAB037691B331F4100E84824 /* Category */,
 				CAB0376C1B331F4100E84824 /* Constans.swift */,
 				CAB0376D1B331F4100E84824 /* Data */,
@@ -346,24 +330,6 @@
 			productReference = CA1427D71B185A1800CC0302 /* YunkuSwiftSDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		CA1427E11B185A1800CC0302 /* YunkuSwiftSDKTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CA1427F01B185A1800CC0302 /* Build configuration list for PBXNativeTarget "YunkuSwiftSDKTests" */;
-			buildPhases = (
-				CA1427DE1B185A1800CC0302 /* Sources */,
-				CA1427DF1B185A1800CC0302 /* Frameworks */,
-				CA1427E01B185A1800CC0302 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CA1427E51B185A1800CC0302 /* PBXTargetDependency */,
-			);
-			name = YunkuSwiftSDKTests;
-			productName = YunkuSwiftSDKTests;
-			productReference = CA1427E21B185A1800CC0302 /* YunkuSwiftSDKTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		CAC65E401C87E3EE0005D36D /* CommonCrypto */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CAC65E521C87E3EE0005D36D /* Build configuration list for PBXNativeTarget "CommonCrypto" */;
@@ -413,12 +379,11 @@
 				TargetAttributes = {
 					CA1427D61B185A1800CC0302 = {
 						CreatedOnToolsVersion = 6.3.1;
-					};
-					CA1427E11B185A1800CC0302 = {
-						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0810;
 					};
 					CAC65E401C87E3EE0005D36D = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0810;
 					};
 					CAC65E491C87E3EE0005D36D = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -438,7 +403,6 @@
 			projectRoot = "";
 			targets = (
 				CA1427D61B185A1800CC0302 /* YunkuSwiftSDK */,
-				CA1427E11B185A1800CC0302 /* YunkuSwiftSDKTests */,
 				CAC65E401C87E3EE0005D36D /* CommonCrypto */,
 				CAC65E491C87E3EE0005D36D /* CommonCryptoTests */,
 			);
@@ -447,13 +411,6 @@
 
 /* Begin PBXResourcesBuildPhase section */
 		CA1427D51B185A1800CC0302 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CA1427E01B185A1800CC0302 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -503,6 +460,7 @@
 				CAB037971B331F4100E84824 /* NetConnection.swift in Sources */,
 				CAB0379E1B331F4100E84824 /* CRC.swift in Sources */,
 				CAB037931B331F4100E84824 /* EntFileManager.swift in Sources */,
+				CA6A5C941E2E2C9F00842BFA /* NetError.swift in Sources */,
 				CAB037911B331F4100E84824 /* ReturnResult.swift in Sources */,
 				CAB037921B331F4100E84824 /* SyncMemberData.swift in Sources */,
 				CAB037991B331F4100E84824 /* SignAbility.swift in Sources */,
@@ -510,14 +468,6 @@
 				CAB0378D1B331F4100E84824 /* Constans.swift in Sources */,
 				CAB037A21B331F4100E84824 /* HMACAlgorithm.swift in Sources */,
 				CAB037961B331F4100E84824 /* HostConfig.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CA1427DE1B185A1800CC0302 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CA1427EA1B185A1800CC0302 /* YunkuSwiftSDKTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,11 +489,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		CA1427E51B185A1800CC0302 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CA1427D61B185A1800CC0302 /* YunkuSwiftSDK */;
-			targetProxy = CA1427E41B185A1800CC0302 /* PBXContainerItemProxy */;
-		};
 		CAC65E4D1C87E3EE0005D36D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CAC65E401C87E3EE0005D36D /* CommonCrypto */;
@@ -653,7 +598,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = YunkuSwiftSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -670,6 +615,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/Brandon/Documents/workplace/MacProject/yunku-sdk-swift/YunkuSwiftSDK/YunkuSwiftSDK/YunkuSwiftSDK-Bridging-Header.hes>";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -682,7 +628,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = YunkuSwiftSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -697,38 +643,7 @@
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-			};
-			name = Release;
-		};
-		CA1427F11B185A1800CC0302 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = YunkuSwiftSDKTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Brandon.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		CA1427F21B185A1800CC0302 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = YunkuSwiftSDKTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Brandon.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -755,6 +670,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gokuai.CommonCrypto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -780,6 +696,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gokuai.CommonCrypto;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -823,15 +740,6 @@
 			buildConfigurations = (
 				CA1427EE1B185A1800CC0302 /* Debug */,
 				CA1427EF1B185A1800CC0302 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CA1427F01B185A1800CC0302 /* Build configuration list for PBXNativeTarget "YunkuSwiftSDKTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CA1427F11B185A1800CC0302 /* Debug */,
-				CA1427F21B185A1800CC0302 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

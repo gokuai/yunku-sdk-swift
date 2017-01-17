@@ -39,6 +39,8 @@
     _entLibManager = [[EntLibManager alloc]initWithClientId:CLIENTID clientSecret:CLIENTSECRET isEnt:true];
 
     [self deserializeReturn:[_entLibManager accessToken:USERNAME password:PASSWORD]];
+    
+    NSURLConnection
 
     // 1T="1099511627776" 1G＝“1073741824”
     //创建库
@@ -121,8 +123,8 @@
 //    [self deserializeReturn:[_entFileManager createFolder:@"test" opName:@"Brandon"]];
 
     //上传文件 文件不得超过50MB
-//    NSData *data = [NSData dataWithContentsOfFile:@"/Users/Brandon/Desktop/test.apk"];
-//    [self deserializeReturn:[_entFileManager createFile:@"test.apk" opName:@"Brandon" data:data]];
+    NSData *data = [NSData dataWithContentsOfFile:@"/Users/Brandon/Desktop/test.apk"];
+    [self deserializeReturn:[_entFileManager createFile:@"test.apk" opName:@"Brandon" data:data]];
 
     //删除文件
 //    [self deserializeReturn:[_entFileManager del:@"file.jpeg" opName:@"Brandon"]];

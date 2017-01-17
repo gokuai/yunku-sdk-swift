@@ -8,6 +8,9 @@
 
 import Foundation
 public class UploadManager: SignAbility{
+    
+    static let logTag = "UploadManager"
+    
     let urlUploadInit = "/upload_init"
     let urlUploadPart = "/upload_part"
     let urlUploadAbort = "/upload_abort"
@@ -56,7 +59,7 @@ public class UploadManager: SignAbility{
         }else{
             if delegate != nil{
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.delegate?.onFail("file not exist",errorCode: UploadError.SDKInnerError.rawValue)
+                    self.delegate?.onFail("file not exist",errorCode: NetError.SDKInnerError.rawValue)
                     LogPrint.error("\(self._localPath) file is not exit")
                 }
                 
@@ -76,7 +79,7 @@ public class UploadManager: SignAbility{
         if self.delegate != nil{
             if filesize == nil {
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.delegate?.onFail("this is error  file", errorCode: UploadError.SDKInnerError.rawValue)
+                    self.delegate?.onFail("this is error  file", errorCode: NetError.SDKInnerError.rawValue)
                 }
                 
             }
@@ -89,7 +92,6 @@ public class UploadManager: SignAbility{
         
         let returnResult = ReturnResult.create(addFile(filesize!, fileHash: filehash, fullPath: fullPath))
         let data = FileOperationData.create(returnResult.result!, code: returnResult.code)
-        
         if data.code == HTTPStatusCode.OK.rawValue{
             
             if data.state != FileOperationData.stateNoupload {
@@ -142,7 +144,7 @@ public class UploadManager: SignAbility{
                         let success =  uploadInit(data.uuidHash, fileName: fileName, fullPath: fullPath, fileHash: filehash, fileSize: filesize!)
                         
                         if !success{
-                            onUploadError("upload Unauthorized", errorCode: UploadError.SDKInnerError.rawValue)
+                            onUploadError("upload Unauthorized", errorCode: NetError.SDKInnerError.rawValue)
                         }
                         
                     } else if returnResult.code == HTTPStatusCode.Conflict.rawValue {
@@ -152,7 +154,7 @@ public class UploadManager: SignAbility{
                         rangeStart = partRangeStart
                         
                     } else {
-                        onUploadError(data.errorMsg, errorCode: UploadError.SDKInnerError.rawValue)
+                        onUploadError(data.errorMsg, errorCode: NetError.SDKInnerError.rawValue)
                     }
                     
                     rangeIndex += 1
@@ -161,7 +163,7 @@ public class UploadManager: SignAbility{
                 let success = uploadCheck()
                 
                 if !success{
-                    onUploadError("upload check fail", errorCode: UploadError.SDKInnerError.rawValue)
+                    onUploadError("upload check fail", errorCode: NetError.SDKInnerError.rawValue)
                 }
                 
                 if delegate != nil{
@@ -183,16 +185,18 @@ public class UploadManager: SignAbility{
             }
             
         }else {
-            LogPrint.error("upload error:\(data.errorCode):\(data.errorMsg)")
-            
-            onUploadError(data.errorMsg,errorCode: data.code)
+            if data.code == HTTPStatusCode.RequestTimeout.rawValue {
+                onUploadError("Time out", errorCode: data.code)
+            }else{
+                onUploadError(data.errorMsg,errorCode: data.errorCode)
+            }
         }
         
     }
     
     //MARK: 上传失败
-    private func onUploadError(errorString:String, errorCode:Int) -> Void{
-        LogPrint.error("onUploadError:\(errorCode):\(errorString)")
+    private func onUploadError(errorString:String?, errorCode:Int) -> Void{
+        LogPrint.error(UploadManager.logTag,msg: "onUploadError:\(errorCode):\(errorString)")
         if self.delegate != nil {
             self.delegate?.onFail(errorString,errorCode:errorCode)
         }
@@ -237,31 +241,10 @@ public class UploadManager: SignAbility{
         request.addValue( String(crc32), forHTTPHeaderField: "x-gk-upload-crc")
         request.HTTPBody = data
         
-        var response: NSURLResponse? = nil
+        let result =  NetConnection.sendRequest(request)
+        return ReturnResult.create(result)
         
-        let dataVal: NSData!
         
-        do{
-            dataVal = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
-        }catch{
-            dataVal = NSData()
-        }
-        
-        //输出返回
-        LogPrint.info(NSString(data: dataVal, encoding: NSUTF8StringEncoding))
-        var jsonResult:Dictionary<String, AnyObject>!
-        do{
-            jsonResult = try NSJSONSerialization.JSONObjectWithData(dataVal, options: NSJSONReadingOptions.MutableContainers) as? Dictionary<String, AnyObject>
-        }catch{
-            jsonResult = Dictionary<String, AnyObject>()
-        }
-        
-        var httpcode: Int = 0
-        if let httpResponse = response as? NSHTTPURLResponse {
-            httpcode = httpResponse.statusCode
-        }
-        
-        return ReturnResult( code: httpcode, result: jsonResult)
     }
     
     //MARK:分块传输

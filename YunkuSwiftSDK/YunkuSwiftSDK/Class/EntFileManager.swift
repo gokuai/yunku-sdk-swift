@@ -24,6 +24,7 @@ public class EntFileManager: SignAbility {
     let urlApiUploadSevers = HostConfig.libHost + "/1/file/upload_servers"
 
     var _orgClientId = ""
+    let queue = dispatch_queue_create("YunkuSwiftSDKQueue", DISPATCH_QUEUE_SERIAL)
 
     public init(orgClientId: String, orgClientSecret: String) {
         super.init()
@@ -98,17 +99,10 @@ public class EntFileManager: SignAbility {
         let uploadManager = UploadManager(apiUrl: self.urlApiCreateFile, localPath: localPath, fullPath: fullPath, opName: opName, opId: opId, orgClientId: self._orgClientId, dateline: Utils.getUnixDateline(), clientSecret: self._clientSecret, overWirte: overwrite)
 
         uploadManager.delegate = delegate
-
-        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) {
-
-            uploadManager.doUpload()
-
-            dispatch_async(dispatch_get_main_queue()) {
-
-            }
-        }
-
-
+        
+        dispatch_async(self.queue, { () -> Void in
+             uploadManager.doUpload()
+        })
         return uploadManager
 
     }
@@ -168,35 +162,7 @@ public class EntFileManager: SignAbility {
         request.setValue("\(postBody.length)", forHTTPHeaderField: "Content-Length")
         request.HTTPBody = postBody
         request.HTTPMethod = "POST"
-
-        var response: NSURLResponse? = nil
-        
-        let dataVal: NSData!
-        
-        do{
-            dataVal = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
-        }catch{
-            dataVal = NSData()
-        }
-
-        //输出返回
-        LogPrint.info(NSString(data: dataVal, encoding: NSUTF8StringEncoding))
-        var jsonResult:Dictionary<String, AnyObject>!
-        do{
-            jsonResult = try NSJSONSerialization.JSONObjectWithData(dataVal, options: NSJSONReadingOptions.MutableContainers) as? Dictionary<String, AnyObject>
-        }catch{
-            jsonResult = Dictionary<String, AnyObject>()
-        }
-
-        var httpcode: Int = 0
-        if let httpResponse = response as? NSHTTPURLResponse {
-            httpcode = httpResponse.statusCode
-        }
-
-        var returnResult = Dictionary<String, AnyObject>()
-        returnResult[ReturnResult.keyCode] = httpcode
-        returnResult[ReturnResult.keyResult] = jsonResult
-        return returnResult
+        return NetConnection.sendRequest(request)
 
     }
 

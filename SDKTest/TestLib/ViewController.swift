@@ -28,7 +28,7 @@ class ViewController: UIViewController,UploadCallBack{
         _libManager = EntLibManager(clientId: OauthConfig.clientId, clientSecret: OauthConfig.clientSecret, isEnt: true);
         
         //获取token 认证
-        deserializeReturn(_libManager!.accessToken(OauthConfig.username,password: OauthConfig.password))
+//        deserializeReturn(_libManager!.accessToken(OauthConfig.username,password: OauthConfig.password))
         
         
         // 1T="1099511627776" 1G＝“1073741824”
@@ -85,8 +85,8 @@ class ViewController: UIViewController,UploadCallBack{
         //=======文件操作========//
         
         
-        let orgClientId = "FkxXDGumDS8qfmAKYjd7tVOYps"
-        let orgClientSecret = "9jXXWx2a8mn9vX9bC10UbaOOh70"
+        let orgClientId = "mYpSi5o79xUutZ2VS1Z0OCoKV8"
+        let orgClientSecret = "zGzucwVeW4opK3GpHZW1fOQsFPw"
         
         
         _fileManager = EntFileManager(orgClientId: orgClientId, orgClientSecret: orgClientSecret)
@@ -132,10 +132,16 @@ class ViewController: UIViewController,UploadCallBack{
         //       deserializeReturn(_fileManager!.links(true))
         
         
-        //文件分块上传
-//                _fileManager?.uploadByBlock("/Users/Brandon/Desktop/gugepinyinshurufa_427.apk",
-//                    fullPath: "test.apk", opName: "Brandon", opId: 0, overwrite: true, delegate: self)
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         
+        print("documentsPath: \(documentsPath)")
+        //文件分块上传
+        _fileManager?.uploadByBlock("\(documentsPath)/各种定制版本说明.xlsx",
+                fullPath: "test", opName: "Brandon", opId: 0, overwrite: true, delegate: self)
+        
+        _fileManager?.uploadByBlock("\(documentsPath)/各种定制版本说明.xlsx",
+                                    fullPath: "test", opName: "Brandon", opId: 0, overwrite: true, delegate: self)
+//
          //通过链接上传文件
 //        deserializeReturn(_fileManager!.createFileByUrl("中文.jpg", opId: 0, opName: "Brandon", overwrite: true, fileUrl: "http://www.sinaimg.cn/dy/slidenews/1_img/2015_27/2841_589214_521618.jpg"))
         
@@ -199,13 +205,15 @@ class ViewController: UIViewController,UploadCallBack{
     }
     
     
-    func onFail(errorMsg: String) {
+    func onFail(errorMsg: String?,errorCode:Int) {
         
-        print("onFail: \(errorMsg)")
+        print("onFail: \(errorMsg),\(errorCode)")
         
     }
     
     func onSuccess(fileHash: String,fullPath:String) {
+        
+        deserializeReturn(_fileManager!.del("test", opName: "Brandon"))
         
         print("onSuccess: \(fileHash)")
         

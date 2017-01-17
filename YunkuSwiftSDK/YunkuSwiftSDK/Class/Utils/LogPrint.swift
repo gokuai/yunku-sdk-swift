@@ -12,25 +12,39 @@ import Foundation
         if Config.logPrint {
 
             if logLevel.rawValue >= Config.logLevel.rawValue {
-                print("LogLevel:\(logLevel.description), \(log)")
+                let now = NSDate()
+                let dformatter = NSDateFormatter()
+                dformatter.dateFormat = "HH:mm:ss.fff"
+                print("YunkuLog =>\(now) Level:\(logLevel.description), \(log)")
             }
 
         }
 
     }
 
-
     class func error<T>(msg: T) {
-        printLog(msg, logLevel: LogLevel.Error)
+        LogPrint.info("", msg: msg)
+    }
+    
+    class func error<T>(tag:String,msg:T){
+        printLog("\(tag) \(msg)", logLevel: LogLevel.Info)
     }
 
+ 
     class func warning<T>(msg: T) {
-        printLog(msg, logLevel: LogLevel.Warning)
-
+        LogPrint.info("", msg: msg)
     }
-
+    
+    class func warning<T>(tag:String,msg:T){
+        printLog("\(tag) \(msg)", logLevel: LogLevel.Info)
+    }
+    
     class func info<T>(msg: T) {
-        printLog(msg, logLevel: LogLevel.Info)
+        LogPrint.info("", msg: msg)
+    }
+    
+    class func info<T>(tag:String,msg:T){
+        printLog("\(tag) \(msg)", logLevel: LogLevel.Info)
     }
 
 }

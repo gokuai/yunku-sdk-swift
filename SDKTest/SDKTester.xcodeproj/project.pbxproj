@@ -36,13 +36,6 @@
 			remoteGlobalIDString = CA1427D71B185A1800CC0302;
 			remoteInfo = YunkuSwiftSDK;
 		};
-		CABC043E1B3A4B1100FCD0C3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CABC04371B3A4B1100FCD0C3 /* YunkuSwiftSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CA1427E21B185A1800CC0302;
-			remoteInfo = YunkuSwiftSDKTests;
-		};
 		CABC04411B3A4F1C00FCD0C3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CABC04371B3A4B1100FCD0C3 /* YunkuSwiftSDK.xcodeproj */;
@@ -182,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				CABC043D1B3A4B1100FCD0C3 /* YunkuSwiftSDK.framework */,
-				CABC043F1B3A4B1100FCD0C3 /* YunkuSwiftSDKTests.xctest */,
 				CAC65E681C87FC350005D36D /* CommonCrypto.framework */,
 				CAC65E6A1C87FC350005D36D /* CommonCryptoTests.xctest */,
 			);
@@ -242,6 +234,8 @@
 				TargetAttributes = {
 					CA71D9F51B1C32B6004E119A = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 7F58SN6633;
+						LastSwiftMigration = 0810;
 					};
 					CA71DA0D1B1C32B6004E119A = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -280,13 +274,6 @@
 			fileType = wrapper.framework;
 			path = YunkuSwiftSDK.framework;
 			remoteRef = CABC043C1B3A4B1100FCD0C3 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CABC043F1B3A4B1100FCD0C3 /* YunkuSwiftSDKTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = YunkuSwiftSDKTests.xctest;
-			remoteRef = CABC043E1B3A4B1100FCD0C3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CAC65E681C87FC350005D36D /* CommonCrypto.framework */ = {
@@ -467,6 +454,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7F58SN6633;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = TestLib/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -474,6 +462,7 @@
 				PRODUCT_NAME = SDKTester;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -481,6 +470,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7F58SN6633;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = TestLib/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -488,6 +478,7 @@
 				PRODUCT_NAME = SDKTester;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
