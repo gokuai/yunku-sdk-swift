@@ -23,20 +23,20 @@ import Foundation
     }
 
     class func error<T>(msg: T) {
-        LogPrint.info("", msg: msg)
+        LogPrint.error("", msg: msg)
     }
     
     class func error<T>(tag:String,msg:T){
-        printLog("\(tag) \(msg)", logLevel: LogLevel.Info)
+        printLog("\(tag) \(msg)", logLevel: LogLevel.Error)
     }
 
  
     class func warning<T>(msg: T) {
-        LogPrint.info("", msg: msg)
+        LogPrint.warning("", msg: msg)
     }
     
     class func warning<T>(tag:String,msg:T){
-        printLog("\(tag) \(msg)", logLevel: LogLevel.Info)
+        printLog("\(tag) \(msg)", logLevel: LogLevel.Warning)
     }
     
     class func info<T>(msg: T) {

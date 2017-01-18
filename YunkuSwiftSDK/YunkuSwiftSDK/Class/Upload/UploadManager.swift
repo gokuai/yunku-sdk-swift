@@ -188,7 +188,11 @@ public class UploadManager: SignAbility{
             if data.code == HTTPStatusCode.RequestTimeout.rawValue {
                 onUploadError("Time out", errorCode: data.code)
             }else{
-                onUploadError(data.errorMsg,errorCode: data.errorCode)
+                if data.errorCode != 0 {
+                    onUploadError(data.errorMsg,errorCode: data.errorCode)
+                }else{
+                    onUploadError("Unknow network error,please see the output on console",errorCode: NetError.UnknowError.rawValue)
+                }
             }
         }
         

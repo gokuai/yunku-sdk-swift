@@ -18,8 +18,13 @@ class BaseData: NSObject {
     
     class func create(dic: Dictionary<String, AnyObject>) -> BaseData {
         let baseData = BaseData()
-        baseData.errorMsg = dic[keyErrorMsg] as? String
-        baseData.errorCode = dic[keyErrorCode] as? Int
+        if let errorMsg = dic[keyErrorMsg] as? String {
+            baseData.errorMsg = errorMsg
+        }
+        
+        if let errorcode = dic[keyErrorCode] as? Int {
+            baseData.errorCode = errorcode
+        }
         return baseData
     }
 

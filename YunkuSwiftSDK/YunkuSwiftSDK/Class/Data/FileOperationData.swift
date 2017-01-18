@@ -27,8 +27,14 @@ class FileOperationData :BaseData {
             data.uuidHash = dic[keyHash] as? String
             data.server = dic[keyServer] as? String
         }else {
-            data.errorCode = dic[keyErrorcode] as? Int
-            data.errorMsg = dic[keyErrormsg] as? String
+            
+            if let errorMsg = dic[keyErrormsg] as? String {
+                data.errorMsg = errorMsg
+            }
+            if let errorcode = dic[keyErrorcode] as? Int {
+                data.errorCode = errorcode
+            }
+            
         }
         return data
     }
