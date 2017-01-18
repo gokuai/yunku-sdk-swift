@@ -306,6 +306,7 @@ typedef SWIFT_ENUM(NSInteger, MemberType) {
 @end
 
 typedef SWIFT_ENUM(NSInteger, NetError) {
+  NetErrorUnknowError = 10000,
   NetErrorSDKInnerError = 10001,
 };
 
