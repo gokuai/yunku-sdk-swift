@@ -138,10 +138,7 @@ class ViewController: UIViewController,UploadCallBack{
         //文件分块上传
         _fileManager?.uploadByBlock("\(documentsPath)/各种定制版本说明.xlsx",
                 fullPath: "test", opName: "Brandon", opId: 0, overwrite: true, delegate: self)
-        
-        _fileManager?.uploadByBlock("\(documentsPath)/各种定制版本说明.xlsx",
-                                    fullPath: "test", opName: "Brandon", opId: 0, overwrite: true, delegate: self)
-//
+        //
          //通过链接上传文件
 //        deserializeReturn(_fileManager!.createFileByUrl("中文.jpg", opId: 0, opName: "Brandon", overwrite: true, fileUrl: "http://www.sinaimg.cn/dy/slidenews/1_img/2015_27/2841_589214_521618.jpg"))
         
@@ -205,21 +202,21 @@ class ViewController: UIViewController,UploadCallBack{
     }
     
     
-    func onFail(errorMsg: String?,errorCode:Int) {
+    func onFail(errorMsg: String?,errorCode:Int,fullPath:String,localPath:String) {
         
-        print("onFail: \(errorMsg),\(errorCode)")
+        print("onFail: \(errorMsg),\(errorCode),\(fullPath),\(localPath)")
         
     }
     
-    func onSuccess(fileHash: String,fullPath:String) {
+    func onSuccess(fileHash: String,fullPath:String,localPath:String) {
         
         deserializeReturn(_fileManager!.del("test", opName: "Brandon"))
         
-        print("onSuccess: \(fileHash)")
+        print("onSuccess: \(fileHash),\(fullPath),\(localPath)")
         
     }
     
-    func onProgress(percent: Float) {
+    func onProgress(percent: Float,fullPath:String) {
         
         print("onProgress: \(percent)")
         

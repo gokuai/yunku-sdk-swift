@@ -7,10 +7,10 @@ import Foundation
 
 @objc public protocol UploadCallBack {
 
-    func onSuccess(fileHash: String,fullPath:String)
+    func onSuccess(fileHash: String, fullPath: String ,localPath:String)
 
-    func onFail(errorMsg: String?,errorCode:Int)
+    func onFail(errorMsg: String?, errorCode: Int, fullPath: String , localPath:String)
 
-    func onProgress(percent: Float)
+    func onProgress(percent: Float, fullPath: String)
 
 }
