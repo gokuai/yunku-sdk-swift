@@ -328,9 +328,9 @@ SWIFT_CLASS("_TtC13YunkuSwiftSDK12ReturnResult")
 
 SWIFT_PROTOCOL("_TtP13YunkuSwiftSDK14UploadCallBack_")
 @protocol UploadCallBack
-- (void)onSuccess:(NSString * _Nonnull)fileHash fullPath:(NSString * _Nonnull)fullPath;
-- (void)onFail:(NSString * _Nullable)errorMsg errorCode:(NSInteger)errorCode;
-- (void)onProgress:(float)percent;
+- (void)onSuccess:(NSString * _Nonnull)fileHash fullPath:(NSString * _Nonnull)fullPath localPath:(NSString * _Nonnull)localPath;
+- (void)onFail:(NSString * _Nullable)errorMsg errorCode:(NSInteger)errorCode fullPath:(NSString * _Nonnull)fullPath localPath:(NSString * _Nonnull)localPath;
+- (void)onProgress:(float)percent fullPath:(NSString * _Nonnull)fullPath;
 @end
 
 
