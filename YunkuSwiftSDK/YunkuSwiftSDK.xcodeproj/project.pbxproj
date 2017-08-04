@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B6E2B90B4A848A80ECAC682 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6B6E20C3DC679DFA94D328E9 /* .gitignore */; };
+		6B6E2C5B3D3EF3BCBB688A6B /* CRC32.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6E22BC40E5DEB281F788AC /* CRC32.swift */; };
 		CA1427DD1B185A1800CC0302 /* YunkuSwiftSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CA1427DC1B185A1800CC0302 /* YunkuSwiftSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CA6A5C941E2E2C9F00842BFA /* NetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6A5C931E2E2C9F00842BFA /* NetError.swift */; };
 		CAB0378B1B331F4100E84824 /* Dictionary+BlocksAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0376A1B331F4100E84824 /* Dictionary+BlocksAdditions.swift */; };
@@ -26,7 +28,6 @@
 		CAB037991B331F4100E84824 /* SignAbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037791B331F4100E84824 /* SignAbility.swift */; };
 		CAB0379A1B331F4100E84824 /* UploadCallBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0377B1B331F4100E84824 /* UploadCallBack.swift */; };
 		CAB0379C1B331F4100E84824 /* AlgorithmType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0377E1B331F4100E84824 /* AlgorithmType.swift */; };
-		CAB0379E1B331F4100E84824 /* CRC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037801B331F4100E84824 /* CRC.swift */; };
 		CAB0379F1B331F4100E84824 /* Digest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037811B331F4100E84824 /* Digest.swift */; };
 		CAB037A11B331F4100E84824 /* Digestible.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037831B331F4100E84824 /* Digestible.swift */; };
 		CAB037A21B331F4100E84824 /* HMACAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037841B331F4100E84824 /* HMACAlgorithm.swift */; };
@@ -55,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6B6E20C3DC679DFA94D328E9 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
+		6B6E22BC40E5DEB281F788AC /* CRC32.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRC32.swift; sourceTree = "<group>"; };
 		CA1427D71B185A1800CC0302 /* YunkuSwiftSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YunkuSwiftSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1427DB1B185A1800CC0302 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA1427DC1B185A1800CC0302 /* YunkuSwiftSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YunkuSwiftSDK.h; sourceTree = "<group>"; };
@@ -78,7 +81,6 @@
 		CAB037791B331F4100E84824 /* SignAbility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignAbility.swift; sourceTree = "<group>"; };
 		CAB0377B1B331F4100E84824 /* UploadCallBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadCallBack.swift; sourceTree = "<group>"; };
 		CAB0377E1B331F4100E84824 /* AlgorithmType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmType.swift; sourceTree = "<group>"; };
-		CAB037801B331F4100E84824 /* CRC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRC.swift; sourceTree = "<group>"; };
 		CAB037811B331F4100E84824 /* Digest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Digest.swift; sourceTree = "<group>"; };
 		CAB037831B331F4100E84824 /* Digestible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Digestible.swift; sourceTree = "<group>"; };
 		CAB037841B331F4100E84824 /* HMACAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMACAlgorithm.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				CAC65E4E1C87E3EE0005D36D /* CommonCryptoTests */,
 				CAC65E611C87E44F0005D36D /* Frameworks */,
 				CA1427D81B185A1800CC0302 /* Products */,
+				6B6E20C3DC679DFA94D328E9 /* .gitignore */,
 			);
 			sourceTree = "<group>";
 		};
@@ -244,7 +247,6 @@
 			isa = PBXGroup;
 			children = (
 				CAB0377E1B331F4100E84824 /* AlgorithmType.swift */,
-				CAB037801B331F4100E84824 /* CRC.swift */,
 				CAB037811B331F4100E84824 /* Digest.swift */,
 				CAB037831B331F4100E84824 /* Digestible.swift */,
 				CAB037841B331F4100E84824 /* HMACAlgorithm.swift */,
@@ -254,6 +256,7 @@
 				CAB037881B331F4100E84824 /* SHA256.swift */,
 				CAB037891B331F4100E84824 /* Utility.swift */,
 				CAB0378A1B331F4100E84824 /* Utils.swift */,
+				6B6E22BC40E5DEB281F788AC /* CRC32.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -379,7 +382,7 @@
 				TargetAttributes = {
 					CA1427D61B185A1800CC0302 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0830;
 					};
 					CAC65E401C87E3EE0005D36D = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -414,6 +417,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B6E2B90B4A848A80ECAC682 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,7 +462,6 @@
 				CAB0379C1B331F4100E84824 /* AlgorithmType.swift in Sources */,
 				CAB0379F1B331F4100E84824 /* Digest.swift in Sources */,
 				CAB037971B331F4100E84824 /* NetConnection.swift in Sources */,
-				CAB0379E1B331F4100E84824 /* CRC.swift in Sources */,
 				CAB037931B331F4100E84824 /* EntFileManager.swift in Sources */,
 				CA6A5C941E2E2C9F00842BFA /* NetError.swift in Sources */,
 				CAB037911B331F4100E84824 /* ReturnResult.swift in Sources */,
@@ -468,6 +471,7 @@
 				CAB0378D1B331F4100E84824 /* Constans.swift in Sources */,
 				CAB037A21B331F4100E84824 /* HMACAlgorithm.swift in Sources */,
 				CAB037961B331F4100E84824 /* HostConfig.swift in Sources */,
+				6B6E2C5B3D3EF3BCBB688A6B /* CRC32.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,7 +619,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/Brandon/Documents/workplace/MacProject/yunku-sdk-swift/YunkuSwiftSDK/YunkuSwiftSDK/YunkuSwiftSDK-Bridging-Header.hes>";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -643,7 +647,7 @@
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

@@ -19,7 +19,7 @@ import Foundation
 /// or continue using a DigestBuffer after reading a Digest from them.
 public protocol AlgorithmType {
     /// Adds data to the algorithm object's internal state.
-    mutating func append(data: UnsafeBufferPointer<UInt8>)
+    mutating func append(_ data: UnsafeBufferPointer<UInt8>)
     
     /// Returns the completed digest. You should not call any other 
     /// methods on the instance after calling finish().

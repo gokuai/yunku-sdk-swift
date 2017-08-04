@@ -16,7 +16,7 @@ class BaseData: NSObject {
     var errorCode: Int! = 0
     var errorMsg: String! = ""
     
-    class func create(dic: Dictionary<String, AnyObject>) -> BaseData {
+    class func create(_ dic: Dictionary<String, AnyObject>) -> BaseData {
         let baseData = BaseData()
         if let errorMsg = dic[keyErrorMsg] as? String {
             baseData.errorMsg = errorMsg

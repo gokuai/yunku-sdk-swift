@@ -235,7 +235,7 @@
 					CA71D9F51B1C32B6004E119A = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = 7F58SN6633;
-						LastSwiftMigration = 0810;
+						LastSwiftMigration = 0830;
 					};
 					CA71DA0D1B1C32B6004E119A = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -462,7 +462,7 @@
 				PRODUCT_NAME = SDKTester;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -478,7 +478,7 @@
 				PRODUCT_NAME = SDKTester;
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

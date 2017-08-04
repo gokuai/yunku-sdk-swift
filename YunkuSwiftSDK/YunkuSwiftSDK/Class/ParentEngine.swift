@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class ParentEngine: SignAbility {
+open class ParentEngine: SignAbility {
     let urlApiToken = HostConfig.oauthHost + "/oauth2/token2"
 
     var _clientId = ""
@@ -21,14 +21,14 @@ public class ParentEngine: SignAbility {
         _tokenType = isEnt ? "ent":""
     }
 
-    public func accessToken(username:String, password:String) -> Dictionary<String, AnyObject> {
+    open func accessToken(_ username:String, password:String) -> Dictionary<String, AnyObject> {
         let url = urlApiToken;
         let methodString = "POST"
         var params = Dictionary<String, String?>()
         params["username"] = username
         
         var passwordEncode:String;
-        if username.rangeOfString("\\") != nil || username.rangeOfString("/") != nil{
+        if username.range(of: "\\") != nil || username.range(of: "/") != nil{
             passwordEncode = Utils.byteArrayToBase64([UInt8](username.utf8))
         }else{
             passwordEncode = password.md5
@@ -43,8 +43,8 @@ public class ParentEngine: SignAbility {
         let returnDiction = NetConnection.sendRequest(url, method: methodString, params: params, headParams: nil)
         let returnResult = ReturnResult.create(returnDiction)
 
-        if returnResult.code == HTTPStatusCode.OK.rawValue {
-            let data = OauthData.create(returnDiction);
+        if returnResult.code == HTTPStatusCode.ok.rawValue {
+            let data = OauthData.create(returnDiction as NSDictionary);
             _token = data.accessToken
         }
 

@@ -16,19 +16,19 @@ extension Dictionary {
         }
     }
     
-    func map<U>(transform: Value -> U) -> [Key : U] {
+    func map<U>(_ transform: (Value) -> U) -> [Key : U] {
         return Dictionary<Key, U>(self.map({ (key, value) in (key, transform(value)) }))
     }
     
-    func map<T : Hashable, U>(transform: (Key, Value) -> (T, U)) -> [T : U] {
+    func map<T : Hashable, U>(_ transform: (Key, Value) -> (T, U)) -> [T : U] {
         return Dictionary<T, U>(self.map(transform))
     }
     
-    func filter(includeElement: Element -> Bool) -> [Key : Value] {
+    func filter(_ includeElement: (Element) -> Bool) -> [Key : Value] {
         return Dictionary(self.filter(includeElement))
     }
     
-    func reduce<U>(initial: U, @noescape combine: (U, Element) -> U) -> U {
+    func reduce<U>(_ initial: U, combine: (U, Element) -> U) -> U {
         return self.reduce(initial, combine: combine)
     }
 }

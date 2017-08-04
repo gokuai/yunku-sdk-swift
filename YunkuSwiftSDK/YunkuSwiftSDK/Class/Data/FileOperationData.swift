@@ -19,10 +19,10 @@ class FileOperationData :BaseData {
     var version:String! = ""
     var server:String! = ""
 
-    class func create (dic:Dictionary<String,AnyObject>,code:Int) -> FileOperationData {
+    class func create (_ dic:Dictionary<String,AnyObject>,code:Int) -> FileOperationData {
         let data = FileOperationData()
         data.code = code
-        if code == HTTPStatusCode.OK.rawValue {
+        if code == HTTPStatusCode.ok.rawValue {
             data.state = dic[keyState] as? Int
             data.uuidHash = dic[keyHash] as? String
             data.server = dic[keyServer] as? String

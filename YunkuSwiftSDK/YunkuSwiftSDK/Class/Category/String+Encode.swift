@@ -16,9 +16,9 @@ public extension String {
     public var urlEncode: String! {
         return CFURLCreateStringByAddingPercentEscapes(
             nil,
-            self,
+            self as CFString,
             nil,
-            "!*'();:@&=+$,/?%#[]",
+            "!*'();:@&=+$,/?%#[]" as CFString,
             CFStringBuiltInEncodings.UTF8.rawValue) as String
     }
 }

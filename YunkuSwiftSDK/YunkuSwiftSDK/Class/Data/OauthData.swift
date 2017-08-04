@@ -13,11 +13,11 @@ class OauthData: BaseData {
     var accessToken: String = ""
     var expiresIn: Int = 0
     
-    class func create(dic: NSDictionary) -> OauthData {
+    class func create(_ dic: NSDictionary) -> OauthData {
         let data = OauthData()
         data.code = (dic[ReturnResult.keyCode] as? Int)!
         var returnResult = dic[ReturnResult.keyResult] as? Dictionary<String, AnyObject>;
-        if data.code == HTTPStatusCode.OK.rawValue {
+        if data.code == HTTPStatusCode.ok.rawValue {
             data.accessToken = (returnResult?[keyAccessToken] as? String)!
             data.expiresIn = (returnResult?[keyExpiresIn] as? Int)!
         } else {

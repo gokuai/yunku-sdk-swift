@@ -5,11 +5,24 @@
 
 import Foundation
 import CommonCrypto
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
 
-public class Utils {
+
+open class Utils {
     
     //MARK:移除空参数，FIXME:可以考虑优化为指针的方式
-    class func removeEmptyParmas(dic: Dictionary<String, String?>?)->Dictionary<String, String?>{
+    class func removeEmptyParmas(_ dic: Dictionary<String, String?>?)->Dictionary<String, String?>{
         if dic != nil {
             return dic!.filter {
                 (key, value) -> Bool in
@@ -25,17 +38,17 @@ public class Utils {
     }
     
     //MARK: Base64 byte array to String
-    class func byteArrayToBase64(bytes: [UInt8]) -> String {
-        let nsdata = NSData(bytes: bytes, length: bytes.count)
-        let base64Encoded = nsdata.base64EncodedStringWithOptions([]);
+    class func byteArrayToBase64(_ bytes: [UInt8]) -> String {
+        let nsdata = Data(bytes: UnsafePointer<UInt8>(bytes), count: bytes.count)
+        let base64Encoded = nsdata.base64EncodedString(options: []);
         return base64Encoded;
     }
     
     //MARK: Base64String to Array
-    class func base64ToByteArray(base64String: String) -> [UInt8]? {
-        if let nsdata = NSData(base64EncodedString: base64String, options: []) {
-            var bytes = [UInt8](count: nsdata.length, repeatedValue: 0)
-            nsdata.getBytes(&bytes, length: bytes.count)
+    class func base64ToByteArray(_ base64String: String) -> [UInt8]? {
+        if let nsdata = Data(base64Encoded: base64String, options: []) {
+            var bytes = [UInt8](repeating: 0, count: nsdata.count)
+            (nsdata as NSData).getBytes(&bytes, length: bytes.count)
             return bytes
         }
         return nil // Invalid input
@@ -43,24 +56,24 @@ public class Utils {
     
     //MARK:获取Unix时间
     class func getUnixDateline()->Int {
-      return Int(NSDate().timeIntervalSince1970)
+      return Int(Date().timeIntervalSince1970)
     }
     
     //MARK: 获取文件
-    public class func getFileSha1(path:String)->String {
+    open class func getFileSha1(_ path:String)->String {
         
-        let handler = NSFileHandle(forReadingAtPath: path)
+        let handler = FileHandle(forReadingAtPath: path)
         let fileSize = handler?.seekToEndOfFile()
-        handler?.seekToFileOffset(0)
+        handler?.seek(toFileOffset: 0)
         let partSize = 65536
         
         var sha1 = SHA1()
         
         while handler?.offsetInFile < fileSize{
-            let readData = handler?.readDataOfLength(partSize)
+            let readData = handler?.readData(ofLength: partSize)
 
-            let ptr = UnsafePointer<UInt8>(readData!.bytes)
-             let bytes = UnsafeBufferPointer<UInt8>(start: ptr, count: (readData?.length)!)
+            let ptr = (readData! as NSData).bytes.bindMemory(to: UInt8.self, capacity: readData!.count)
+             let bytes = UnsafeBufferPointer<UInt8>(start: ptr, count: (readData?.count)!)
             sha1.append(bytes)
         }
         

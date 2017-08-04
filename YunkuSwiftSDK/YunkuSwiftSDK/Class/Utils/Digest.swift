@@ -22,23 +22,16 @@ final public class Digest: Equatable, Comparable, Hashable {
     }()
     
     /// The digest as a hexadecimal string.
-    public lazy var hex: String = self.bytes.map { byte in byte.toHex() }.reduce("", combine: +)
+    public lazy var hex: String = self.bytes.map { byte in byte.toHex() }.reduce("", +)
     
     /// The digest as a base64-encoded String.
-    public func base64WithOptions(options: NSDataBase64EncodingOptions) -> String {
-        return data.base64EncodedStringWithOptions(options)
-    }
-    
-    /// The digest as an array of base64-encoded bytes.
-    public func base64BytesWithOptions(options: NSDataBase64EncodingOptions) -> [UInt8] {
-        return withExtendedLifetime(base64DataWithOptions(options)) { (data: NSData) in
-            return Array(data.bufferPointer)
-        }
+    public func base64WithOptions(options: NSData.Base64EncodingOptions) -> String {
+        return data.base64EncodedString(options: options)
     }
     
     /// The digest as an NSData object of base64-encoded bytes.
-    public func base64DataWithOptions(options: NSDataBase64EncodingOptions) -> NSData {
-        return data.base64EncodedDataWithOptions(options)
+    public func base64DataWithOptions(options: NSData.Base64EncodingOptions) -> NSData {
+        return data.base64EncodedData(options: options) as NSData
     }
     
     /// Creates a Digest from an array of bytes. You should not normally need to 
@@ -49,7 +42,8 @@ final public class Digest: Equatable, Comparable, Hashable {
     
     /// Creates a Digest by copying the algorithm object and finish()ing it. You 
     /// should not normally need to call this yourself.
-    public convenience init<Algorithm: AlgorithmType>(var algorithm: Algorithm) {
+    public convenience init<Algorithm: AlgorithmType>( algorithm: Algorithm) {
+        var algorithm = algorithm
         self.init(bytes: algorithm.finish())
     }
     
@@ -58,7 +52,7 @@ final public class Digest: Equatable, Comparable, Hashable {
         // algorithms, since each bit should contain as much entropy as 
         // every other.
         var value: Int = 0
-        let usedBytes = self.bytes[0 ..< min(self.bytes.count, sizeof(Int))]
+        let usedBytes = self.bytes[0 ..< min(self.bytes.count, MemoryLayout<Int>.size)]
         
         for byte in usedBytes {
             value <<= 8
@@ -88,5 +82,5 @@ public func < (lhs: Digest, rhs: Digest) -> Bool {
         return false
     }
     
-    return lhs.bytes.lexicographicalCompare(rhs.bytes)
+    return lhs.bytes.lexicographicallyPrecedes(rhs.bytes)
 }

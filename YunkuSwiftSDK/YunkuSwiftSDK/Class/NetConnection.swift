@@ -10,7 +10,7 @@ import Foundation
     static let logTag = "NetConnection"
 
     //MARK:发送请求
-    class func sendRequest(urlPath: String, method: String, params: Dictionary<String, String?>?, headParams: Dictionary<String, String?>?) -> Dictionary<String, AnyObject> {
+    class func sendRequest(_ urlPath: String, method: String, params: Dictionary<String, String?>?, headParams: Dictionary<String, String?>?) -> Dictionary<String, AnyObject> {
 
 
         //输出参数
@@ -38,14 +38,14 @@ import Foundation
 
       
 
-        let url: NSURL = NSURL(string: requestUrl)!
+        let url: URL = URL(string: requestUrl)!
 
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = method
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = method
 
         //set httpbod
         if method == "POST" {
-            request.HTTPBody = requestString.dataUsingEncoding(NSUTF8StringEncoding)
+            request.httpBody = requestString.data(using: String.Encoding.utf8)
         }
 
         //set head params
@@ -62,16 +62,16 @@ import Foundation
     }
     
     //MARK:发送请求
-     class func sendRequest(request:NSMutableURLRequest)  -> Dictionary<String, AnyObject> {
-        var response: NSURLResponse? = nil
+     class func sendRequest(_ request:NSMutableURLRequest)  -> Dictionary<String, AnyObject> {
+        var response: URLResponse? = nil
         var jsonResult:Dictionary<String, AnyObject>!
         var httpcode: Int = 0
-        var dataVal: NSData? = nil
+        var dataVal: Data? = nil
         
         do{
-            dataVal = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+            dataVal = try NSURLConnection.sendSynchronousRequest(request as URLRequest, returning: &response)
             
-            if let httpResponse = response as? NSHTTPURLResponse {
+            if let httpResponse = response as? HTTPURLResponse {
                 httpcode = httpResponse.statusCode
             }
             
@@ -81,7 +81,7 @@ import Foundation
             
             if let error = e as? NSError {
                 if error.code == NSURLErrorTimedOut {
-                    httpcode = HTTPStatusCode.RequestTimeout.rawValue
+                    httpcode = HTTPStatusCode.requestTimeout.rawValue
                 }
             }
 
@@ -90,8 +90,8 @@ import Foundation
         if dataVal != nil {
             do{
                 //输出返回
-                LogPrint.info(NSString(data: dataVal!, encoding: NSUTF8StringEncoding))
-                jsonResult = try NSJSONSerialization.JSONObjectWithData(dataVal!, options: NSJSONReadingOptions.MutableContainers) as? Dictionary<String, AnyObject>
+                LogPrint.info(NSString(data: dataVal!, encoding: String.Encoding.utf8.rawValue))
+                jsonResult = try JSONSerialization.jsonObject(with: dataVal!, options: JSONSerialization.ReadingOptions.mutableContainers) as? Dictionary<String, AnyObject>
             }catch(let e){
                 LogPrint.error(logTag,e)
             }
@@ -99,8 +99,8 @@ import Foundation
         }
         
         var returnResult = Dictionary<String, AnyObject>()
-        returnResult[ReturnResult.keyCode] = httpcode
-        returnResult[ReturnResult.keyResult] = jsonResult
+        returnResult[ReturnResult.keyCode] = httpcode as AnyObject
+        returnResult[ReturnResult.keyResult] = jsonResult as AnyObject
         return returnResult
  
     }

@@ -21,14 +21,14 @@ class ViewController: UIViewController,UploadCallBack{
         //设置是否打印日志
         Config.logPrint = true
         //设置日志等级
-        Config.logLevel = LogLevel.Info
+        Config.logLevel = LogLevel.info
         
         //=======库操作========//
         
         _libManager = EntLibManager(clientId: OauthConfig.clientId, clientSecret: OauthConfig.clientSecret, isEnt: true);
         
         //获取token 认证
-//        deserializeReturn(_libManager!.accessToken(OauthConfig.username,password: OauthConfig.password))
+        deserializeReturn(_libManager!.accessToken(OauthConfig.username,password: OauthConfig.password))
         
         
         // 1T="1099511627776" 1G＝“1073741824”
@@ -89,7 +89,7 @@ class ViewController: UIViewController,UploadCallBack{
         let orgClientSecret = "zGzucwVeW4opK3GpHZW1fOQsFPw"
         
         
-        _fileManager = EntFileManager(orgClientId: orgClientId, orgClientSecret: orgClientSecret)
+//        _fileManager = EntFileManager(orgClientId: orgClientId, orgClientSecret: orgClientSecret)
         
         //获取文件列表
 //        deserializeReturn( _fileManager!.getFileList(0, fullPath: ""))
@@ -132,7 +132,7 @@ class ViewController: UIViewController,UploadCallBack{
         //       deserializeReturn(_fileManager!.links(true))
         
         
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         
         print("documentsPath: \(documentsPath)")
         //文件分块上传
@@ -202,13 +202,13 @@ class ViewController: UIViewController,UploadCallBack{
     }
     
     
-    func onFail(errorMsg: String?,errorCode:Int,fullPath:String,localPath:String) {
+    func onFail(_ errorMsg: String?,errorCode:Int,fullPath:String,localPath:String) {
         
         print("onFail: \(errorMsg),\(errorCode),\(fullPath),\(localPath)")
         
     }
     
-    func onSuccess(fileHash: String,fullPath:String,localPath:String) {
+    func onSuccess(_ fileHash: String,fullPath:String,localPath:String) {
         
         deserializeReturn(_fileManager!.del("test", opName: "Brandon"))
         
@@ -216,16 +216,16 @@ class ViewController: UIViewController,UploadCallBack{
         
     }
     
-    func onProgress(percent: Float,fullPath:String) {
+    func onProgress(_ percent: Float,fullPath:String) {
         
         print("onProgress: \(percent)")
         
     }
 
 
-    func deserializeReturn(result: Dictionary<String, AnyObject>) {
+    func deserializeReturn(_ result: Dictionary<String, AnyObject>) {
         let returnResult = ReturnResult.create(result)
-        if returnResult.code == HTTPStatusCode.OK.rawValue {
+        if returnResult.code == HTTPStatusCode.ok.rawValue {
             //请求成功
             print("return 200")
 

@@ -8,14 +8,14 @@
 
 import Foundation
 
-internal extension NSData {
+internal extension Data {
     var bufferPointer: UnsafeBufferPointer<UInt8> {
-        return UnsafeBufferPointer<UInt8>(start: UnsafePointer(self.bytes), count: self.length)
+        return UnsafeBufferPointer<UInt8>(start: (self as NSData).bytes.bindMemory(to: UInt8.self, capacity: self.count), count: self.count)
     }
 }
 
 internal extension UInt8 {
-    private static let allHexits: [Character] = Array("0123456789abcdef".characters)
+    fileprivate static let allHexits: [Character] = Array("0123456789abcdef".characters)
     
     func toHex() -> String {
         let nybbles = [ self >> 4, self & 0x0F ]

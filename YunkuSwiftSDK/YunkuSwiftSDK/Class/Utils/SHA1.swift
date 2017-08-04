@@ -15,19 +15,19 @@ import CommonCrypto
 /// Although SHA-1 has not yet been broken, breaking it is expected to be feasible 
 /// within the next decade. You should probably not use it in new designs.
 public struct SHA1: AlgorithmType {
-    private var context = CC_SHA1_CTX()
+    fileprivate var context = CC_SHA1_CTX()
     
     /// SHA1 should be initialized without any parameters.
     public init() {
         // Default OK
     }
     
-    public mutating func append(data: UnsafeBufferPointer<UInt8>) {
-        CC_SHA1_Update(&context, UnsafePointer<Void>(data.baseAddress), CC_LONG(data.count))
+    public mutating func append(_ data: UnsafeBufferPointer<UInt8>) {
+        CC_SHA1_Update(&context, UnsafeRawPointer(data.baseAddress), CC_LONG(data.count))
     }
     
     public mutating func finish() -> [UInt8] {
-        var data: [UInt8] = Array(count: Int(CC_SHA1_DIGEST_LENGTH), repeatedValue: 0)
+        var data: [UInt8] = Array(repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
         CC_SHA1_Final(&data, &context)
         
         return data

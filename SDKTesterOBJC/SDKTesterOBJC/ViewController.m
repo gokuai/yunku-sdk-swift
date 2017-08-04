@@ -40,7 +40,6 @@
 
     [self deserializeReturn:[_entLibManager accessToken:USERNAME password:PASSWORD]];
     
-    NSURLConnection
 
     // 1T="1099511627776" 1G＝“1073741824”
     //创建库
@@ -219,7 +218,7 @@
 
     ReturnResult *returnResult = [ReturnResult create:result];
 
-    if (returnResult.code == HTTPStatusCodeOK) {
+    if (returnResult.code == HTTPStatusCodeOk) {
         NSLog(@"return 200");
         //请求成功
 

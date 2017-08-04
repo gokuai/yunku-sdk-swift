@@ -5,26 +5,26 @@
 
 import Foundation
 
-@objc public class Config:NSObject  {
+@objc open class Config:NSObject  {
     static let userAgent = "YunkuSwiftSDK"
-    static let connectTimeOut: NSTimeInterval = 30
+    static let connectTimeOut: TimeInterval = 30
 
     //如果想打印日志，则在外部调用设置为true
-    public static var logPrint = true
+    open static var logPrint = true
     //设定输入日志的等级
-    public static var logLevel = LogLevel.Error
+    open static var logLevel = LogLevel.error
 }
 
 //MARK:日志等级
 
 @objc public enum LogLevel: Int {
-    case Info = 0, Warning, Error
+    case info = 0, warning, error
 
     var description: String {
         switch self {
-        case .Info: return "info";
-        case .Warning: return "warning";
-        case .Error: return "error";
+        case .info: return "info";
+        case .warning: return "warning";
+        case .error: return "error";
         }
     }
 
@@ -33,25 +33,25 @@ import Foundation
 //MARK:成员类型
 
 @objc public enum MemberType: Int {
-    case  Account = 0, OutId, MemberId
+    case  account = 0, outId, memberId
 
     public var description: String {
         switch self {
-        case .Account: return "account";
-        case .OutId: return "outid";
-        case .MemberId: return "memberid";
+        case .account: return "account";
+        case .outId: return "outid";
+        case .memberId: return "memberid";
         }
     }
 }
 
 @objc public enum AuthType: Int {
-    case Default = 0, Preview, Download, Upload
+    case `default` = 0, preview, download, upload
     public var description: String {
         switch self {
-        case .Default: return "default";
-        case .Preview: return "preview";
-        case .Download: return "download";
-        case .Upload: return "upload";
+        case .default: return "default";
+        case .preview: return "preview";
+        case .download: return "download";
+        case .upload: return "upload";
         }
     }
 
@@ -60,11 +60,11 @@ import Foundation
 //MARK:文件网络类型
 @objc public enum NetType:Int{
     
-    case Default = 0, In
+    case `default` = 0, `in`
     public var description: String {
         switch self {
-        case .Default: return "";//外网
-        case .In: return "in";//内网
+        case .default: return "";//外网
+        case .in: return "in";//内网
         }
     }
 

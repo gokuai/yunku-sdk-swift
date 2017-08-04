@@ -5,7 +5,7 @@
 
 import Foundation
 
-public class EntFileManager: SignAbility {
+open class EntFileManager: SignAbility {
 
     let uploadLimitSize = 52428800
     let urlApiFilelist = HostConfig.libHost + "/1/file/ls"
@@ -24,7 +24,7 @@ public class EntFileManager: SignAbility {
     let urlApiUploadSevers = HostConfig.libHost + "/1/file/upload_servers"
 
     var _orgClientId = ""
-    let queue = dispatch_queue_create("YunkuSwiftSDKQueue", DISPATCH_QUEUE_SERIAL)
+    let queue = DispatchQueue(label: "YunkuSwiftSDKQueue", attributes: [])
 
     public init(orgClientId: String, orgClientSecret: String) {
         super.init()
@@ -33,7 +33,7 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:获取文件列表
-    public func getFileList(start: Int, fullPath: String) -> Dictionary<String, AnyObject> {
+    open func getFileList(_ start: Int, fullPath: String) -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiFilelist
         var params = Dictionary<String, String?>()
@@ -46,7 +46,7 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:获取更新列表
-    public func getUpdateList(isCompare: Bool, fetchDateline: Int) -> Dictionary<String, AnyObject> {
+    open func getUpdateList(_ isCompare: Bool, fetchDateline: Int) -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiUpdateCount
         var params = Dictionary<String, String?>()
@@ -61,7 +61,7 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:获取文件信息
-    public func getFileInfo(fullPath: String, type: NetType) -> Dictionary<String, AnyObject> {
+    open func getFileInfo(_ fullPath: String, type: NetType) -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiFileInfo
         var params = Dictionary<String, String?>()
@@ -70,9 +70,9 @@ public class EntFileManager: SignAbility {
         params["fullpath"] = fullPath
 
         switch (type) {
-        case .Default:
+        case .default:
             ()
-        case .In:
+        case .in:
             params["net"] = type.description
 
         }
@@ -81,7 +81,7 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:创建文件夹
-    public func createFolder(fullPath: String, opName: String) -> Dictionary<String, AnyObject> {
+    open func createFolder(_ fullPath: String, opName: String) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiCreateFolder
         var params = Dictionary<String, String?>()
@@ -94,13 +94,13 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:文件分块上传
-    public func uploadByBlock(localPath: String, fullPath: String, opName: String, opId: Int, overwrite: Bool, delegate: UploadCallBack) -> UploadManager {
+    open func uploadByBlock(_ localPath: String, fullPath: String, opName: String, opId: Int, overwrite: Bool, delegate: UploadCallBack) -> UploadManager {
 
         let uploadManager = UploadManager(apiUrl: self.urlApiCreateFile, localPath: localPath, fullPath: fullPath, opName: opName, opId: opId, orgClientId: self._orgClientId, dateline: Utils.getUnixDateline(), clientSecret: self._clientSecret, overWirte: overwrite)
 
         uploadManager.delegate = delegate
         
-        dispatch_async(self.queue, { () -> Void in
+        self.queue.async(execute: { () -> Void in
              uploadManager.doUpload()
         })
         return uploadManager
@@ -108,8 +108,8 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:将文件数据上传至
-    public func createFile(fullPath: String, opName: String, data: NSData) -> Dictionary<String, AnyObject> {
-        if data.length > uploadLimitSize {
+    open func createFile(_ fullPath: String, opName: String, data: Data) -> Dictionary<String, AnyObject> {
+        if data.count > uploadLimitSize {
             LogPrint.error("The file more than 50 MB is not be allowed")
             return Dictionary<String, AnyObject>()
         }
@@ -121,7 +121,7 @@ public class EntFileManager: SignAbility {
         parameters["op_name"] = opName
         parameters["filefield"] = "file"
 
-        let uniqueId = NSProcessInfo.processInfo().globallyUniqueString
+        let uniqueId = ProcessInfo.processInfo.globallyUniqueString
 
         let postBody: NSMutableData = NSMutableData()
         var postData: String = String()
@@ -147,27 +147,27 @@ public class EntFileManager: SignAbility {
         postData += "--\(boundary)\r\n"
         postData += "Content-Disposition: form-data; name=\"file\"; filename=\"\(filename).jpg\"\r\n"
         postData += "Content-Type: image/png\r\n\r\n"
-        postBody.appendData(postData.dataUsingEncoding(NSUTF8StringEncoding)!)
-        postBody.appendData(data)
+        postBody.append(postData.data(using: String.Encoding.utf8)!)
+        postBody.append(data)
         postData = String()
         postData += "\r\n"
         postData += "\r\n--\(boundary)--\r\n"
-        postBody.appendData(postData.dataUsingEncoding(NSUTF8StringEncoding)!)
+        postBody.append(postData.data(using: String.Encoding.utf8)!)
 
-        let url = NSURL(string: urlApiCreateFile)
-        let request: NSMutableURLRequest = NSMutableURLRequest(URL: url!, cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData, timeoutInterval: 10)
+        let url = URL(string: urlApiCreateFile)
+        let request: NSMutableURLRequest = NSMutableURLRequest(url: url!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 10)
 
         let content: String = "multipart/form-data; boundary=\(boundary)"
         request.setValue(content, forHTTPHeaderField: "Content-Type")
         request.setValue("\(postBody.length)", forHTTPHeaderField: "Content-Length")
-        request.HTTPBody = postBody
-        request.HTTPMethod = "POST"
+        request.httpBody = postBody as Data
+        request.httpMethod = "POST"
         return NetConnection.sendRequest(request)
 
     }
 
     //MARK: 删除文件
-    public func del(fullPaths: String, opName: String) -> Dictionary<String, AnyObject> {
+    open func del(_ fullPaths: String, opName: String) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiDelFile
         var params = Dictionary<String, String?>()
@@ -180,7 +180,7 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:移动文件
-    public func move(fullPath: String, destFullPath: String, opName: String) -> Dictionary<String, AnyObject> {
+    open func move(_ fullPath: String, destFullPath: String, opName: String) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiMoveFile
         var params = Dictionary<String, String?>()
@@ -194,7 +194,7 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:获取文件链接
-    public func link(fullPath: String, deadline: Int, authType: AuthType, password: String?) -> Dictionary<String, AnyObject> {
+    open func link(_ fullPath: String, deadline: Int, authType: AuthType, password: String?) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiLinkFile
         var params = Dictionary<String, String?>()
@@ -206,7 +206,7 @@ public class EntFileManager: SignAbility {
             params["deadline"] = String(deadline)
         }
 
-        if authType != AuthType.Default {
+        if authType != AuthType.default {
             params["auth"] = authType.description
         }
 
@@ -216,7 +216,7 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:发送消息
-    public func sendmsg(title: String, text: String, image: String?, linkUrl: String?, opName: String) -> Dictionary<String, AnyObject> {
+    open func sendmsg(_ title: String, text: String, image: String?, linkUrl: String?, opName: String) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiSendmsg
         var params = Dictionary<String, String?>()
@@ -232,7 +232,7 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:获取当前库所有外链
-    public func links(fileOnly: Bool) -> Dictionary<String, AnyObject> {
+    open func links(_ fileOnly: Bool) -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiGetLink
         var params = Dictionary<String, String?>()
@@ -247,7 +247,7 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:文件更新数量
-    public func getUpdateCounts(beginDateline: Int, endDateline: Int, showDelete: Bool) -> Dictionary<String, AnyObject> {
+    open func getUpdateCounts(_ beginDateline: Int, endDateline: Int, showDelete: Bool) -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiUpdateCount
         var params = Dictionary<String, String?>()
@@ -261,7 +261,7 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:通过链接上传文件
-    public func createFileByUrl(fullPath: String, opId: Int, opName: String!, overwrite: Bool, fileUrl: String) -> Dictionary<String, AnyObject> {
+    open func createFileByUrl(_ fullPath: String, opId: Int, opName: String!, overwrite: Bool, fileUrl: String) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiCreateFileByUrl
         var params = Dictionary<String, String?>()
@@ -280,7 +280,7 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:获取上传地址
-    public func getUploadServers() -> Dictionary<String, AnyObject> {
+    open func getUploadServers() -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiUploadSevers
         var params = Dictionary<String, String?>()
@@ -291,7 +291,7 @@ public class EntFileManager: SignAbility {
     }
 
 
-    public func getServerSite(type: String) -> Dictionary<String, AnyObject> {
+    open func getServerSite(_ type: String) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiUpdateCount
         var params = Dictionary<String, String?>()
@@ -303,7 +303,7 @@ public class EntFileManager: SignAbility {
     }
 
     //MARK:复制一个EntFileManager
-    public func clone() -> EntFileManager {
+    open func clone() -> EntFileManager {
         return EntFileManager(orgClientId: _orgClientId, orgClientSecret: _clientSecret)
     }
 
