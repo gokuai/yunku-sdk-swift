@@ -1,48 +1,40 @@
 //
-// Created by Brandon on 15/6/1.
-// Copyright (c) 2015 goukuai. All rights reserved.
+//  EntFileManager.swift
+//  YunkuSwiftSDK
+//
+//  Created by qp on 2017/9/25.
+//  Copyright © 2017年 goukuai. All rights reserved.
 //
 
 import Foundation
 
-open class EntFileManager: HttpEngine {
-
+open class EntFileManagerV2: HttpEngine {
+    
     let uploadLimitSize = 52428800
-    let urlApiFilelist = HostConfig.libHost + "/1/file/ls"
-    let urlApiUpdateList = HostConfig.libHost + "/1/file/updates"
-    let urlApiFileInfo = HostConfig.libHost + "/1/file/info"
-    let urlApiCreateFolder = HostConfig.libHost + "/1/file/create_folder"
-    let urlApiCreateFile = HostConfig.libHost + "/1/file/create_file"
-    let urlApiCopyFile = HostConfig.libHost + "/1/file/copy"
-    let urlApiDelFile = HostConfig.libHost + "/1/file/del"
-    let urlApiRecycleFile = HostConfig.libHost + "/1/file/recycle"
-    let urlApiRecoverFile = HostConfig.libHost + "/1/file/recover"
-    let urlApiDelCompletelyFile = HostConfig.libHost + "/1/file/del_completely"
-    let urlApiMoveFile = HostConfig.libHost + "/1/file/move"
-    let urlApiHistoryFile = HostConfig.libHost + "/1/file/history"
-    let urlApiLinkFile = HostConfig.libHost + "/1/file/link"
-    let urlApiSendmsg = HostConfig.libHost + "/1/file/sendmsg"
-    let urlApiGetLink = HostConfig.libHost + "/1/file/links"
-    let urlApiUpdateCount = HostConfig.libHost + "/1/file/updates_count"
-    let urlApiGetServerSite = HostConfig.libHost + "/1/file/servers"
-    let urlApiCreateFileByUrl = HostConfig.libHost + "/1/file/create_file_by_url"
-    let urlApiUploadSevers = HostConfig.libHost + "/1/file/upload_servers"
-    let urlApiSearchFile = HostConfig.libHost + "/1/file/search"
-    let urlApiPreviewUrl = HostConfig.libHost + "/1/file/preview_url"
-    let urlApiGetPermission = HostConfig.libHost + "/1/file/get_permission"
-    let urlApiSetPermission = HostConfig.libHost + "/1/file/file_permission"
-    let urlApiGetPermission = HostConfig.libHost + "/1/file/get_permission"
-    let urlApiAddTag = HostConfig.libHost + "/1/file/add_tag"
-    let urlApiDelTag = HostConfig.libHost + "/1/file/del_tag"
+    let urlApiFilelist = HostConfigV2.libHostV2 + "/1/file/ls"
+    let urlApiUpdateList = HostConfigV2.libHostV2 + "/1/file/updates"
+    let urlApiFileInfo = HostConfigV2.libHostV2 + "/1/file/info"
+    let urlApiCreateFolder = HostConfigV2.libHostV2 + "/1/file/create_folder"
+    let urlApiCreateFile = HostConfigV2.libHostV2 + "/1/file/create_file"
+    let urlApiDelFile = HostConfigV2.libHostV2 + "/1/file/del"
+    let urlApiMoveFile = HostConfigV2.libHostV2 + "/1/file/move"
+    let urlApiLinkFile = HostConfigV2.libHostV2 + "/1/file/link"
+    let urlApiSendmsg = HostConfigV2.libHostV2 + "/1/file/sendmsg"
+    let urlApiGetLink = HostConfigV2.libHostV2 + "/1/file/links"
+    let urlApiUpdateCount = HostConfigV2.libHostV2 + "/1/file/updates_count"
+    let urlApiGetServerSite = HostConfigV2.libHostV2 + "/1/file/servers"
+    let urlApiCreateFileByUrl = HostConfigV2.libHostV2 + "/1/file/create_file_by_url"
+    let urlApiUploadSevers = HostConfigV2.libHostV2 + "/1/file/upload_servers"
     
     let queue = DispatchQueue(label: "YunkuSwiftSDKQueue", attributes: [])
-
+    
     public init(orgClientId: String, orgClientSecret: String) {
         super.init(clientId: orgClientId, clientSecret: orgClientSecret)
     }
-
+    
     //MARK:获取文件列表
     open func getFileList(_ start: Int, fullPath: String) -> Dictionary<String, AnyObject> {
+        let method = "GET"
         let url = urlApiFilelist
         var params = Dictionary<String, String?>()
         params["org_client_id"] = _orgClientId
@@ -52,9 +44,10 @@ open class EntFileManager: HttpEngine {
         params["sign"] = generateSign(params)
         return HttpEngine.RequestHelper().setParams(params: params).setUrl(url: url).setMethod(method: RequestMethod.GET.rawValue).executeSync()
     }
-
+    
     //MARK:获取更新列表
     open func getUpdateList(_ isCompare: Bool, fetchDateline: Int) -> Dictionary<String, AnyObject> {
+        let method = "GET"
         let url = urlApiUpdateCount
         var params = Dictionary<String, String?>()
         params["org_client_id"] = _orgClientId
@@ -66,28 +59,30 @@ open class EntFileManager: HttpEngine {
         params["sign"] = generateSign(params)
         return HttpEngine.RequestHelper().setParams(params: params).setUrl(url: url).setMethod(method: RequestMethod.GET.rawValue).executeSync()
     }
-
+    
     //MARK:获取文件信息
     open func getFileInfo(_ fullPath: String, type: NetType) -> Dictionary<String, AnyObject> {
+        let method = "GET"
         let url = urlApiFileInfo
         var params = Dictionary<String, String?>()
         params["org_client_id"] = _orgClientId
         params["dateline"] = String(Utils.getUnixDateline())
         params["fullpath"] = fullPath
-
+        
         switch (type) {
         case .default:
             ()
         case .in:
             params["net"] = type.description
-
+            
         }
         params["sign"] = generateSign(params)
         return HttpEngine.RequestHelper().setParams(params: params).setUrl(url: url).setMethod(method: RequestMethod.GET.rawValue).executeSync()
     }
-
+    
     //MARK:创建文件夹
     open func createFolder(_ fullPath: String, opName: String) -> Dictionary<String, AnyObject> {
+        let method = "POST"
         let url = urlApiCreateFolder
         var params = Dictionary<String, String?>()
         params["org_client_id"] = _orgClientId
@@ -97,57 +92,57 @@ open class EntFileManager: HttpEngine {
         params["sign"] = generateSign(params)
         return HttpEngine.RequestHelper().setParams(params: params).setUrl(url: url).setMethod(method: RequestMethod.POST.rawValue).executeSync()
     }
-
+    
     //MARK:文件分块上传
     open func uploadByBlock(_ localPath: String, fullPath: String, opName: String, opId: Int, overwrite: Bool, delegate: UploadCallBack) -> UploadManager {
-
+        
         let uploadManager = UploadManager(apiUrl: self.urlApiCreateFile, localPath: localPath, fullPath: fullPath, opName: opName, opId: opId, orgClientId: self._orgClientId, dateline: Utils.getUnixDateline(), clientSecret: self._clientSecret, overWirte: overwrite)
-
+        
         uploadManager.delegate = delegate
         
         self.queue.async(execute: { () -> Void in
-             uploadManager.doUpload()
+            uploadManager.doUpload()
         })
         return uploadManager
-
+        
     }
-
+    
     //MARK:将文件数据上传至
     open func createFile(_ fullPath: String, opName: String, data: Data) -> Dictionary<String, AnyObject> {
         if data.count > uploadLimitSize {
             LogPrint.error("The file more than 50 MB is not be allowed")
             return Dictionary<String, AnyObject>()
         }
-
+        
         var parameters = Dictionary<String, String?>();
         parameters["org_client_id"] = _orgClientId
         parameters["dateline"] = String(Utils.getUnixDateline())
         parameters["fullpath"] = fullPath
         parameters["op_name"] = opName
         parameters["filefield"] = "file"
-
+        
         let uniqueId = ProcessInfo.processInfo.globallyUniqueString
-
+        
         let postBody: NSMutableData = NSMutableData()
         var postData: String = String()
         let boundary: String = "------WebKitFormBoundary\(uniqueId)"
-
+        
         let filename = (fullPath as NSString).lastPathComponent
-
+        
         //添加参数
         postData += "--\(boundary)\r\n"
         for (key, value) in parameters {
-
+            
             postData += "--\(boundary)\r\n"
             postData += "Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n"
             postData += "\(value!)\r\n"
         }
-
+        
         //添加签名
         postData += "--\(boundary)\r\n"
         postData += "Content-Disposition: form-data; name=\"sign\"\r\n\r\n"
         postData += "\(generateSign(parameters))\r\n"
-
+        
         //添加文件数据
         postData += "--\(boundary)\r\n"
         postData += "Content-Disposition: form-data; name=\"file\"; filename=\"\(filename).jpg\"\r\n"
@@ -158,21 +153,22 @@ open class EntFileManager: HttpEngine {
         postData += "\r\n"
         postData += "\r\n--\(boundary)--\r\n"
         postBody.append(postData.data(using: String.Encoding.utf8)!)
-
+        
         let url = URL(string: urlApiCreateFile)
         let request: NSMutableURLRequest = NSMutableURLRequest(url: url!, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 10)
-
+        
         let content: String = "multipart/form-data; boundary=\(boundary)"
         request.setValue(content, forHTTPHeaderField: "Content-Type")
         request.setValue("\(postBody.length)", forHTTPHeaderField: "Content-Length")
         request.httpBody = postBody as Data
         request.httpMethod = "POST"
         return NetConnection.sendRequest(request)
-
+        
     }
-
+    
     //MARK: 删除文件
     open func del(_ fullPaths: String, opName: String) -> Dictionary<String, AnyObject> {
+        let method = "POST"
         let url = urlApiDelFile
         var params = Dictionary<String, String?>()
         params["org_client_id"] = _orgClientId
@@ -182,9 +178,10 @@ open class EntFileManager: HttpEngine {
         params["sign"] = generateSign(params)
         return HttpEngine.RequestHelper().setParams(params: params).setUrl(url: url).setMethod(method: RequestMethod.POST.rawValue).executeSync()
     }
-
+    
     //MARK:移动文件
     open func move(_ fullPath: String, destFullPath: String, opName: String) -> Dictionary<String, AnyObject> {
+        let method = "POST"
         let url = urlApiMoveFile
         var params = Dictionary<String, String?>()
         params["org_client_id"] = _orgClientId
@@ -195,30 +192,32 @@ open class EntFileManager: HttpEngine {
         params["sign"] = generateSign(params)
         return HttpEngine.RequestHelper().setParams(params: params).setUrl(url: url).setMethod(method: RequestMethod.POST.rawValue).executeSync()
     }
-
+    
     //MARK:获取文件链接
     open func link(_ fullPath: String, deadline: Int, authType: AuthType, password: String?) -> Dictionary<String, AnyObject> {
+        let method = "POST"
         let url = urlApiLinkFile
         var params = Dictionary<String, String?>()
         params["org_client_id"] = _orgClientId
         params["dateline"] = String(Utils.getUnixDateline())
         params["fullpath"] = fullPath
-
+        
         if deadline != 0 {
             params["deadline"] = String(deadline)
         }
-
+        
         if authType != AuthType.default {
             params["auth"] = authType.description
         }
-
+        
         params["password"] = password
         params["sign"] = generateSign(params)
         return HttpEngine.RequestHelper().setParams(params: params).setUrl(url: url).setMethod(method: RequestMethod.POST.rawValue).executeSync()
     }
-
+    
     //MARK:发送消息
     open func sendmsg(_ title: String, text: String, image: String?, linkUrl: String?, opName: String) -> Dictionary<String, AnyObject> {
+        let method = "POST"
         let url = urlApiSendmsg
         var params = Dictionary<String, String?>()
         params["org_client_id"] = _orgClientId
@@ -231,9 +230,10 @@ open class EntFileManager: HttpEngine {
         params["sign"] = generateSign(params)
         return HttpEngine.RequestHelper().setParams(params: params).setUrl(url: url).setMethod(method: RequestMethod.POST.rawValue).executeSync()
     }
-
+    
     //MARK:获取当前库所有外链
     open func links(_ fileOnly: Bool) -> Dictionary<String, AnyObject> {
+        let method = "GET"
         let url = urlApiGetLink
         var params = Dictionary<String, String?>()
         params["org_client_id"] = _orgClientId
@@ -243,11 +243,12 @@ open class EntFileManager: HttpEngine {
         }
         params["sign"] = generateSign(params)
         return HttpEngine.RequestHelper().setParams(params: params).setUrl(url: url).setMethod(method: RequestMethod.GET.rawValue).executeSync()
-
+        
     }
-
+    
     //MARK:文件更新数量
     open func getUpdateCounts(_ beginDateline: Int, endDateline: Int, showDelete: Bool) -> Dictionary<String, AnyObject> {
+        let method = "GET"
         let url = urlApiUpdateCount
         var params = Dictionary<String, String?>()
         params["org_client_id"] = _orgClientId
@@ -258,9 +259,10 @@ open class EntFileManager: HttpEngine {
         params["sign"] = generateSign(params)
         return HttpEngine.RequestHelper().setParams(params: params).setUrl(url: url).setMethod(method: RequestMethod.GET.rawValue).executeSync()
     }
-
+    
     //MARK:通过链接上传文件
     open func createFileByUrl(_ fullPath: String, opId: Int, opName: String!, overwrite: Bool, fileUrl: String) -> Dictionary<String, AnyObject> {
+        let method = "POST"
         let url = urlApiCreateFileByUrl
         var params = Dictionary<String, String?>()
         params["org_client_id"] = _orgClientId
@@ -276,9 +278,10 @@ open class EntFileManager: HttpEngine {
         params["sign"] = generateSign(params)
         return HttpEngine.RequestHelper().setParams(params: params).setUrl(url: url).setMethod(method: RequestMethod.POST.rawValue).executeSync()
     }
-
+    
     //MARK:获取上传地址
     open func getUploadServers() -> Dictionary<String, AnyObject> {
+        let method = "GET"
         let url = urlApiUploadSevers
         var params = Dictionary<String, String?>()
         params["org_client_id"] = _orgClientId
@@ -286,9 +289,10 @@ open class EntFileManager: HttpEngine {
         params["sign"] = generateSign(params)
         return HttpEngine.RequestHelper().setParams(params: params).setUrl(url: url).setMethod(method: RequestMethod.GET.rawValue).executeSync()
     }
-
-
+    
+    
     open func getServerSite(_ type: String) -> Dictionary<String, AnyObject> {
+        let method = "POST"
         let url = urlApiUpdateCount
         var params = Dictionary<String, String?>()
         params["org_client_id"] = _orgClientId
@@ -297,11 +301,11 @@ open class EntFileManager: HttpEngine {
         params["sign"] = generateSign(params)
         return HttpEngine.RequestHelper().setParams(params: params).setUrl(url: url).setMethod(method: RequestMethod.POST.rawValue).executeSync()
     }
-
+    
     //MARK:复制一个EntFileManager
     open func clone() -> EntFileManager {
         return EntFileManager(orgClientId: _orgClientId, orgClientSecret: _clientSecret)
     }
-
-
+    
+    
 }

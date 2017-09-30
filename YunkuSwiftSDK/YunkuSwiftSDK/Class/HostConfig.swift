@@ -6,6 +6,6 @@
 import Foundation
 
 struct HostConfig {
-   static let oauthHost = "http://a.goukuai.cn"
-   static let libHost = "http://a-lib.goukuai.cn"
+   static let oauthHost = "http://yk3-api.gokuai.com"
+   static let libHost = "http://yk3-api-ent.gokuai.com"
 }

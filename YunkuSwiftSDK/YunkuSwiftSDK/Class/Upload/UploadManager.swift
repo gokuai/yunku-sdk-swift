@@ -21,7 +21,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 
-open class UploadManager: SignAbility {
+open class UploadManager: HttpEngine {
 
     static let logTag = "UploadManager"
 

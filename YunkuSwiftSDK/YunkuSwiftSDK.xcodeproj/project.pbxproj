@@ -24,7 +24,6 @@
 		CAB037951B331F4100E84824 /* EntManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037751B331F4100E84824 /* EntManager.swift */; };
 		CAB037961B331F4100E84824 /* HostConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037761B331F4100E84824 /* HostConfig.swift */; };
 		CAB037971B331F4100E84824 /* NetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037771B331F4100E84824 /* NetConnection.swift */; };
-		CAB037981B331F4100E84824 /* ParentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037781B331F4100E84824 /* ParentEngine.swift */; };
 		CAB037991B331F4100E84824 /* SignAbility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037791B331F4100E84824 /* SignAbility.swift */; };
 		CAB0379A1B331F4100E84824 /* UploadCallBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0377B1B331F4100E84824 /* UploadCallBack.swift */; };
 		CAB0379C1B331F4100E84824 /* AlgorithmType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0377E1B331F4100E84824 /* AlgorithmType.swift */; };
@@ -43,6 +42,15 @@
 		CAC65E501C87E3EE0005D36D /* CommonCryptoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC65E4F1C87E3EE0005D36D /* CommonCryptoTests.m */; };
 		CAC65E601C87E4210005D36D /* CommonCrypto.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CAC65E581C87E4210005D36D /* CommonCrypto.xcconfig */; };
 		CAC65E621C87E9C70005D36D /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC65E411C87E3EE0005D36D /* CommonCrypto.framework */; };
+		F1542AD41F7A1E3100DF06CB /* ThirdPartyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1542AD31F7A1E3100DF06CB /* ThirdPartyManager.swift */; };
+		F18978991F78CD8300880599 /* EntFileManagerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18978981F78CD8300880599 /* EntFileManagerV2.swift */; };
+		F189789B1F78CF1900880599 /* EntLibManagerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F189789A1F78CF1900880599 /* EntLibManagerV2.swift */; };
+		F189789D1F78CF4D00880599 /* EntManagerV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F189789C1F78CF4D00880599 /* EntManagerV2.swift */; };
+		F18978A11F78D04F00880599 /* OauthEngineV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18978A01F78D04F00880599 /* OauthEngineV2.swift */; };
+		F18978A31F78D3A300880599 /* HostConfigV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18978A21F78D3A300880599 /* HostConfigV2.swift */; };
+		F18978A51F79028E00880599 /* HttpEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18978A41F79028E00880599 /* HttpEngine.swift */; };
+		F18978A71F7902F000880599 /* OauthEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18978A61F7902F000880599 /* OauthEngine.swift */; };
+		F1E990551F7E51EE00CEBA0E /* RequestMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E990541F7E51EE00CEBA0E /* RequestMethod.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,7 +85,6 @@
 		CAB037751B331F4100E84824 /* EntManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntManager.swift; sourceTree = "<group>"; };
 		CAB037761B331F4100E84824 /* HostConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostConfig.swift; sourceTree = "<group>"; };
 		CAB037771B331F4100E84824 /* NetConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetConnection.swift; sourceTree = "<group>"; };
-		CAB037781B331F4100E84824 /* ParentEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentEngine.swift; sourceTree = "<group>"; };
 		CAB037791B331F4100E84824 /* SignAbility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignAbility.swift; sourceTree = "<group>"; };
 		CAB0377B1B331F4100E84824 /* UploadCallBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadCallBack.swift; sourceTree = "<group>"; };
 		CAB0377E1B331F4100E84824 /* AlgorithmType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmType.swift; sourceTree = "<group>"; };
@@ -105,6 +112,15 @@
 		CAC65E5D1C87E4210005D36D /* watchsimulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = watchsimulator.modulemap; sourceTree = "<group>"; };
 		CAC65E5E1C87E4210005D36D /* appletvos.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = appletvos.modulemap; sourceTree = "<group>"; };
 		CAC65E5F1C87E4210005D36D /* appletvsimulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = appletvsimulator.modulemap; sourceTree = "<group>"; };
+		F1542AD31F7A1E3100DF06CB /* ThirdPartyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyManager.swift; sourceTree = "<group>"; };
+		F18978981F78CD8300880599 /* EntFileManagerV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntFileManagerV2.swift; sourceTree = "<group>"; };
+		F189789A1F78CF1900880599 /* EntLibManagerV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntLibManagerV2.swift; sourceTree = "<group>"; };
+		F189789C1F78CF4D00880599 /* EntManagerV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntManagerV2.swift; sourceTree = "<group>"; };
+		F18978A01F78D04F00880599 /* OauthEngineV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthEngineV2.swift; sourceTree = "<group>"; };
+		F18978A21F78D3A300880599 /* HostConfigV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostConfigV2.swift; sourceTree = "<group>"; };
+		F18978A41F79028E00880599 /* HttpEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpEngine.swift; sourceTree = "<group>"; };
+		F18978A61F7902F000880599 /* OauthEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OauthEngine.swift; sourceTree = "<group>"; };
+		F1E990541F7E51EE00CEBA0E /* RequestMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMethod.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +212,7 @@
 		CAB037681B331F4100E84824 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				F18978961F78CD4D00880599 /* compat */,
 				CA6A5C931E2E2C9F00842BFA /* NetError.swift */,
 				CAB037691B331F4100E84824 /* Category */,
 				CAB0376C1B331F4100E84824 /* Constans.swift */,
@@ -205,10 +222,13 @@
 				CAB037751B331F4100E84824 /* EntManager.swift */,
 				CAB037761B331F4100E84824 /* HostConfig.swift */,
 				CAB037771B331F4100E84824 /* NetConnection.swift */,
-				CAB037781B331F4100E84824 /* ParentEngine.swift */,
 				CAB037791B331F4100E84824 /* SignAbility.swift */,
 				CAB0377A1B331F4100E84824 /* Upload */,
 				CAB0377D1B331F4100E84824 /* Utils */,
+				F18978A41F79028E00880599 /* HttpEngine.swift */,
+				F18978A61F7902F000880599 /* OauthEngine.swift */,
+				F1542AD31F7A1E3100DF06CB /* ThirdPartyManager.swift */,
+				F1E990541F7E51EE00CEBA0E /* RequestMethod.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -292,6 +312,26 @@
 				CAC65E2E1C87DB960005D36D /* libz.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F18978961F78CD4D00880599 /* compat */ = {
+			isa = PBXGroup;
+			children = (
+				F18978971F78CD5600880599 /* v2 */,
+			);
+			path = compat;
+			sourceTree = "<group>";
+		};
+		F18978971F78CD5600880599 /* v2 */ = {
+			isa = PBXGroup;
+			children = (
+				F18978981F78CD8300880599 /* EntFileManagerV2.swift */,
+				F189789A1F78CF1900880599 /* EntLibManagerV2.swift */,
+				F189789C1F78CF4D00880599 /* EntManagerV2.swift */,
+				F18978A01F78D04F00880599 /* OauthEngineV2.swift */,
+				F18978A21F78D3A300880599 /* HostConfigV2.swift */,
+			);
+			path = v2;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,29 +489,37 @@
 				CAB037901B331F4100E84824 /* OauthData.swift in Sources */,
 				CAB0378B1B331F4100E84824 /* Dictionary+BlocksAdditions.swift in Sources */,
 				CAB037A81B331F4100E84824 /* Utils.swift in Sources */,
-				CAB037981B331F4100E84824 /* ParentEngine.swift in Sources */,
+				F1542AD41F7A1E3100DF06CB /* ThirdPartyManager.swift in Sources */,
 				CAB037941B331F4100E84824 /* EntLibManager.swift in Sources */,
 				CAB0378F1B331F4100E84824 /* FileOperationData.swift in Sources */,
 				CAB037A71B331F4100E84824 /* Utility.swift in Sources */,
 				CAB037A61B331F4100E84824 /* SHA256.swift in Sources */,
 				CAB037A11B331F4100E84824 /* Digestible.swift in Sources */,
+				F189789B1F78CF1900880599 /* EntLibManagerV2.swift in Sources */,
+				F189789D1F78CF4D00880599 /* EntManagerV2.swift in Sources */,
 				CAB037951B331F4100E84824 /* EntManager.swift in Sources */,
 				CAC0D1E51B498C500024C8A9 /* UploadManager.swift in Sources */,
 				CAB037A31B331F4100E84824 /* HTTPStatusCodes.swift in Sources */,
 				CAB0378E1B331F4100E84824 /* BaseData.swift in Sources */,
 				CAB0379C1B331F4100E84824 /* AlgorithmType.swift in Sources */,
+				F18978991F78CD8300880599 /* EntFileManagerV2.swift in Sources */,
 				CAB0379F1B331F4100E84824 /* Digest.swift in Sources */,
 				CAB037971B331F4100E84824 /* NetConnection.swift in Sources */,
+				F18978A51F79028E00880599 /* HttpEngine.swift in Sources */,
 				CAB037931B331F4100E84824 /* EntFileManager.swift in Sources */,
 				CA6A5C941E2E2C9F00842BFA /* NetError.swift in Sources */,
 				CAB037911B331F4100E84824 /* ReturnResult.swift in Sources */,
+				F1E990551F7E51EE00CEBA0E /* RequestMethod.swift in Sources */,
 				CAB037921B331F4100E84824 /* SyncMemberData.swift in Sources */,
+				F18978A71F7902F000880599 /* OauthEngine.swift in Sources */,
 				CAB037991B331F4100E84824 /* SignAbility.swift in Sources */,
 				CAB037A51B331F4100E84824 /* SHA1.swift in Sources */,
 				CAB0378D1B331F4100E84824 /* Constans.swift in Sources */,
+				F18978A31F78D3A300880599 /* HostConfigV2.swift in Sources */,
 				CAB037A21B331F4100E84824 /* HMACAlgorithm.swift in Sources */,
 				CAB037961B331F4100E84824 /* HostConfig.swift in Sources */,
 				6B6E2C5B3D3EF3BCBB688A6B /* CRC32.swift in Sources */,
+				F18978A11F78D04F00880599 /* OauthEngineV2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
