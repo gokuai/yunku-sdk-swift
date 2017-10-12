@@ -1332,7 +1332,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 | 参数 | 必需 | 类型 | 说明 |
 |------|------|------|------|
 | fullPaths | 是 | string | 源文件路径,如果是多个文件用“｜”符号隔开 |
-| destFullPaths | 是 | string | 目标文件夹(不包含文件名), 如果复制多份使用竖号 "|" 分隔|
+| destFullPaths | 是 | string | 目标文件夹(不包含文件名), 如果复制多份使用用“｜”符号隔开|
 
 #### 返回结果
 	正常返回 HTTP 200
@@ -1478,7 +1478,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 | path | 是 | string | 需要搜索的文件夹|
 | start | 是 | int | 开始位置|
 | size | 是 | int | 返回条数|
-| scopes | 是 | String| FILENAME-文件名、TAG-标签、CONTENT-全文,复合条件使用"|"分隔开|
+| scopes | 是 | String| FILENAME-文件名、TAG-标签、CONTENT-全文,复合条件用“｜”符号隔开 |
 
 #### 返回结果
 	{
