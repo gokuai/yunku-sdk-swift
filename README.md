@@ -1310,8 +1310,8 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 | 参数 | 必需 | 类型 | 说明 |
 |------|------|------|------|
-| fullPaths | 是 | string | 源文件路径,如果是多个文件用“｜”符号隔开 |
-| destFullPath | 是 | string | 目标文件路径(不含文件名称)|
+| fullPath| 是 | string | 源文件路径 |
+| destFullPath | 是 | string | 目标文件路径(含文件名称)|
 | opName | 是 | string | 用户名称 |
 
 #### 返回结果
@@ -1332,7 +1332,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 | 参数 | 必需 | 类型 | 说明 |
 |------|------|------|------|
 | fullPaths | 是 | string | 源文件路径,如果是多个文件用“｜”符号隔开 |
-| destFullPath | 是 | string | 目标文件路径(不含文件名称)|
+| destFullPaths | 是 | string | 目标文件夹(不包含文件名), 如果复制多份使用竖号 "|" 分隔|
 
 #### 返回结果
 	正常返回 HTTP 200
@@ -1462,8 +1462,48 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 ---
 
+### 文件搜索
+**swift**
+
+	search(keyWords:String, path:String, start:Int, size:Int, scopes:String)
+
+**objc**
+
+	search:(NSString *) keyWords path:(NSString *) path start:(NSInteger) start size:(NSInteger)size scopes:(NSString *) scopes
+
+#### 参数
+| 名称 | 必需 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| keyWords | 是 | string | 搜索关键字 |
+| path | 是 | string | 需要搜索的文件夹|
+| start | 是 | int | 开始位置|
+| size | 是 | int | 返回条数|
+| scopes | 是 | String| FILENAME-文件名、TAG-标签、CONTENT-全文,复合条件使用"|"分隔开|
+
+#### 返回结果
+	{
+		count:
+		list:
+		[
+			{
+				hash:
+				dir:
+				fullpath:
+				filename:
+				filehash:
+				filesize:
+				create_member_name:
+				create_dateline:
+				last_member_name:
+				last_dateline:
+			},
+			...
+		]
+	}
+---
+
 ## 条件配置(ConfigHelper.swift)
-###构造方法
+### 构造方法
 **swift**
 
 	ConfigHelper()
