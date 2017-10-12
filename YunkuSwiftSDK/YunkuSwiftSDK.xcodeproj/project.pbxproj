@@ -13,7 +13,7 @@
 		CA6A5C941E2E2C9F00842BFA /* NetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6A5C931E2E2C9F00842BFA /* NetError.swift */; };
 		CAB0378B1B331F4100E84824 /* Dictionary+BlocksAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0376A1B331F4100E84824 /* Dictionary+BlocksAdditions.swift */; };
 		CAB0378C1B331F4100E84824 /* String+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0376B1B331F4100E84824 /* String+Encode.swift */; };
-		CAB0378D1B331F4100E84824 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0376C1B331F4100E84824 /* Constans.swift */; };
+		CAB0378D1B331F4100E84824 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0376C1B331F4100E84824 /* Config.swift */; };
 		CAB0378E1B331F4100E84824 /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0376E1B331F4100E84824 /* BaseData.swift */; };
 		CAB0378F1B331F4100E84824 /* FileOperationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0376F1B331F4100E84824 /* FileOperationData.swift */; };
 		CAB037901B331F4100E84824 /* OauthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037701B331F4100E84824 /* OauthData.swift */; };
@@ -66,7 +66,7 @@
 		CA6A5C931E2E2C9F00842BFA /* NetError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetError.swift; sourceTree = "<group>"; };
 		CAB0376A1B331F4100E84824 /* Dictionary+BlocksAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+BlocksAdditions.swift"; sourceTree = "<group>"; };
 		CAB0376B1B331F4100E84824 /* String+Encode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Encode.swift"; sourceTree = "<group>"; };
-		CAB0376C1B331F4100E84824 /* Constans.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
+		CAB0376C1B331F4100E84824 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		CAB0376E1B331F4100E84824 /* BaseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseData.swift; sourceTree = "<group>"; };
 		CAB0376F1B331F4100E84824 /* FileOperationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileOperationData.swift; sourceTree = "<group>"; };
 		CAB037701B331F4100E84824 /* OauthData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthData.swift; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 			children = (
 				CA6A5C931E2E2C9F00842BFA /* NetError.swift */,
 				CAB037691B331F4100E84824 /* Category */,
-				CAB0376C1B331F4100E84824 /* Constans.swift */,
+				CAB0376C1B331F4100E84824 /* Config.swift */,
 				CAB0376D1B331F4100E84824 /* Data */,
 				CAB037731B331F4100E84824 /* EntFileManager.swift */,
 				CAB037741B331F4100E84824 /* EntLibManager.swift */,
@@ -468,7 +468,7 @@
 				CAB037921B331F4100E84824 /* SyncMemberData.swift in Sources */,
 				CAB037991B331F4100E84824 /* SignAbility.swift in Sources */,
 				CAB037A51B331F4100E84824 /* SHA1.swift in Sources */,
-				CAB0378D1B331F4100E84824 /* Constans.swift in Sources */,
+				CAB0378D1B331F4100E84824 /* Config.swift in Sources */,
 				CAB037A21B331F4100E84824 /* HMACAlgorithm.swift in Sources */,
 				CAB037961B331F4100E84824 /* HostConfig.swift in Sources */,
 				6B6E2C5B3D3EF3BCBB688A6B /* CRC32.swift in Sources */,

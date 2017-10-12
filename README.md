@@ -1257,6 +1257,24 @@ org_client_secret用于调用库文件相关API签名时的密钥
 #### 返回结果
 	正常返回 HTTP 200
 ---
+
+### 根据 Tag 删除文件
+**swift**
+	
+	delByTag( tag: String, opName: String)
+
+**objc**
+
+	delByTag:(NSString *)tag opName:(NSString *)opName;
+	
+#### 参数 
+| 参数 | 必需 | 类型 | 说明 |
+|------|------|------|------|
+| opName | 否 | string | 操作人名称|
+| tag | 是 | string | 根据 tag 删除对应的文件|
+#### 返回结果
+	正常返回 HTTP 200
+---
 ###移动文件
 **swift**
 
@@ -1277,7 +1295,50 @@ org_client_secret用于调用库文件相关API签名时的密钥
 #### 返回结果
 	正常返回 HTTP 200
 ---
-###获取文件链接
+
+###复制文件
+**swift**
+
+	copy( fullPaths: String, destFullPath: String, opName: String)
+
+**objc**
+
+	copy:(NSString *)fullPaths destFullPath:(NSString *)destFullPath opName:(NSString *)opName;
+
+#### 参数 
+
+| 参数 | 必需 | 类型 | 说明 |
+|------|------|------|------|
+| fullPaths | 是 | string | 源文件路径,如果是多个文件用“｜”符号隔开 |
+| destFullPath | 是 | string | 目标文件路径(不含文件名称)|
+| opName | 是 | string | 用户名称 |
+
+#### 返回结果
+	正常返回 HTTP 200
+---
+
+### 复制文件(拷贝 tag 与操作人属性)
+**swift**
+
+	copyAll( fullPaths: String, destFullPath: String, opName: String)
+
+**objc**
+
+	copyAll:(NSString *)fullPaths destFullPath:(NSString *)destFullPath;
+
+#### 参数 
+
+| 参数 | 必需 | 类型 | 说明 |
+|------|------|------|------|
+| fullPaths | 是 | string | 源文件路径,如果是多个文件用“｜”符号隔开 |
+| destFullPath | 是 | string | 目标文件路径(不含文件名称)|
+
+#### 返回结果
+	正常返回 HTTP 200
+---
+
+
+### 获取文件链接
 **swift**
 
 	link( fullPath: String, deadline:Int, authType: AuthType, password: String)
@@ -1394,8 +1455,121 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 ---
 
+## 条件配置(ConfigHelper.swift)
+###构造方法
+**swift**
 
-## SDK日志（**Config.swift** ）
+	ConfigHelper()
+
+**objc**
+
+	[[ConfigHelper alloc]init]
+
+### 修改认证地址
+**swift**
+
+	oauthHost(oauthHost:String)
+
+**objc**
+
+	oauthHost:(NSString *) oauthHost
+#### 参数
+| 名称 | 必需 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| authHost | 是 | string | 认证使用的地址 |
+
+### 修改 API 地址
+**swift**
+
+	apiHost(oauthHost:String)
+
+**objc**
+
+	apiHost:(NSString *) apiHost
+#### 参数
+| 名称 | 必需 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| authHost | 是 | string | API 使用的地址 |
+
+---
+### 设置上传根目录
+**swift**
+
+	uploadRootPath(rootPath:String)
+
+**objc**
+
+	uploadRootPath:(NSString *) rootPath
+#### 参数
+| 名称 | 必需 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| rootPath | 是 | string | 上传默认路径，在原有上传路径上添加上传前缀，例如上传路径为 uploadPath，则路径变为 "rootPath/uploadPath"|
+
+---
+
+
+### 设置默认上传文件标签
+**swift**
+
+	uploadFileTags(tags:String)
+
+**objc**
+
+	uploadFileTags:(NSString *) tags
+#### 参数
+| 名称 | 必需 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| tags | 是 | string| 设置上传时，默认使用的 tag,如果是多个文件用“｜”符号隔开 |
+---
+### 设置默认上传操作人
+**swift**
+
+	uploadOpName(opName:String)
+
+**objc**
+
+	uploadOpName:(NSString *) opName
+	
+#### 参数
+| 名称 | 必需 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| opName | 是 | string| 设置默认上传时操作人的名字 |
+---
+### 设置代理方法
+>未实现
+
+### 修改 USERAGENT
+**swift**
+
+	userAgent(userAgent:String)
+
+**objc**
+
+	userAgent:(NSString *) userAgent
+#### 参数
+| 名称 | 必需 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| userAgent | 是 | string| 更改使用的 UserAgent 值 |
+---
+
+### 修改接口语言环境
+**swift**
+
+	language(language:String)
+
+**objc**
+
+	language:(NSString *) language
+	
+#### 参数
+| 名称 | 必需 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| language | 是 | string| 修改接口语言环境，默认获取系统的语言环境, 现只支持 ZH 和 US 两种语言 |
+---
+
+
+
+## SDK日志（Config.swift）
 
 ###设置是否打印SDK日志
 **swift**
