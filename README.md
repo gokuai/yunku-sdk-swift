@@ -17,7 +17,7 @@ Robots: noindex,nofollow
 建议将项目build产生的**YunkuSwiftSDK.framework**文件引用进项目，或者将项目作为Library Project 引入,如果是 iOS Application，使用 Headers/iOS 文件夹下的头文件，如果是 OSX Application
 则使用Headers/OSX的头文件
 
-###Swift
+### Swift
 *Framework*
 
 * 将YunkuSwiftSDK.framework,CommonCrypto.framework 拖至 ［Your Project］之下
@@ -32,7 +32,7 @@ Robots: noindex,nofollow
 * 在 Build Phases 中添加一项 New Copy Files Phrase，选择 Destination 为 Frameworks，将项目中的 YunkuSwiftSDK.framework，CommonCrypto.framework 拖曳进去
 * 在使用SDK的类的顶部添加 import YunkuSwiftSDK
 
-###Object-C
+### Object-C
 *Framework*
 
 * 将YunkuSwiftSDK.framework 拖至 ［Your Project］之下
@@ -52,7 +52,7 @@ Robots: noindex,nofollow
 ## 初始化
 要使用云库api，您需要有效的CLIENT_ID和CLIENT_SECRET,和获得云库后台管理账号。
 
-##参数使用
+## 参数使用
 以下使用到的方法中，如果是string类型的非必要参数，如果是不传，则传null
 
 ## 企业库管理（ **EntLibManager.swift** ）
@@ -187,7 +187,7 @@ Robots: noindex,nofollow
 #### 返回结果 
    正常返回 HTTP 200 
 
-####数值参考
+#### 数值参考
 1T="1099511627776" 
 1G＝“1073741824”；
 
@@ -475,7 +475,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 
 ## 企业管理（**EntManager.swift** ）
-###构造方法
+### 构造方法
 
 **swift**
 
@@ -526,7 +526,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 | refresh_token | string | 用于刷新access_token 的 refresh_token，有效期1个月 |
 
 ---
-###获取角色
+### 获取角色
 
 **swift**
 
@@ -772,7 +772,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 ---
 
-###获取分组
+### 获取分组
 
 **swift**
 
@@ -835,7 +835,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 	}
 
 ---
-###根据成员id获取成员个人库外链
+### 根据成员id获取成员个人库外链
 
 **swift**
 
@@ -1059,7 +1059,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 | last_dateline | int | 文件最后修改时间戳 |
 
 ---
-###获取更新列表
+### 获取更新列表
 
 **swift**
 
@@ -1120,7 +1120,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 	}
 ---
 
-###获取文件信息
+### 获取文件信息
 
 **swift**
 
@@ -1167,7 +1167,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 | uri | string | 文件下载地址 |
 
 ---
-###创建文件夹
+### 创建文件夹
 **swift**
 
 	createFolder( fullPath:String,opName:String)
@@ -1190,7 +1190,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 | fullpath | string | 文件夹的路径 |
 
 ---
-###通过数据上传（50M以内文件）
+### 通过数据上传（50M以内文件）
 
 **swift**
 
@@ -1219,7 +1219,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 
 ---
-###文件分块上传
+### 文件分块上传
 
 **swift**
 	
@@ -1240,7 +1240,8 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 ---
 	
-###删除文件
+### 删除文件
+
 **swift**
 	
 	del( fullPaths: String, opName: String)
@@ -1275,7 +1276,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 #### 返回结果
 	正常返回 HTTP 200
 ---
-###移动文件
+### 移动文件
 **swift**
 
 	move( fullPath: String, destFullPath: String, opName: String)
@@ -1296,7 +1297,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 	正常返回 HTTP 200
 ---
 
-###复制文件
+### 复制文件
 **swift**
 
 	copy( fullPaths: String, destFullPath: String, opName: String)
@@ -1357,7 +1358,13 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 
 #### 返回结果
-###发送消息
+
+    {
+    "link": "外链地址"
+    }
+
+
+### 发送消息
 **swift**
 
 	sendmsg( title: String,
@@ -1379,7 +1386,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 	正常返回 HTTP 200 
 ---
 
-###获取当前库所有外链
+### 获取当前库所有外链
 
 **swift**
 
@@ -1406,7 +1413,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 ---
 
-###通过链接上传文件
+### 通过链接上传文件
 
 **swift**
 
@@ -1481,7 +1488,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 ### 修改 API 地址
 **swift**
 
-	apiHost(oauthHost:String)
+	apiHost(apiHost:String)
 
 **objc**
 
@@ -1571,7 +1578,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 ## SDK日志（Config.swift）
 
-###设置是否打印SDK日志
+### 设置是否打印SDK日志
 **swift**
   
 	static logPrint
@@ -1580,7 +1587,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 	setLogPrint:(BOOL)value;
 
-###设置打印日志的级别
+### 设置打印日志的级别
 
 **swift**
   
