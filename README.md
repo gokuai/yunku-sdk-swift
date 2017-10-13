@@ -1362,7 +1362,30 @@ org_client_secret用于调用库文件相关API签名时的密钥
     {
     "link": "外链地址"
     }
+### 文件预览地址
 
+**swift**
+
+	getFilePreviewUrl(fullPath:String, pathHash:String, watermark: Bool, member_name: String)
+
+**objc**
+	
+	getFilePreviewUrl:(NSString *) fullPath pathHash:(NSString *) pathHash watermark:(NSString *) watermark member_name:(NSString *) member_name;
+
+#### 参数 
+| 名称 | 必需 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| fullPath | 是 | string | 文件路径 |
+| pathHash | 是 | string | 文件路径 hash |
+| watermark | 是 | boolean | 是否显示水印 |
+| member_name | 否 | string | 在水印中显示的文档查看人姓名 |
+
+#### 返回结果
+	{
+    	"url" : 文档预览地址(10分钟有效)
+	}
+	
+---    
 
 ### 发送消息
 **swift**
