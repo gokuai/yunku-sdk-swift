@@ -5,7 +5,7 @@
 
 import Foundation
 
-@objc public protocol UploadCallBack {
+@objc public protocol UploadCallBack : NSObject {
 
     func onSuccess(_ fileHash: String, fullPath: String ,localPath:String)
 

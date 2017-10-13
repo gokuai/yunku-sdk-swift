@@ -15,5 +15,5 @@ FOUNDATION_EXPORT double YunkuSwiftSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char YunkuSwiftSDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <YunkuSwiftSDK/PublicHeader.h>
-
+#import <YunkuSwiftSDK/gkobjassist.h>
 
