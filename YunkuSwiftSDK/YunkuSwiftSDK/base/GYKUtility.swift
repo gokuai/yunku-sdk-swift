@@ -70,7 +70,7 @@ fileprivate let FileIcons: [String:String] = [
     ";h;m;jsp;js;cpp;mm;php;json;c;xml;html;css;json;":kIconImageNameCode];
 
 
-@inline(__always) func gkSafeString(dic: [AnyHashable:Any], key: String, def: String = "") -> String {
+@inline(__always) public func gkSafeString(dic: [AnyHashable:Any], key: String, def: String = "") -> String {
     
     var strval = def
     if let tempstr = dic[key] as? String {
@@ -85,7 +85,7 @@ fileprivate let FileIcons: [String:String] = [
     return strval
 }
 
-@inline(__always) func gkSafeInt(dic: [AnyHashable:Any], key: String, def: Int = 0) -> Int {
+@inline(__always) public func gkSafeInt(dic: [AnyHashable:Any], key: String, def: Int = 0) -> Int {
     
     var intval = def
     if let tempint = dic[key] as? Int {
@@ -442,7 +442,7 @@ public class GYKUtility : NSObject {
     
     //MARK: --------- Json ---------
     
-    @objc static func str2data(str: String) -> Data? {
+    @objc public static func str2data(str: String) -> Data? {
         return str.data(using: .utf8)
     }
     
@@ -450,7 +450,7 @@ public class GYKUtility : NSObject {
         return String(data: data, encoding: .utf8)
     }
     
-    @objc static func josn2obj(obj: Any) -> Any? {
+    @objc public static func josn2obj(obj: Any) -> Any? {
         var ret: Any? = nil
         if let d = obj as? [AnyHashable:Any] {
             ret = d
@@ -487,7 +487,7 @@ public class GYKUtility : NSObject {
         return nil
     }
     
-    @objc static func obj2str(obj: Any) -> String? {
+    @objc public static func obj2str(obj: Any) -> String? {
         if obj is String {
             return obj as? String
         } else if obj is Data {
@@ -506,7 +506,7 @@ public class GYKUtility : NSObject {
     
     //MARK: --------- Format ---------
     
-    @objc static func createUUID()->String {
+    @objc public static func createUUID()->String {
         let uuid = CFUUIDCreate(kCFAllocatorDefault)
         let cfstr: CFString! = CFUUIDCreateString(kCFAllocatorDefault, uuid)
         let s = cfstr as String

@@ -29,7 +29,7 @@
 		CB27F6371F90912A005AAEAD /* EntFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB27F6341F90912A005AAEAD /* EntFileManager.swift */; };
 		CB27F6381F90912A005AAEAD /* EntLibManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB27F6351F90912A005AAEAD /* EntLibManager.swift */; };
 		CB27F6391F90912A005AAEAD /* EntManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB27F6361F90912A005AAEAD /* EntManager.swift */; };
-		CB27F63D1F90B725005AAEAD /* GYKConfigHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB27F63C1F90B725005AAEAD /* GYKConfigHelper.swift */; };
+		CBB4EE9E1F96FA170023B2C9 /* GYKConfigHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB4EE9D1F96FA170023B2C9 /* GYKConfigHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +59,7 @@
 		CB27F6341F90912A005AAEAD /* EntFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntFileManager.swift; sourceTree = "<group>"; };
 		CB27F6351F90912A005AAEAD /* EntLibManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntLibManager.swift; sourceTree = "<group>"; };
 		CB27F6361F90912A005AAEAD /* EntManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntManager.swift; sourceTree = "<group>"; };
-		CB27F63C1F90B725005AAEAD /* GYKConfigHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GYKConfigHelper.swift; sourceTree = "<group>"; };
+		CBB4EE9D1F96FA170023B2C9 /* GYKConfigHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GYKConfigHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +96,7 @@
 		CA1427D91B185A1800CC0302 /* YunkuSwiftSDK */ = {
 			isa = PBXGroup;
 			children = (
+				CBB4EE9D1F96FA170023B2C9 /* GYKConfigHelper.swift */,
 				CB27F6331F90912A005AAEAD /* interface */,
 				CB2012B41F9080520070EE99 /* trans */,
 				CB2012951F8F762D0070EE99 /* base */,
@@ -187,7 +188,6 @@
 		CB27F6331F90912A005AAEAD /* interface */ = {
 			isa = PBXGroup;
 			children = (
-				CB27F63C1F90B725005AAEAD /* GYKConfigHelper.swift */,
 				CB27F6341F90912A005AAEAD /* EntFileManager.swift */,
 				CB27F6351F90912A005AAEAD /* EntLibManager.swift */,
 				CB27F6361F90912A005AAEAD /* EntManager.swift */,
@@ -286,7 +286,7 @@
 				CB27F6381F90912A005AAEAD /* EntLibManager.swift in Sources */,
 				CB2012A91F8F762D0070EE99 /* GYKData.swift in Sources */,
 				CB2012BD1F9080940070EE99 /* YKTransDefine.swift in Sources */,
-				CB27F63D1F90B725005AAEAD /* GYKConfigHelper.swift in Sources */,
+				CBB4EE9E1F96FA170023B2C9 /* GYKConfigHelper.swift in Sources */,
 				CB2012AC1F8F762D0070EE99 /* GYKUtility.swift in Sources */,
 				CB2012AB1F8F762D0070EE99 /* GYKString.swift in Sources */,
 				CB2012C11F90842C0070EE99 /* YKEventNotify.swift in Sources */,

@@ -15,9 +15,9 @@ public class GYKConfigHelper : NSObject {
     var https = false
     var oauth_host = ""
     var api_host = ""
-    var upload_root_path: String?
     var userAgent: String?
     var language: String?
+    var upload_root_path = ""
     
     @objc public func oauthHost(_ host: String) -> GYKConfigHelper {
         self.oauth_host = host

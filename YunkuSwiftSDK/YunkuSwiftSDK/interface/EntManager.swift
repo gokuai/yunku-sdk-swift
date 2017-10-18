@@ -19,8 +19,7 @@ import Foundation
     }
     
     //MARK:获取成员
-    @objc public func getMembers(start: Int,
-                         size: Int) -> GYKResponse {
+    @objc public func getMembers(start: Int, size: Int) -> GYKResponse {
         return self.httpEngine.getEntMemberList(start: start, size: size)
         
     }

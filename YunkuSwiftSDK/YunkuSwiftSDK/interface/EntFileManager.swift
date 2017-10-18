@@ -7,11 +7,15 @@ import Foundation
 
 @objc public class EntFileManager: NSObject {
     
-    private func haihangfullPathUpload(userID: String, path: String) -> String {
-        return "\(userID)/huiyijiyao/" + path
+    private func fullUploadPath(path: String) -> String {
+        var parent = GYKConfigHelper.shanreConfig.upload_root_path
+        if !parent.isEmpty {
+            parent = parent.gyk_addLastSlash
+        }
+        return parent + path
     }
 
-    private var httpEngine: GYKHttpEngine!
+    public var httpEngine: GYKHttpEngine!
     
     var taskLock = gklock()
     var tasks = [YKUploadTask]()
@@ -22,9 +26,7 @@ import Foundation
     }
 
     //MARK:获取文件列表
-    @objc public func getFileList(fullPath: String,
-                                  start: Int,
-                                  size: Int) -> GYKResponse {
+    @objc public func getFileList(fullPath: String, start: Int, size: Int) -> GYKResponse {
         return self.httpEngine.fetchFileList(fullpath: fullPath, dir: 0, hashs: nil, start: start, size: size)
     }
 
@@ -53,97 +55,24 @@ import Foundation
         return ret
     }
 
-    //MARK:将文件数据上传至
-    @objc public func uploadFile(fullPath: String, data: Data, userID: String , userName: String, overwrite: Bool) -> GYKResponse {
-        let thepath = haihangfullPathUpload(userID: userID, path: fullPath)
-        let res = self.httpEngine.uploadFile(fullpath: thepath , op_id: nil, op_name: userName, overwrite: overwrite, data: data)
-        
-        if res.statuscode == 200 {
-            let tag1 = GYKUtility.createUUID()
-            let tag2 = userID
-            let _ = self.httpEngine.addFileTag(fullpath: thepath, tag:"\(tag1);\(tag2)")
-        }
-        
-        return res
-    }
-
-    //MARK: 删除文件
-    @objc public func del(userID: String, guids: [String], opName: String?) -> GYKResponse {
-        
-        return self.httpEngine.deleteFiles(fullpath:nil, tag:guids.joined(separator: ";"), path:self.haihangfullPathUpload(userID: userID, path: ""), op_id:nil, op_name:opName, destroy: false)
-    }
-    
-    //MARK: 复制文件(高级)
-//    @objc public func copy(sourcePaths: [String], targetFullpaths: [String]) -> GYKResponse {
-//        var sources = [String]()
-//        for p in sourcePaths {
-//            let strpath = p
-//            sources.append(strpath)
-//        }
-//        var dests = [String]()
-//        for p in targetFullpaths {
-//            let strpath = p
-//            dests.append(strpath)
-//            let _ = self.httpEngine.createFolder(fullPath: strpath, op_id: nil, op_name: nil)
-//        }
-//        return self.httpEngine.copyFilesEx(sourcePaths: sources.joined(separator: "|"), targetFullpaths: dests.joined(separator: "|"), copy_all: true, op_id: nil, op_name: nil)
-//    }
-    
-    //MARK: 复制文件(支持批量)
-    @objc public func copy(sourcePaths: [String], userids: [String]) -> GYKResponse {
-        var sources = [String]()
-        for p in sourcePaths {
-            let strpath = p
-            sources.append(strpath)
-        }
-        var dests = [String]()
-        for uid in userids {
-            let path = self.haihangfullPathUpload(userID: uid, path: "").gyk_removeLastSlash
-            dests.append(path)
-            let _ = self.httpEngine.createFolder(fullPath: path, op_id: nil, op_name: nil)
-        }
-        return self.httpEngine.copyFilesEx(sourcePaths: sources.joined(separator: "|"), targetFullpaths: dests.joined(separator: "|"), copy_all: true, op_id: nil, op_name: nil)
-    }
-    
-    //MARK: 取消分享
-    @objc public func deleteShare(userid: String, guid: String) -> GYKResponse {
-        let path = self.haihangfullPathUpload(userID: userid, path: "")
-        return self.httpEngine.deleteFiles(fullpath: nil, tag: guid, path: path, op_id: nil, op_name: nil)
-    }
-    
-    //MARK: 获取共享成员列表
-    @objc public func getCopyHistory(guid: String, start: Int, size: Int) -> GYKResponse {
-        let ret = self.httpEngine.searchFile(keywords: guid, path: nil, scope: "[\"tag\"]", start: start, size: size)
-        var userIDs = [String]()
-        if ret.statuscode == 200 {
-            if let dic = ret.data?.gyk_dic {
-                if let list = dic["list"] as? Array<Any> {
-                    for item in list {
-                        if let d = item as? Dictionary<AnyHashable,Any> {
-                            let fullpath = gkSafeString(dic: d, key: "fullpath") as NSString
-                            let r = fullpath.range(of: "/")
-                            if r.location != NSNotFound {
-                                let userid = fullpath.substring(to: r.location)
-                                if !userid.isEmpty {
-                                    if !userIDs.contains(userid) {
-                                        userIDs.append(userid)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if let tempstr = GYKUtility.obj2str(obj: userIDs) {
-                        ret.data = GYKUtility.str2data(str: tempstr)
-                    }
-                }
-            }
-        }
-        return ret
+    //MARK: 复制文件
+    @objc public func copyFiles(sourcePaths: String, targetFullpaths: String, copy_all: Bool, op_id: String?,op_name: String?) -> GYKResponse {
+        return self.httpEngine.copyFilesEx(sourcePaths:sourcePaths, targetFullpaths:targetFullpaths, copy_all:copy_all, op_id:op_id, op_name:op_name )
     }
 
     //MARK: 移动文件
-    @objc public func move(fullpath: String, dest_fullpath: String) -> GYKResponse {
+    @objc public func moveFile(fullpath: String, dest_fullpath: String) -> GYKResponse {
         return self.httpEngine.moveFiles(fullpath:fullpath, dest_fullpath:dest_fullpath, op_id:nil, op_name:nil)
+    }
+    
+    //MARK: 删除文件
+    @objc public func deleteFiles(fullpath: String?,
+                            tag: String?,
+                            path: String?,
+                            op_id: String?,
+                            op_name: String?,
+                            destroy: Bool = false) -> GYKResponse {
+        return self.httpEngine.deleteFiles(fullpath:fullpath, tag:tag, path:path, op_id:op_id, op_name:op_name, destroy:destroy)
     }
     
     //MARK: 获取文件下载链接
@@ -156,29 +85,14 @@ import Foundation
         return self.httpEngine.getFilePreviewUrl(fullPath: fullPath, pathHash: nil, watermark: watermark, member_name: member_name)
     }
 
-    //MARK:获取文件链接
-    @objc public func link(fullPath: String,
-                   deadline: Int64,
-                   authType: AuthType,
-                   password: String?) -> GYKResponse {
+    //MARK:获取文件外链
+    @objc public func link(fullPath: String, deadline: Int64, authType: AuthType, password: String?) -> GYKResponse {
         return self.httpEngine.getFileLink(fullpath: fullPath, deadline: deadline, auth: authType.description, password: password)
     }
 
     //MARK:获取当前库所有外链
     @objc public func links(fileOnly: Bool) -> GYKResponse {
         return self.httpEngine.getFileLinks(onlyFile:fileOnly)
-    }
-
-    
-    //MARK:通过链接上传文件
-    @objc public func createFileByUrl(fullPath: String, userID: String, userName: String, overwrite: Bool, fileUrl: String) -> GYKResponse {
-        let ret = self.httpEngine.createFileByURL(fullpath: self.haihangfullPathUpload(userID: userID, path: fullPath), op_id: nil, op_name: userName, overwrite: overwrite, url: fileUrl)
-        if ret.statuscode == 200 {
-            let tag1 = GYKUtility.createUUID()
-            let tag2 = userID
-            let _ = self.httpEngine.addFileTag(fullpath: fullPath, tag:"\(tag1);\(tag2)")
-        }
-        return ret
     }
     
     //MARK: 添加标签
@@ -210,9 +124,22 @@ import Foundation
     @objc public func getUploadServers() -> GYKResponse {
         return self.httpEngine.getUploadServers()
     }
+    
+    //MARK:将文件数据上传至
+    @objc public func uploadFile(fullPath: String, data: Data, opID: String?, opName: String?, overwrite: Bool) -> GYKResponse {
+        let res = self.httpEngine.uploadFile(fullpath: self.fullUploadPath(path: fullPath) , op_id: opID, op_name: opName, overwrite: overwrite, data: data)
+        
+        return res
+    }
+    
+    //MARK:通过链接上传文件
+    @objc public func uploadFileByUrl(fullPath: String, opID: String?, opName: String?, overwrite: Bool, fileUrl: String) -> GYKResponse {
+        let ret = self.httpEngine.createFileByURL(fullpath: self.fullUploadPath(path: fullPath), op_id: opID, op_name: opName, overwrite: overwrite, url: fileUrl)
+        return ret
+    }
 
     //MARK: 分块上传
-    @objc public func uploadByBlock(fullpath:String, localpath:String, overwrite:Bool, userID: String, userName: String) {
+    @objc public func uploadChunk(fullpath:String, localpath:String, overwrite:Bool, opID: String?, opName: String?, tags: String? = nil) {
         
         self.checkFinished()
         
@@ -221,17 +148,15 @@ import Foundation
         UserDefaults.standard.set(nid, forKey: "gokuaiUploadIndex")
         UserDefaults.standard.synchronize()
         uploadItem.nID = nid
-        uploadItem.webpath = self.haihangfullPathUpload(userID: userID, path: fullpath)
+        uploadItem.webpath = self.fullUploadPath(path: fullpath)
         uploadItem.filename = fullpath.gyk_fileName
         uploadItem.parent = fullpath.gyk_parentPath
         uploadItem.localpath = localpath
-        uploadItem.opID = nil
-        uploadItem.opName = userName
+        uploadItem.opID = opID
+        uploadItem.opName = opName
         uploadItem.status = .Normal
         uploadItem.overwrite = overwrite
-        let tag1 = GYKUtility.createUUID()
-        let tag2 = userID
-        uploadItem.tags = "\(tag1);\(tag2)"
+        uploadItem.tags = tags
         
         if uploadItem.nID >= 0 {
             let task = YKUploadTask(uploadItem: uploadItem)
@@ -243,11 +168,11 @@ import Foundation
         }
     }
     
-    func deleteTask(id:Int) {
+    @objc public func deleteTaskByID(_ taskID:Int) {
         taskLock.lock()
         for i in 0..<tasks.count {
             let task = self.tasks[i]
-            if task.pItem.nID == id {
+            if task.pItem.nID == taskID {
                 task.cancel()
                 if task.pItem.status == .Start {
                     task.delete()
@@ -262,7 +187,7 @@ import Foundation
         taskLock.unlock()
     }
     
-    func deleteAll() {
+    @objc public func deleteAllTask() {
         
         taskLock.lock()
         taskQueue.cancelAllOperations()
@@ -299,4 +224,6 @@ import Foundation
             
         }
     }
+    
+    
 }
