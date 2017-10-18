@@ -32,6 +32,7 @@ class YKUploadItemData {
     var nID = 0
     var opID: String?
     var opName: String?
+    var tags: String?
     var webpath = ""
     var parent = ""
     var filename = ""

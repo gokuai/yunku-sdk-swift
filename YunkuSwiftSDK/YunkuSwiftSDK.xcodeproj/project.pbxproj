@@ -20,7 +20,6 @@
 		CB2012AB1F8F762D0070EE99 /* GYKString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB20129C1F8F762D0070EE99 /* GYKString.swift */; };
 		CB2012AC1F8F762D0070EE99 /* GYKUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB20129D1F8F762D0070EE99 /* GYKUtility.swift */; };
 		CB2012AE1F8F762D0070EE99 /* GYKAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2012A01F8F762D0070EE99 /* GYKAPI.swift */; };
-		CB2012AF1F8F762D0070EE99 /* GYKConfigHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2012A11F8F762D0070EE99 /* GYKConfigHelper.swift */; };
 		CB2012B01F8F762D0070EE99 /* GYKHttpEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2012A21F8F762D0070EE99 /* GYKHttpEngine.swift */; };
 		CB2012B11F8F762D0070EE99 /* GYKHttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2012A31F8F762D0070EE99 /* GYKHttpRequest.swift */; };
 		CB2012B21F8F762D0070EE99 /* GYKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2012A41F8F762D0070EE99 /* GYKResponse.swift */; };
@@ -30,6 +29,7 @@
 		CB27F6371F90912A005AAEAD /* EntFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB27F6341F90912A005AAEAD /* EntFileManager.swift */; };
 		CB27F6381F90912A005AAEAD /* EntLibManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB27F6351F90912A005AAEAD /* EntLibManager.swift */; };
 		CB27F6391F90912A005AAEAD /* EntManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB27F6361F90912A005AAEAD /* EntManager.swift */; };
+		CB27F63D1F90B725005AAEAD /* GYKConfigHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB27F63C1F90B725005AAEAD /* GYKConfigHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,7 +50,6 @@
 		CB20129C1F8F762D0070EE99 /* GYKString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GYKString.swift; sourceTree = "<group>"; };
 		CB20129D1F8F762D0070EE99 /* GYKUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GYKUtility.swift; sourceTree = "<group>"; };
 		CB2012A01F8F762D0070EE99 /* GYKAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GYKAPI.swift; sourceTree = "<group>"; };
-		CB2012A11F8F762D0070EE99 /* GYKConfigHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GYKConfigHelper.swift; sourceTree = "<group>"; };
 		CB2012A21F8F762D0070EE99 /* GYKHttpEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GYKHttpEngine.swift; sourceTree = "<group>"; };
 		CB2012A31F8F762D0070EE99 /* GYKHttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GYKHttpRequest.swift; sourceTree = "<group>"; };
 		CB2012A41F8F762D0070EE99 /* GYKResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GYKResponse.swift; sourceTree = "<group>"; };
@@ -60,6 +59,7 @@
 		CB27F6341F90912A005AAEAD /* EntFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntFileManager.swift; sourceTree = "<group>"; };
 		CB27F6351F90912A005AAEAD /* EntLibManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntLibManager.swift; sourceTree = "<group>"; };
 		CB27F6361F90912A005AAEAD /* EntManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntManager.swift; sourceTree = "<group>"; };
+		CB27F63C1F90B725005AAEAD /* GYKConfigHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GYKConfigHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +167,6 @@
 			isa = PBXGroup;
 			children = (
 				CB2012A01F8F762D0070EE99 /* GYKAPI.swift */,
-				CB2012A11F8F762D0070EE99 /* GYKConfigHelper.swift */,
 				CB2012A21F8F762D0070EE99 /* GYKHttpEngine.swift */,
 				CB2012A31F8F762D0070EE99 /* GYKHttpRequest.swift */,
 				CB2012A41F8F762D0070EE99 /* GYKResponse.swift */,
@@ -188,6 +187,7 @@
 		CB27F6331F90912A005AAEAD /* interface */ = {
 			isa = PBXGroup;
 			children = (
+				CB27F63C1F90B725005AAEAD /* GYKConfigHelper.swift */,
 				CB27F6341F90912A005AAEAD /* EntFileManager.swift */,
 				CB27F6351F90912A005AAEAD /* EntLibManager.swift */,
 				CB27F6361F90912A005AAEAD /* EntManager.swift */,
@@ -281,12 +281,12 @@
 			files = (
 				CB2012B11F8F762D0070EE99 /* GYKHttpRequest.swift in Sources */,
 				CB27F6371F90912A005AAEAD /* EntFileManager.swift in Sources */,
-				CB2012AF1F8F762D0070EE99 /* GYKConfigHelper.swift in Sources */,
 				CB2012AE1F8F762D0070EE99 /* GYKAPI.swift in Sources */,
 				CB2012A81F8F762D0070EE99 /* gkobjassist.m in Sources */,
 				CB27F6381F90912A005AAEAD /* EntLibManager.swift in Sources */,
 				CB2012A91F8F762D0070EE99 /* GYKData.swift in Sources */,
 				CB2012BD1F9080940070EE99 /* YKTransDefine.swift in Sources */,
+				CB27F63D1F90B725005AAEAD /* GYKConfigHelper.swift in Sources */,
 				CB2012AC1F8F762D0070EE99 /* GYKUtility.swift in Sources */,
 				CB2012AB1F8F762D0070EE99 /* GYKString.swift in Sources */,
 				CB2012C11F90842C0070EE99 /* YKEventNotify.swift in Sources */,
@@ -421,6 +421,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/Brandon/Documents/workplace/MacProject/yunku-sdk-swift/YunkuSwiftSDK/YunkuSwiftSDK/YunkuSwiftSDK-Bridging-Header.hes>";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -449,6 +450,7 @@
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

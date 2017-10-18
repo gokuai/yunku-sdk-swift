@@ -25,6 +25,7 @@ class YKUploadTask : Operation {
     
     init(uploadItem: YKUploadItemData) {
         self.pItem = YKUploadItemData()
+        pItem.tags = uploadItem.tags
         pItem.opID = uploadItem.opID
         pItem.opName = uploadItem.opName
         pItem.nID = uploadItem.nID
@@ -369,6 +370,11 @@ class YKUploadTask : Operation {
         pItem.errcode = 0
         pItem.errmsg = ""
         pItem.status = YKTransStatus.Finish
+        if let tags = pItem.tags {
+            if !tags.isEmpty {
+                let _ = self.httpEngine.addFileTag(fullpath: pItem.webpath, tag: tags)
+            }
+        }
         YKEventNotify.notify(pItem, type: .uploadFile)
     }
     

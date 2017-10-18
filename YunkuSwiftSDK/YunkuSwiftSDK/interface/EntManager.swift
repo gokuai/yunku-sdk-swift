@@ -5,28 +5,28 @@
 
 import Foundation
 
-open class EntManager :NSObject {
+@objc public class EntManager :NSObject {
 
     private var httpEngine: GYKHttpEngine!
     
     @objc public init(clientID: String, clientSecret: String) {
-        self.httpEngine = GYKHttpEngine(clientID: clientID, clientSecret: clientSecret, errorLog: nil)
+        self.httpEngine = GYKHttpEngine(host: GYKConfigHelper.shanreConfig.api_host, clientID: clientID, clientSecret: clientSecret, errorLog: nil)
     }
 
     //MARK:获取角色
-    open func getRoles() -> GYKResponse {
+    @objc public func getRoles() -> GYKResponse {
         return self.httpEngine.getEntRoles()
     }
     
     //MARK:获取成员
-    open func getMembers(start: Int,
+    @objc public func getMembers(start: Int,
                          size: Int) -> GYKResponse {
-        return self.httpEngine.getEntMembers(start: start, size: size)
+        return self.httpEngine.getEntMemberList(start: start, size: size)
         
     }
    
     //MARK:获取分组
-    open func getGroups() -> GYKResponse {
+    @objc public func getGroups() -> GYKResponse {
         return self.httpEngine.getEntGroups()
     }
 

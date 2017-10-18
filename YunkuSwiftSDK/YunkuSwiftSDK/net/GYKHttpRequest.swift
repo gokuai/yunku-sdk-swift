@@ -85,7 +85,7 @@ class GYKHttpTaskWrap {
     
 }
 
-class GYKHttpRequest : NSObject,URLSessionDelegate,URLSessionDataDelegate {
+public class GYKHttpRequest : NSObject,URLSessionDelegate,URLSessionDataDelegate {
     
     private lazy var session: URLSession = {
         return URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: self.queue)
@@ -295,7 +295,7 @@ class GYKHttpRequest : NSObject,URLSessionDelegate,URLSessionDataDelegate {
     
     
     //MARK: 
-    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         self.mapLock.lock()
         if let proxy = self.map["\(task.taskIdentifier)"] as? GYKHttpTaskWrap {
             proxy.urlSession(session, task: task, didCompleteWithError: error)
@@ -303,7 +303,8 @@ class GYKHttpRequest : NSObject,URLSessionDelegate,URLSessionDataDelegate {
         self.map.removeValue(forKey: "\(task.taskIdentifier)")
         self.mapLock.unlock()
     }
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+    
+    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         self.mapLock.lock()
         if let proxy = self.map["\(dataTask.taskIdentifier)"] as? GYKHttpTaskWrap {
             proxy.responseData.response = response as? HTTPURLResponse
@@ -312,7 +313,7 @@ class GYKHttpRequest : NSObject,URLSessionDelegate,URLSessionDataDelegate {
         completionHandler(.allow)
     }
     
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+    public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         
         self.mapLock.lock()
         if let proxy = self.map["\(dataTask.taskIdentifier)"] as? GYKHttpTaskWrap {

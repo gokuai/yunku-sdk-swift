@@ -10,41 +10,244 @@ import Foundation
 
 fileprivate let kTokenInvalidCode = 40101
 fileprivate let kTokenExpiredCode = 40102
-fileprivate let kTryCount: Int = 3
+fileprivate let kTryCount: Int = 2
 
 
-class GYKHttpEngine : GYKHttpRequest {
+public class GYKHttpEngine : GYKHttpRequest {
     
     var clientID = ""
     var clientSecret = ""
+    var apiHost = ""
     
     private var bStop = false
     
-    @objc init(clientID: String, clientSecret: String, errorLog: GYKRequestLogger?) {
+    public init(host: String, clientID: String, clientSecret: String, errorLog: GYKRequestLogger?) {
+        self.apiHost = host
         self.clientID = clientID
         self.clientSecret = clientSecret
         super.init()
         self.errorLog = errorLog
     }
     
-    func sign(_ param: [String:String]) -> String {
+    private func sign(_ param: [String:String]) -> String {
         return param.gyk_sign(key: self.clientSecret)
     }
 
-    func generateurl(_ url: String) -> String {
-        return GYKConfigHelper.shanreConfig.api_host + url
+    private func generateurl(_ url: String) -> String {
+        return self.apiHost + url
     }
     
-    func refreshToken() -> Bool {
+    private func refreshToken() -> Bool {
         return true
     }
     
     //MARK: ------企业操作------
     
-    //MARK: 获取企业成员
-    @objc func getEntMembers(start: Int,
-                                    size: Int) -> GYKResponse {
+    //MARK: 添加或修改同步成员
+    public func addEntSyncMember(outID: String, memberName: String, account: String, memberEmail: String?, memberPhone: String?, password: String?, state: Int = 1) -> GYKResponse {
         
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            param["out_id"] = outID
+            param["member_name"] = memberName
+            param["account"] = account
+            if memberEmail != nil {
+                param["member_email"] = memberEmail!
+            }
+            if memberPhone != nil {
+                param["member_phone"] = memberPhone!
+            }
+            if password != nil {
+                param["password"] = password!
+            }
+            param["state"] = "\(state)"
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ENT_ADD_SYNC_MEMBER), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    //MARK: 删除同步成员
+    public func delEntSyncMember(memberIDs: String) -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            param["members"] = memberIDs
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ENT_DEL_SYNC_MEMBER), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    //MARK: 添加或修改同步成部门
+    public func addEntSyncGroup(outID: String, name: String, parentID: String?) -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            param["out_id"] = outID
+            param["name"] = name
+            if parentID != nil {
+                param["parent_out_id"] = parentID!
+            }
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ENT_ADD_SYNC_GROUP), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    //MARK: 删除同步部门
+    public func delEntSyncGroup(groups: String) -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            param["groups"] = groups
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ENT_DEL_SYNC_GROUP), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    //MARK: 添加同步部门的成员
+    public func addEntSyncGroupMember(groupOutID: String?, members: String) -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            param["members"] = members
+            if groupOutID != nil {
+                param["group_out_id"] = groupOutID!
+            }
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ENT_ADD_GROUP_SYNC_MEMBER), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    //MARK: 删除同步部门的成员
+    public func delEntSyncGroupMember(groupOutID: String?, members: String) -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            param["members"] = members
+            if groupOutID != nil {
+                param["group_out_id"] = groupOutID!
+            }
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ENT_DEL_GROUP_SYNC_MEMBER), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    //MARK: 删除成员的所属部门
+    public func delSyncGroupOfMember(members: String) -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            param["members"] = members
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ENT_DEL_MEMBER_GROUPS), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    //MARK: 添加管理员
+    public func addEntSyncAdmin(outID: String, email: String?, type: Int) -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            param["out_id"] = outID
+            if email != nil {
+                param["member_email"] = email!
+            }
+            param["type"] = "\(type)"
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ENT_ADD_MANAGER), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    
+    //MARK: 成员列表
+    public func getEntMemberList(start: Int, size: Int) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -58,7 +261,7 @@ class GYKHttpEngine : GYKHttpRequest {
             param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
             param["sign"] = sign(param)
             
-            result = self.POST(url: generateurl(GYKAPI.ENT_MEMBER), headers: nil, param: param, reqType: GYKResponse.self)
+            result = self.POST(url: generateurl(GYKAPI.ENT_MEMBER_LIST), headers: nil, param: param, reqType: GYKResponse.self)
             if result.statuscode == 200 {
                 break
             } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
@@ -70,17 +273,24 @@ class GYKHttpEngine : GYKHttpRequest {
         return result
     }
     
-    //MARK: 获取企业角色
-    @objc func getEntRoles() -> GYKResponse {
-        
+    //MARK: 成员信息
+    public func getEntMember(memberID: String?, outID: String?, account: String?, showGroups: Bool = false) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
             var param = ["client_id":self.clientID]
+            if memberID != nil {
+                param["member_id"] = memberID!
+            } else if outID != nil {
+                param["out_id"] = outID!
+            } else if account != nil {
+                param["account"] = account!
+            }
+            param["show_groups"] = (showGroups ? "1" : "0")
             param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
             param["sign"] = sign(param)
             
-            result = self.POST(url: generateurl(GYKAPI.ENT_ROLES), headers: nil, param: param, reqType: GYKResponse.self)
+            result = self.POST(url: generateurl(GYKAPI.ENT_MEMBER_INFO), headers: nil, param: param, reqType: GYKResponse.self)
             if result.statuscode == 200 {
                 break
             } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
@@ -92,9 +302,34 @@ class GYKHttpEngine : GYKHttpRequest {
         return result
     }
     
-    //MARK: 获取企业部门
-    @objc func getEntGroups() -> GYKResponse {
+    //MARK: 通过外部帐号获取成员信息
+    public func getEntMemberByOutID(outIDs: String?, userIDs: String?) -> GYKResponse {
         
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            if outIDs != nil {
+                param["out_ids"] = outIDs!
+            } else if userIDs != nil {
+                param["user_ids"] = userIDs!
+            }
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ENT_MEMBER_INFO_OUT), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    //MARK: 部门列表
+    public func getEntGroups() -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -114,16 +349,62 @@ class GYKHttpEngine : GYKHttpRequest {
         return result
     }
     
+    //MARK: 获取部门成员
+    public func getGroupMembers(groupID: Int, showChild: Bool = false, start: Int = 0, size: Int = 0) -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            param["group_id"] = "\(groupID)"
+            param["show_child"] = (showChild ? "1" : "0")
+            if start > 0 {
+                param["start"] = "\(start)"
+            }
+            if size > 0 {
+                param["size"] = "\(size)"
+            }
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ENT_GROUP_MEMBER), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    //MARK: 获取企业角色
+    public func getEntRoles() -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ENT_ROLES), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
     
     
     //MARK: ------库操作------
     
     //MARK: 创建库
-    @objc func createOrg(name: String,
-                                logo: String? = nil,
-                                capacity: String? = nil,
-                                storage_point_name: String? = nil) -> GYKResponse {
-
+    public func createOrg(name: String, logo: String? = nil, capacity: String? = nil, storagePoint: String? = nil) -> GYKResponse {
 
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -135,8 +416,8 @@ class GYKHttpEngine : GYKHttpRequest {
             if capacity != nil {
                 param["org_capacity"] = capacity!
             }
-            if storage_point_name != nil {
-                param["storage_point_name"] = storage_point_name!
+            if storagePoint != nil {
+                param["storage_point_name"] = storagePoint!
             }
             param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
             param["sign"] = sign(param)
@@ -154,10 +435,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 修改库
-    @objc func configOrg(orgID: Int,
-                                name: String? = nil,
-                                logo: String? = nil,
-                                capacity: String? = nil) -> GYKResponse {
+    public func configOrg(orgID: Int, name: String? = nil, logo: String? = nil, capacity: String? = nil) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -188,7 +466,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 获取库信息
-    @objc func getOrgInfo(orgID: Int) -> GYKResponse {
+    public func getOrgInfo(orgID: Int) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -211,7 +489,7 @@ class GYKHttpEngine : GYKHttpRequest {
     
     
     //MARK: 拿库列表
-    @objc func getOrgList(type: Int = 0, memberID: Int = 0) -> GYKResponse {
+    public func getOrgList(type: Int = 0, memberID: Int = 0) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -236,16 +514,21 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 获取库授权
-    @objc func bindOrg(orgID: Int, mountID: Int) -> GYKResponse {
+    public func bindOrg(orgID: Int, mountID: Int, title: String? = nil, url: String? = nil) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
             var param = ["client_id":self.clientID]
             if orgID > 0 {
                 param["org_id"] = "\(orgID)"
-            }
-            if mountID > 0 {
+            } else if mountID > 0 {
                 param["mount_id"] = "\(mountID)"
+            }
+            if title != nil {
+                param["title"] = title!
+            }
+            if url != nil {
+                param["url"] = url!
             }
             param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
             param["sign"] = sign(param)
@@ -263,12 +546,12 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 取消库授权
-    @objc func unbindOrg(org_client_id: String) -> GYKResponse {
+    public func unbindOrg(orgClientID: String) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
             var param = ["client_id":self.clientID]
-            param["org_client_id"] = org_client_id
+            param["org_client_id"] = orgClientID
             param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
             param["sign"] = sign(param)
             
@@ -285,14 +568,12 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 获取库成员
-    @objc func getOrgMember(org_id: Int,
-                            start: Int,
-                            size: Int) -> GYKResponse {
+    public func getOrgMemberList(orgID: Int, start: Int, size: Int) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
             var param = ["client_id":self.clientID]
-            param["org_id"] = "\(org_id)"
+            param["org_id"] = "\(orgID)"
             if start > 0 {
                 param["start"] = "\(start)"
             }
@@ -314,17 +595,38 @@ class GYKHttpEngine : GYKHttpRequest {
         return result
     }
     
-    //MARK: 添加库成员
-    @objc func addOrgMember(org_id: Int,
-                            role_id: Int,
-                            member_ids: String) -> GYKResponse {
+    //MARK: 查询库成员信息
+    public func getOrgMemberInfo(orgID: Int, type: String, ids: String) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
             var param = ["client_id":self.clientID]
-            param["org_id"] = "\(org_id)"
-            param["role_id"] = "\(role_id)"
-            param["member_ids"] = member_ids
+            param["type"] = type
+            param["ids"] = ids
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ORG_MEMBER_INFO), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    //MARK: 添加库成员
+    public func addOrgMember(orgID: Int, roleID: Int, memberIDs: String) -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            param["org_id"] = "\(orgID)"
+            param["role_id"] = "\(roleID)"
+            param["member_ids"] = memberIDs
             param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
             param["sign"] = sign(param)
             
@@ -340,15 +642,38 @@ class GYKHttpEngine : GYKHttpRequest {
         return result
     }
     
-    //MARK: 删除库成员
-    @objc func delOrgMember(org_id: Int,
-                            member_ids: String) -> GYKResponse {
+    //MARK: 修改库成员角色
+    public func modifyOrgMemberRole(orgID: Int, roleID: Int, memberIDs: String) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
             var param = ["client_id":self.clientID]
-            param["org_id"] = "\(org_id)"
-            param["member_ids"] = member_ids
+            param["org_id"] = "\(orgID)"
+            param["role_id"] = "\(roleID)"
+            param["member_ids"] = memberIDs
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ORG_SET_MEMBER_ROLE), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    //MARK: 删除库成员
+    public func delOrgMember(orgID: Int, memberIDs: String) -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            param["org_id"] = "\(orgID)"
+            param["member_ids"] = memberIDs
             param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
             param["sign"] = sign(param)
             
@@ -364,17 +689,109 @@ class GYKHttpEngine : GYKHttpRequest {
         return result
     }
     
-    //MARK: 删除库
-    @objc func delOrg(org_id: Int,
-                      org_client_id: String?) -> GYKResponse {
+    //MARK: 获取库部门
+    public func getOrgGroupList(orgID: Int) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
             var param = ["client_id":self.clientID]
-            if org_client_id != nil {
-                param["org_client_id"] = org_client_id!
+            param["org_id"] = "\(orgID)"
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ORG_GROUP_LIST), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    //MARK: 添加库成部门
+    public func addOrgGroup(orgID: Int, groupID: Int, roleID: Int, memberIDs: String) -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            param["org_id"] = "\(orgID)"
+            param["role_id"] = "\(roleID)"
+            param["group_id"] = "\(groupID)"
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ORG_ADD_GROUP), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    //MARK: 删除库部门
+    public func delOrgGroup(orgID: Int, groupID: Int) -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            param["org_id"] = "\(orgID)"
+            param["group_id"] = "\(groupID)"
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ORG_DEL_GROUP), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    //MARK: 修改库部门角色
+    public func modifyOrgGroupRole(orgID: Int, groupID: Int, roleID: Int) -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            param["org_id"] = "\(orgID)"
+            param["role_id"] = "\(roleID)"
+            param["group_id"] = "\(groupID)"
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ORG_SET_GROUP_ROLE), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
+    //MARK: 删除库
+    public func delOrg(orgID: Int, orgClientID: String?) -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            if orgClientID != nil {
+                param["org_client_id"] = orgClientID!
             } else {
-                param["org_id"] = "\(org_id)"
+                param["org_id"] = "\(orgID)"
             }
             param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
             param["sign"] = sign(param)
@@ -392,13 +809,49 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     
+    //MARK: 库日志
+    public func getOrgLog(orgID: Int, mountID: Int, act: String?, startDateline: Int64 = 0, size: Int = 0) -> GYKResponse {
+        
+        var result: GYKResponse!
+        for _ in 0..<kTryCount {
+            var param = ["client_id":self.clientID]
+            if orgID > 0 {
+                param["org_id"] = "\(orgID)"
+            }
+            if mountID > 0 {
+                param["mount_id"] = "\(mountID)"
+            }
+            if act != nil {
+                param["act"] = act!
+            }
+            if startDateline > 0 {
+                param["start_dateline"] = "\(startDateline)"
+            }
+            if size > 0 {
+                param["size"] = "\(size)"
+            }
+            param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
+            param["sign"] = sign(param)
+            
+            result = self.POST(url: generateurl(GYKAPI.ORG_LOG), headers: nil, param: param, reqType: GYKResponse.self)
+            if result.statuscode == 200 {
+                break
+            } else if result.errcode == kTokenExpiredCode || result.errcode == kTokenInvalidCode {
+                if bStop { break }
+                let _ = self.refreshToken()
+            }
+        }
+        
+        return result
+    }
+    
     
     
     
     //MARK: ------库文件操作------
     
     //MARK: 文件列表
-    @objc func fetchFileList(fullpath: String,
+    public func fetchFileList(fullpath: String,
                                     dir: Int = 0,
                                     hashs: String? = nil,
                                     start: Int = 0,
@@ -432,7 +885,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 文件最近更新列表
-    @objc func getFileUpdates(mode: String?,
+    public func getFileUpdates(mode: String?,
                               fetch_dateline: Int64 = 0,
                               dir: String? = nil) -> GYKResponse {
         
@@ -462,7 +915,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 文件最近更新数量
-    @objc func getFileUpdateCount(begin_dateline: Int64,
+    public func getFileUpdateCount(begin_dateline: Int64,
                                   end_dateline: Int64,
                                   showDelete: Bool) -> GYKResponse {
         
@@ -489,7 +942,7 @@ class GYKHttpEngine : GYKHttpRequest {
     
     
     //MARK: 文件信息
-    @objc public func fetchFileInfo(fullPath: String?, pathHash: String?,attribute: Bool = false, net: String? = nil) -> GYKResponse {
+    public func fetchFileInfo(fullPath: String?, pathHash: String?,attribute: Bool = false, net: String? = nil) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -519,7 +972,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 搜索文件
-    @objc func searchFile(keywords: String, path: String?, scope: String?, start: Int, size: Int) -> GYKResponse {
+    public func searchFile(keywords: String, path: String?, scope: String?, start: Int, size: Int) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -553,7 +1006,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 创建文件夹
-    @objc public func createFolder(fullPath: String, op_id: String?,op_name: String?) -> GYKResponse {
+    public func createFolder(fullPath: String, op_id: String?,op_name: String?) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -580,7 +1033,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 获取文件下载链接
-    @objc public func getFileDownloadUrl(fullPath:String?, pathHash:String?, fileHash: String?, fileName: String?, net: String? = nil, open: Int = 0) -> GYKResponse {
+    public func getFileDownloadUrl(fullPath:String?, pathHash:String?, fileHash: String?, fileName: String?, net: String? = nil, open: Int = 0) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -616,7 +1069,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 获取文件预览地址
-    @objc public func getFilePreviewUrl(fullPath:String?, pathHash:String?, watermark: Bool, member_name: String?) -> GYKResponse {
+    public func getFilePreviewUrl(fullPath:String?, pathHash:String?, watermark: Bool, member_name: String?) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -647,7 +1100,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 复制文件
-    @objc func copyFiles(sourcePaths: String, targetFullpath: String, op_id: String?,op_name: String?, copy_all: Bool = false) -> GYKResponse {
+    public func copyFiles(sourcePaths: String, targetFullpath: String, op_id: String?,op_name: String?, copy_all: Bool = false) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -676,7 +1129,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 复制文件(高级)
-    @objc func copyFilesEx(sourcePaths: String, targetFullpaths: String, copy_all: Bool, op_id: String?,op_name: String?) -> GYKResponse {
+    public func copyFilesEx(sourcePaths: String, targetFullpaths: String, copy_all: Bool, op_id: String?,op_name: String?) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -705,7 +1158,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 移动文件
-    @objc func moveFiles(fullpath: String, dest_fullpath: String, op_id: String?,op_name: String?) -> GYKResponse {
+    public func moveFiles(fullpath: String, dest_fullpath: String, op_id: String?,op_name: String?) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -733,7 +1186,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 删除文件
-    @objc func deleteFiles(fullpath: String?,
+    public func deleteFiles(fullpath: String?,
                            tag: String?,
                            path: String?,
                            op_id: String?,
@@ -773,7 +1226,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 彻底删除文件
-    @objc func deleteCompleteFiles(fullpaths: String?, tag: String?, op_id: String?,op_name: String?) -> GYKResponse {
+    public func deleteCompleteFiles(fullpaths: String?, tag: String?, op_id: String?,op_name: String?) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -804,7 +1257,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 获取回收站文件
-    @objc func getRecycleFiles(start: Int, size: Int) -> GYKResponse {
+    public func getRecycleFiles(start: Int, size: Int) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -831,7 +1284,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 恢复已删除的文件
-    @objc func recoverFiles(fullpaths: String, op_id: String?,op_name: String?) -> GYKResponse {
+    public func recoverFiles(fullpaths: String, op_id: String?,op_name: String?) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -858,7 +1311,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 获取文件外链
-    @objc func getFileLink(fullpath: String, deadline: Int64, auth: String?, password: String?) -> GYKResponse {
+    public func getFileLink(fullpath: String, deadline: Int64, auth: String?, password: String?) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -886,7 +1339,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 获取开启外链的文件列表
-    @objc func getFileLinks(onlyFile: Bool = false) -> GYKResponse {
+    public func getFileLinks(onlyFile: Bool = false) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -908,7 +1361,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 添加标签
-    @objc func addFileTag(fullpath: String, tag: String) -> GYKResponse {
+    public func addFileTag(fullpath: String, tag: String) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -931,7 +1384,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 删除标签
-    @objc func delFileTag(fullpath: String, tag: String) -> GYKResponse {
+    public func delFileTag(fullpath: String, tag: String) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -954,7 +1407,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 上传文件
-    @objc func uploadFile(fullpath:String, op_id: String?, op_name: String?, overwrite: Bool, data: Data) -> GYKResponse {
+    public func uploadFile(fullpath:String, op_id: String?, op_name: String?, overwrite: Bool, data: Data) -> GYKResponse {
         
         if data.count > 50*1024*1024 {
             let res = GYKResponse()
@@ -1026,7 +1479,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 通过连接上传文件
-    @objc public func createFileByURL(fullpath:String, op_id: String?,op_name: String?, overwrite: Bool, url: String) -> GYKResponse {
+    public func createFileByURL(fullpath:String, op_id: String?,op_name: String?, overwrite: Bool, url: String) -> GYKResponse {
         var result: GYKResponse!
         for _ in 0..<kTryCount {
             var param = ["org_client_id":self.clientID]
@@ -1056,7 +1509,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 获取上传服务器
-    @objc func getUploadServers() -> GYKResponse {
+    public func getUploadServers() -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -1118,7 +1571,7 @@ class GYKHttpEngine : GYKHttpRequest {
     private let HEADER_X_GK_TOKEN			=	"x-gk-token"
     
     //MARK: 初始化上传
-    @objc func uploadFileInit(host:String,filename:String,uuidhash:String,filehash:String,filesize:Int64) -> GYKResponse {
+    public func uploadFileInit(host:String,filename:String,uuidhash:String,filehash:String,filesize:Int64) -> GYKResponse {
         var result: GYKResponse!
         
         for _ in 0..<kTryCount {
@@ -1146,7 +1599,7 @@ class GYKHttpEngine : GYKHttpRequest {
     private let HEADER_X_GK_UPLOAD_PART_CRC = "x-gk-upload-crc"
     
     //MARK: 上传数据块
-    @objc func uploadFilePart(host:String,session:String,start:Int64,end:Int64,data:Data,crc:String) -> GYKResponse {
+    public func uploadFilePart(host:String,session:String,start:Int64,end:Int64,data:Data,crc:String) -> GYKResponse {
         var result: GYKResponse!
         
         for _ in 0..<1 {
@@ -1170,7 +1623,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 完成上传
-    @objc func uploadFileFinish(host:String,session:String,filesize:Int64) -> GYKResponse {
+    public func uploadFileFinish(host:String,session:String,filesize:Int64) -> GYKResponse {
         var result: GYKResponse!
         
         for _ in 0..<kTryCount {
@@ -1192,7 +1645,7 @@ class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 取消上传
-    @objc func uploadAbort(host:String,session:String,filesize:Int64) -> GYKResponse {
+    public func uploadAbort(host:String,session:String,filesize:Int64) -> GYKResponse {
         var result: GYKResponse!
         
         for _ in 0..<kTryCount {
