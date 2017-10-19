@@ -26,8 +26,8 @@ import Foundation
     }
 
     //MARK:获取文件列表
-    @objc public func getFileList(fullPath: String, start: Int, size: Int) -> GYKResponse {
-        return self.httpEngine.fetchFileList(fullpath: fullPath, dir: 0, hashs: nil, start: start, size: size)
+    @objc public func getFileList(fullPath: String, start: Int, size: Int, order: String?) -> GYKResponse {
+        return self.httpEngine.fetchFileList(fullpath: fullPath, dir: 0, hashs: nil, start: start, size: size, order: order)
     }
 
     //MARK:获取更新列表
@@ -251,7 +251,13 @@ import Foundation
     //MARK: 取消分享给某个成员
     @objc public func deleteShare(userID: String, guids: [String], opName: String?) -> GYKResponse {
         
-        return self.httpEngine.deleteFiles(fullpath:nil, tag:guids.joined(separator: ";"), path:self.hnafullpath(userID: userID, path: ""), op_id:nil, op_name:opName, destroy: false)
+        return self.httpEngine.deleteFiles(fullpath:nil, tag:guids.joined(separator: ";"), path:self.hnafullpath(userID: userID, path: ""), op_id:nil, op_name:opName, destroy: true)
+    }
+    
+    //MARK: 创建者删除
+    @objc public func delteSelfFile(guids: [String], opName: String?) -> GYKResponse {
+        
+        return self.httpEngine.deleteFiles(fullpath:nil, tag:guids.joined(separator: ";"), path:nil, op_id:nil, op_name:opName, destroy: true)
     }
     
     

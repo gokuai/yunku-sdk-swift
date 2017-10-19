@@ -855,7 +855,8 @@ public class GYKHttpEngine : GYKHttpRequest {
                                     dir: Int = 0,
                                     hashs: String? = nil,
                                     start: Int = 0,
-                                    size: Int = 10000) -> GYKResponse {
+                                    size: Int = 10000,
+                                    order: String?) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -868,6 +869,9 @@ public class GYKHttpEngine : GYKHttpRequest {
             param["dir"] = "\(dir)"
             if hashs != nil {
                 param["hashs"] = hashs!
+            }
+            if order != nil {
+                param["order"] = order!
             }
             param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
             param["sign"] = sign(param)
