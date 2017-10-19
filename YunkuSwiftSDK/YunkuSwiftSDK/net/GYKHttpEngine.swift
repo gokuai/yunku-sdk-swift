@@ -1129,7 +1129,7 @@ public class GYKHttpEngine : GYKHttpRequest {
     }
     
     //MARK: 复制文件(高级)
-    public func copyFilesEx(sourcePaths: String, targetFullpaths: String, copy_all: Bool, op_id: String?,op_name: String?) -> GYKResponse {
+    public func copyFilesEx(sourcePaths: String, targetFullpaths: String, copy_all: Bool, op_id: String?,op_name: String?, sp: String? = nil) -> GYKResponse {
         
         var result: GYKResponse!
         for _ in 0..<kTryCount {
@@ -1141,6 +1141,9 @@ public class GYKHttpEngine : GYKHttpRequest {
                 param["op_id"] = op_id!
             } else if op_name != nil {
                 param["op_name"] = op_name!
+            }
+            if sp != nil {
+                param["sp"] = sp!
             }
             param["dateline"] =  "\(Int64(Date().timeIntervalSince1970))"
             param["sign"] = sign(param)

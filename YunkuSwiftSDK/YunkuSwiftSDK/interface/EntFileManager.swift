@@ -226,4 +226,83 @@ import Foundation
     }
     
     
+    //MARK: 海航
+    func hnafullpath(userID: String, path: String) -> String {
+        return "\(userID)/huiyijiyao/" + path
+    }
+    
+    //MARK: 分享文件(支持批量)
+    @objc public func share(userids: [String], paths: [String]) -> GYKResponse {
+        var sources = [String]()
+        for p in paths {
+            let strpath = p
+            sources.append(strpath)
+        }
+        
+        var dests = [String]()
+        for uid in userids {
+            let path = self.hnafullpath(userID: uid, path: "")
+            dests.append(path)
+            let _ = self.httpEngine.createFolder(fullPath: path, op_id: nil, op_name: nil)
+        }
+        return self.httpEngine.copyFilesEx(sourcePaths: sources.joined(separator: "|"), targetFullpaths: dests.joined(separator: "|"), copy_all: true, op_id: nil, op_name: nil, sp: "share")
+    }
+    
+    //MARK: 取消分享给某个成员
+    @objc public func deleteShare(userID: String, guids: [String], opName: String?) -> GYKResponse {
+        
+        return self.httpEngine.deleteFiles(fullpath:nil, tag:guids.joined(separator: ";"), path:self.hnafullpath(userID: userID, path: ""), op_id:nil, op_name:opName, destroy: false)
+    }
+    
+    
+    //MARK: 获取共享成员列表
+    @objc public func getSharedUsers(guid: String, start: Int, size: Int) -> GYKResponse {
+        let ret = self.httpEngine.searchFile(keywords: guid, path: nil, scope: "[\"tag\"]", start: start, size: size)
+        var userIDs = [String]()
+        if ret.statuscode == 200 {
+            if let dic = GYKUtility.josn2obj(obj: ret.data as Any) as? [String:AnyHashable] {
+                if let list = dic["list"] as? Array<Any> {
+                    for item in list {
+                        if let d = item as? Dictionary<AnyHashable,Any> {
+                            let fullpath = gkSafeString(dic: d, key: "fullpath") as NSString
+                            let r = fullpath.range(of: "/")
+                            if r.location != NSNotFound {
+                                let userid = fullpath.substring(to: r.location)
+                                if !userid.isEmpty {
+                                    if !userIDs.contains(userid) {
+                                        userIDs.append(userid)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if let tempstr = GYKUtility.obj2str(obj: userIDs) {
+                        ret.data = GYKUtility.str2data(str: tempstr)
+                    }
+                }
+            }
+        }
+        return ret
+    }
+    
+    //MARK:将文件数据上传至
+    @objc public func uploadFile(fullPath: String, data: Data, userID: String, userName: String, overwrite: Bool) -> GYKResponse {
+        let res = self.uploadFile(fullPath: fullPath, data: data, opID: nil, opName: userName, overwrite: overwrite)
+        
+        if res.statuscode == 200 {
+            let tag1 = GYKUtility.createUUID()
+            let tag2 = userID
+            let _ = self.httpEngine.addFileTag(fullpath: self.hnafullpath(userID: userID, path: fullPath), tag:"\(tag1);\(tag2)")
+        }
+        
+        return res
+    }
+    
+    //MARK: 分块上传
+    @objc public func uploadByBlock(fullpath:String, localpath:String, overwrite:Bool, userID: String, userName: String) {
+        let tag1 = GYKUtility.createUUID()
+        let tag2 = userID
+        self.uploadChunk(fullpath: fullpath, localpath: localpath, overwrite: overwrite, opID: nil, opName: userName, tags: "\(tag1);\(tag2)")
+    }
+    
 }
