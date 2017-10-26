@@ -8,10 +8,10 @@ Robots: noindex,nofollow
 
 # 够快云库Swift SDK使用说明
 
-[![CI Status](http://img.shields.io/travis/yotao/YunkuPod.svg?style=flat)](https://travis-ci.org/yotao/YunkuPod)
-[![Version](https://img.shields.io/cocoapods/v/YunkuPod.svg?style=flat)](http://cocoapods.org/pods/YunkuPod)
-[![License](https://img.shields.io/cocoapods/l/YunkuPod.svg?style=flat)](http://cocoapods.org/pods/YunkuPod)
-[![Platform](https://img.shields.io/cocoapods/p/YunkuPod.svg?style=flat)](http://cocoapods.org/pods/YunkuPod)
+[![CI Status](http://img.shields.io/travis/yotao/YunkuSwiftSDK.svg?style=flat)](https://travis-ci.org/BrandonGk/YunkuSwiftSDK)
+[![Version](https://img.shields.io/cocoapods/v/YunkuSwiftSDK.svg?style=flat)](http://cocoapods.org/pods/YunkuSwiftSDK)
+[![License](https://img.shields.io/cocoapods/l/YunkuSwiftSDK.svg?style=flat)](http://cocoapods.org/pods/YunkuSwiftSDK)
+[![Platform](https://img.shields.io/cocoapods/p/YunkuSwiftSDK.svg?style=flat)](http://cocoapods.org/pods/YunkuSwiftSDK)
 
 版本：1.0.1
 
@@ -20,7 +20,7 @@ Robots: noindex,nofollow
 
 ## Installation
 
-YunkuPod is available through [CocoaPods](http://cocoapods.org). To install
+To install
 it, simply add the following line to your Podfile:
 
 ```ruby
