@@ -77,7 +77,7 @@ import Foundation
             
         }catch(let e){
             
-            LogPrint.error(NetConnection.logTag,e)
+            LogPrint.error(NetConnection.logTag,msg:e)
             
             if let error = e as? NSError {
                 if error.code == NSURLErrorTimedOut {
@@ -93,7 +93,7 @@ import Foundation
                 LogPrint.info(NSString(data: dataVal!, encoding: String.Encoding.utf8.rawValue))
                 jsonResult = try JSONSerialization.jsonObject(with: dataVal!, options: JSONSerialization.ReadingOptions.mutableContainers) as? Dictionary<String, AnyObject>
             }catch(let e){
-                LogPrint.error(logTag,e)
+                LogPrint.error(logTag,msg:e)
             }
             
         }
