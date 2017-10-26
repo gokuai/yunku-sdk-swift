@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YunkuSwiftSDK'
-  s.version          = '1.0.9'
+  s.version          = '1.0.10'
   s.summary          = 'Pod first init'
 
 # This description is used to generate tags and improve search results.
@@ -28,11 +28,14 @@ DESC
   s.source           = { :git => 'https://github.com/gokuai/yunku-sdk-swift.git', :tag => s.version.to_s }
 #  s.social_media_url = 'http://www.gokuai.com'
 
-  s.ios.deployment_target = '8.0'
+  s.platform = :osx, '10.13'
+  s.platform = :ios, '8.0'
 #  s.public_header_files = 'Headers/iOS/YunkuSwiftSDK.h'
-   s.source_files = 'YunkuSwiftSDK/YunkuSwiftSDK/Class/**/*'
+  s.osx.source_files = 'YunkuSwiftSDK/YunkuSwiftSDK/Class/**/*'
+  s.ios.source_files = 'YunkuSwiftSDK/YunkuSwiftSDK/Class/**/*'
 #  s.frameworks = 'YunkuSwiftSDK'
-  s.vendored_frameworks = 'Frameworks/CommonCrypto.framework'
+  s.osx.vendored_frameworks = 'Frameworks/CommonCrypto.framework'
+  s.ios.vendored_frameworks = 'Frameworks/CommonCrypto.framework'
 
 #  s.libraries = "libz.tbd"
 

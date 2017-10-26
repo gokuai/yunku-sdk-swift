@@ -8,16 +8,30 @@ Robots: noindex,nofollow
 
 # 够快云库Swift SDK使用说明
 
+[![CI Status](http://img.shields.io/travis/yotao/YunkuPod.svg?style=flat)](https://travis-ci.org/yotao/YunkuPod)
+[![Version](https://img.shields.io/cocoapods/v/YunkuPod.svg?style=flat)](http://cocoapods.org/pods/YunkuPod)
+[![License](https://img.shields.io/cocoapods/l/YunkuPod.svg?style=flat)](http://cocoapods.org/pods/YunkuPod)
+[![Platform](https://img.shields.io/cocoapods/p/YunkuPod.svg?style=flat)](http://cocoapods.org/pods/YunkuPod)
+
 版本：1.0.1
 
 创建：2015-06-23
 修改时间：2016-03-03
 
+## Installation
+
+YunkuPod is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod 'YunkuPod'
+```
+
 ## 引用 
 建议将项目build产生的**YunkuSwiftSDK.framework**文件引用进项目，或者将项目作为Library Project 引入,如果是 iOS Application，使用 Headers/iOS 文件夹下的头文件，如果是 OSX Application
 则使用Headers/OSX的头文件
 
-###Swift
+### Swift
 *Framework*
 
 * 将YunkuSwiftSDK.framework,CommonCrypto.framework 拖至 ［Your Project］之下
@@ -32,7 +46,7 @@ Robots: noindex,nofollow
 * 在 Build Phases 中添加一项 New Copy Files Phrase，选择 Destination 为 Frameworks，将项目中的 YunkuSwiftSDK.framework，CommonCrypto.framework 拖曳进去
 * 在使用SDK的类的顶部添加 import YunkuSwiftSDK
 
-###Object-C
+### Object-C
 *Framework*
 
 * 将YunkuSwiftSDK.framework 拖至 ［Your Project］之下
@@ -52,7 +66,7 @@ Robots: noindex,nofollow
 ## 初始化
 要使用云库api，您需要有效的CLIENT_ID和CLIENT_SECRET,和获得云库后台管理账号。
 
-##参数使用
+## 参数使用
 以下使用到的方法中，如果是string类型的非必要参数，如果是不传，则传null
 
 ## 企业库管理（ **EntLibManager.swift** ）
