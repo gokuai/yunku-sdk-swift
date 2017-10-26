@@ -619,7 +619,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/Brandon/Documents/workplace/MacProject/yunku-sdk-swift/YunkuSwiftSDK/YunkuSwiftSDK/YunkuSwiftSDK-Bridging-Header.hes>";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -647,7 +647,7 @@
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
