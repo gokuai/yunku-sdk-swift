@@ -25,14 +25,14 @@ DESC
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'BrandonGk' => 'heybozai@sina.com' }
-  s.source           = { :git => 'https://github.com/yotao/YunkuSwiftSDKTEST.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/gokuai/yunku-sdk-swift.git', :tag => s.version.to_s }
 #  s.social_media_url = 'http://www.gokuai.com'
 
   s.ios.deployment_target = '8.0'
 #  s.public_header_files = 'Headers/iOS/YunkuSwiftSDK.h'
    s.source_files = 'YunkuSwiftSDK/YunkuSwiftSDK/Class/**/*'
 #  s.frameworks = 'YunkuSwiftSDK'
-  s.vendored_frameworks = 'Frameworks/iOS/CommonCrypto.framework'
+  s.vendored_frameworks = 'Frameworks/CommonCrypto.framework'
 
 #  s.libraries = "libz.tbd"
 
