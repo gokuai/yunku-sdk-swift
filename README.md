@@ -24,7 +24,7 @@ To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'YunkuPod'
+pod 'YunkuSwiftSDK'
 ```
 
 ## 引用 
@@ -71,7 +71,7 @@ pod 'YunkuPod'
 
 ## 企业库管理（ **EntLibManager.swift** ）
 
-###构造方法
+### 构造方法
 **swift**
 
 	EntLibManager（clientId:String,clientSecret:String,isEnt:Bool）
@@ -138,7 +138,7 @@ pod 'YunkuPod'
 | orgDesc | 否 | string | 库描述|
 | orgLogo | 否 | string | 库logo |
 
-####数值参考
+#### 数值参考
 1T="1099511627776" 
 1G＝“1073741824”；
 
@@ -201,7 +201,7 @@ pod 'YunkuPod'
 #### 返回结果 
    正常返回 HTTP 200 
 
-####数值参考
+#### 数值参考
 1T="1099511627776" 
 1G＝“1073741824”；
 
@@ -540,7 +540,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 | refresh_token | string | 用于刷新access_token 的 refresh_token，有效期1个月 |
 
 ---
-###获取角色
+### 获取角色
 
 **swift**
 
@@ -563,7 +563,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 ---
 
-###获取成员
+### 获取成员
 
 **swift**
 
@@ -1018,7 +1018,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 | orgClientSecret | 是 | string | 库授权client_secret  |
 
 ---
-###获取文件列表
+### 获取文件列表
 
 **swift**
 
@@ -1073,7 +1073,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 | last_dateline | int | 文件最后修改时间戳 |
 
 ---
-###获取更新列表
+### 获取更新列表
 
 **swift**
 
@@ -1110,7 +1110,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 ---
 
-###文件更新数量
+### 文件更新数量
 
 **swift**
 
@@ -1134,7 +1134,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 	}
 ---
 
-###获取文件信息
+### 获取文件信息
 
 **swift**
 
@@ -1204,7 +1204,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 | fullpath | string | 文件夹的路径 |
 
 ---
-###通过数据上传（50M以内文件）
+### 通过数据上传（50M以内文件）
 
 **swift**
 
@@ -1233,7 +1233,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 
 ---
-###文件分块上传
+### 文件分块上传
 
 **swift**
 	
@@ -1254,7 +1254,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 ---
 	
-###删除文件
+### 删除文件
 **swift**
 	
 	del( fullPaths: String, opName: String)
@@ -1271,7 +1271,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 #### 返回结果
 	正常返回 HTTP 200
 ---
-###移动文件
+### 移动文件
 **swift**
 
 	move( fullPath: String, destFullPath: String, opName: String)
@@ -1291,7 +1291,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 #### 返回结果
 	正常返回 HTTP 200
 ---
-###获取文件链接
+### 获取文件链接
 **swift**
 
 	link( fullPath: String, deadline:Int, authType: AuthType, password: String)
@@ -1332,7 +1332,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 	正常返回 HTTP 200 
 ---
 
-###获取当前库所有外链
+### 获取当前库所有外链
 
 **swift**
 
@@ -1359,7 +1359,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 ---
 
-###通过链接上传文件
+### 通过链接上传文件
 
 **swift**
 
@@ -1383,7 +1383,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 ---
 
-###WEB直接上传文件
+### WEB直接上传文件
 
 **swift**
 
@@ -1411,7 +1411,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 ## SDK日志（**Config.swift** ）
 
-###设置是否打印SDK日志
+### 设置是否打印SDK日志
 **swift**
   
 	static logPrint
@@ -1420,7 +1420,7 @@ org_client_secret用于调用库文件相关API签名时的密钥
 
 	setLogPrint:(BOOL)value;
 
-###设置打印日志的级别
+### 设置打印日志的级别
 
 **swift**
   
@@ -1437,6 +1437,15 @@ org_client_secret用于调用库文件相关API签名时的密钥
 	LogLevelInfo //info级别以上的所有日志
 	LogLevelWarning //warning级别以上的所有日志
 	LogLevelError //error级别的日志
+	
+### 配置 API 地址
+**swift**
+  
+	 ConfigHelper().apihost(apiHost: "[api host]").apiLibHost(apiLibHost:"[apiLib host]").config()
+	
+**objc**
+  
+	[[[[ConfigHelper alloc]init] apihostWithApiHost:@"[api host]"]apiLibHostWithApiLibHost:@"[apiLib host]"]config ];
 	
 ## 常见错误
 
