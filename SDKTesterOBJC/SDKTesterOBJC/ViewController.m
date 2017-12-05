@@ -35,6 +35,8 @@
     //设置日志等级
 
     [Config setLogLevel:LogLevelInfo];
+    //修改地址
+    //[[[[ConfigHelper alloc]init] apihostWithApiHost:@""]apiLibHostWithApiLibHost:@""]config ];
 
     _entLibManager = [[EntLibManager alloc]initWithClientId:CLIENTID clientSecret:CLIENTSECRET isEnt:true];
 
