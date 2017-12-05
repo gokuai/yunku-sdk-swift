@@ -27,7 +27,7 @@ class ViewController: UIViewController,UploadCallBack{
         
         //=======库操作========//
         
-        ConfigHelper().apihost(apiHost: "http://yk3-api-ent.gokuai.com").apiLibHost(apiLibHost:"http://yk3-api.gokuai.com").config()
+        //ConfigHelper().apihost(apiHost: "").apiLibHost(apiLibHost:"").config()
         
         _libManager = EntLibManager(clientId: OauthConfig.clientId, clientSecret: OauthConfig.clientSecret, isEnt: true)
         
