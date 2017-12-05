@@ -7,32 +7,49 @@ import Foundation
 
 open class EntLibManager: ParentEngine {
 
-    let urlApiCreateLib = HostConfig.libHost + "/1/org/create"
-    let urlApiGetLibList = HostConfig.libHost + "/1/org/ls"
-    let urlApiBind = HostConfig.libHost + "/1/org/bind"
-    let urlApiUnbind = HostConfig.libHost + "/1/org/unbind"
-    let urlApiGetMembers = HostConfig.libHost + "/1/org/get_members"
-    let urlApiAddMembers = HostConfig.libHost + "/1/org/add_member"
-    let urlApiSetMemberRole = HostConfig.libHost + "/1/org/set_member_role"
-    let urlApiDelMember = HostConfig.libHost + "/1/org/del_member"
-    let urlApiGetGroups = HostConfig.libHost + "/1/org/get_groups"
-    let urlApiAddGroup = HostConfig.libHost + "/1/org/add_group"
-    let urlApiDelGroup = HostConfig.libHost + "/1/org/del_group"
-    let urlApiSetGroupRole = HostConfig.libHost + "/1/org/set_group_role"
-    let urlApiDestroy = HostConfig.libHost + "/1/org/destroy"
-    let urlApiGetMember = HostConfig.libHost + "/1/org/get_member"
-    let urlApiSet = HostConfig.libHost + "/1/org/set"
-    let urlApiGetInfo = HostConfig.libHost + "/1/org/info"
-
+    var urlApiCreateLib = ""
+    var urlApiGetLibList = ""
+    var urlApiBind = ""
+    var urlApiUnbind = ""
+    var urlApiGetMembers = ""
+    var urlApiAddMembers = ""
+    var urlApiSetMemberRole = ""
+    var urlApiDelMember = ""
+    var urlApiGetGroups = ""
+    var urlApiAddGroup = ""
+    var urlApiDelGroup = ""
+    var urlApiSetGroupRole = ""
+    var urlApiDestroy = ""
+    var urlApiGetMember = ""
+    var urlApiSet = ""
+    var urlApiGetInfo = ""
 
     public override init(clientId: String, clientSecret: String,isEnt:Bool) {
         super.init(clientId: clientId, clientSecret: clientSecret,isEnt:isEnt)
+        urlApiCreateLib = HostConfig.libHost + "/1/org/create"
+        urlApiGetLibList = HostConfig.libHost + "/1/org/ls"
+        urlApiBind = HostConfig.libHost + "/1/org/bind"
+        urlApiUnbind = HostConfig.libHost + "/1/org/unbind"
+        urlApiGetMembers = HostConfig.libHost + "/1/org/get_members"
+        urlApiAddMembers = HostConfig.libHost + "/1/org/add_member"
+        urlApiSetMemberRole = HostConfig.libHost + "/1/org/set_member_role"
+        urlApiDelMember = HostConfig.libHost + "/1/org/del_member"
+        urlApiGetGroups = HostConfig.libHost + "/1/org/get_groups"
+        urlApiAddGroup = HostConfig.libHost + "/1/org/add_group"
+        urlApiDelGroup = HostConfig.libHost + "/1/org/del_group"
+        urlApiSetGroupRole = HostConfig.libHost + "/1/org/set_group_role"
+        urlApiDestroy = HostConfig.libHost + "/1/org/destroy"
+        urlApiGetMember = HostConfig.libHost + "/1/org/get_member"
+        urlApiSet = HostConfig.libHost + "/1/org/set"
+        urlApiGetInfo = HostConfig.libHost + "/1/org/info"
     }
 
     public init(clientId: String, clientSecret: String,isEnt:Bool,token:String) {
         super.init(clientId: clientId, clientSecret: clientSecret,isEnt:isEnt)
         self._token = token
     }
+    
+    
 
     //MARK:创建库
     open func create(_ orgName: String, orgCapacity: String?, storagePointName: String?, orgDesc: String?, orgLogo: String?) -> Dictionary<String, AnyObject> {

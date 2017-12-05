@@ -10,6 +10,7 @@
 		6B6E2B90B4A848A80ECAC682 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6B6E20C3DC679DFA94D328E9 /* .gitignore */; };
 		6B6E2C5B3D3EF3BCBB688A6B /* CRC32.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6E22BC40E5DEB281F788AC /* CRC32.swift */; };
 		CA1427DD1B185A1800CC0302 /* YunkuSwiftSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CA1427DC1B185A1800CC0302 /* YunkuSwiftSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CA3BA0851FD6AF3B00DD011D /* ConfigHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3BA0841FD6AF3B00DD011D /* ConfigHelper.swift */; };
 		CA6A5C941E2E2C9F00842BFA /* NetError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6A5C931E2E2C9F00842BFA /* NetError.swift */; };
 		CAB0378B1B331F4100E84824 /* Dictionary+BlocksAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0376A1B331F4100E84824 /* Dictionary+BlocksAdditions.swift */; };
 		CAB0378C1B331F4100E84824 /* String+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB0376B1B331F4100E84824 /* String+Encode.swift */; };
@@ -63,6 +64,7 @@
 		CA1427DC1B185A1800CC0302 /* YunkuSwiftSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YunkuSwiftSDK.h; sourceTree = "<group>"; };
 		CA1427E81B185A1800CC0302 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA1427E91B185A1800CC0302 /* YunkuSwiftSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YunkuSwiftSDKTests.swift; sourceTree = "<group>"; };
+		CA3BA0841FD6AF3B00DD011D /* ConfigHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigHelper.swift; sourceTree = "<group>"; };
 		CA6A5C931E2E2C9F00842BFA /* NetError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetError.swift; sourceTree = "<group>"; };
 		CAB0376A1B331F4100E84824 /* Dictionary+BlocksAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+BlocksAdditions.swift"; sourceTree = "<group>"; };
 		CAB0376B1B331F4100E84824 /* String+Encode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Encode.swift"; sourceTree = "<group>"; };
@@ -196,10 +198,13 @@
 		CAB037681B331F4100E84824 /* Class */ = {
 			isa = PBXGroup;
 			children = (
-				CA6A5C931E2E2C9F00842BFA /* NetError.swift */,
 				CAB037691B331F4100E84824 /* Category */,
-				CAB0376C1B331F4100E84824 /* Constans.swift */,
 				CAB0376D1B331F4100E84824 /* Data */,
+				CAB0377A1B331F4100E84824 /* Upload */,
+				CAB0377D1B331F4100E84824 /* Utils */,
+				CA3BA0841FD6AF3B00DD011D /* ConfigHelper.swift */,
+				CA6A5C931E2E2C9F00842BFA /* NetError.swift */,
+				CAB0376C1B331F4100E84824 /* Constans.swift */,
 				CAB037731B331F4100E84824 /* EntFileManager.swift */,
 				CAB037741B331F4100E84824 /* EntLibManager.swift */,
 				CAB037751B331F4100E84824 /* EntManager.swift */,
@@ -207,8 +212,6 @@
 				CAB037771B331F4100E84824 /* NetConnection.swift */,
 				CAB037781B331F4100E84824 /* ParentEngine.swift */,
 				CAB037791B331F4100E84824 /* SignAbility.swift */,
-				CAB0377A1B331F4100E84824 /* Upload */,
-				CAB0377D1B331F4100E84824 /* Utils */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				CA6A5C941E2E2C9F00842BFA /* NetError.swift in Sources */,
 				CAB037911B331F4100E84824 /* ReturnResult.swift in Sources */,
 				CAB037921B331F4100E84824 /* SyncMemberData.swift in Sources */,
+				CA3BA0851FD6AF3B00DD011D /* ConfigHelper.swift in Sources */,
 				CAB037991B331F4100E84824 /* SignAbility.swift in Sources */,
 				CAB037A51B331F4100E84824 /* SHA1.swift in Sources */,
 				CAB0378D1B331F4100E84824 /* Constans.swift in Sources */,

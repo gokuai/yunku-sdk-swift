@@ -6,7 +6,7 @@
 import Foundation
 
 open class ParentEngine: SignAbility {
-    let urlApiToken = HostConfig.oauthHost + "/oauth2/token2"
+    var urlApiToken = ""
 
     var _clientId = ""
     var _token = ""
@@ -19,6 +19,7 @@ open class ParentEngine: SignAbility {
         _clientSecret = clientSecret;
         _isEnt = isEnt
         _tokenType = isEnt ? "ent":""
+        urlApiToken = HostConfig.oauthHost + "/oauth2/token2"
     }
 
     open func accessToken(_ username:String, password:String) -> Dictionary<String, AnyObject> {

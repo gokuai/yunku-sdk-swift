@@ -8,20 +8,20 @@ import Foundation
 open class EntFileManager: SignAbility {
 
     let uploadLimitSize = 52428800
-    let urlApiFilelist = HostConfig.libHost + "/1/file/ls"
-    let urlApiUpdateList = HostConfig.libHost + "/1/file/updates"
-    let urlApiFileInfo = HostConfig.libHost + "/1/file/info"
-    let urlApiCreateFolder = HostConfig.libHost + "/1/file/create_folder"
-    let urlApiCreateFile = HostConfig.libHost + "/1/file/create_file"
-    let urlApiDelFile = HostConfig.libHost + "/1/file/del"
-    let urlApiMoveFile = HostConfig.libHost + "/1/file/move"
-    let urlApiLinkFile = HostConfig.libHost + "/1/file/link"
-    let urlApiSendmsg = HostConfig.libHost + "/1/file/sendmsg"
-    let urlApiGetLink = HostConfig.libHost + "/1/file/links"
-    let urlApiUpdateCount = HostConfig.libHost + "/1/file/updates_count"
-    let urlApiGetServerSite = HostConfig.libHost + "/1/file/servers"
-    let urlApiCreateFileByUrl = HostConfig.libHost + "/1/file/create_file_by_url"
-    let urlApiUploadSevers = HostConfig.libHost + "/1/file/upload_servers"
+    var urlApiFilelist = ""
+    var urlApiUpdateList = ""
+    var urlApiFileInfo = ""
+    var urlApiCreateFolder = ""
+    var urlApiCreateFile = ""
+    var urlApiDelFile = ""
+    var urlApiMoveFile = ""
+    var urlApiLinkFile = ""
+    var urlApiSendmsg = ""
+    var urlApiGetLink = ""
+    var urlApiUpdateCount = ""
+    var urlApiGetServerSite = ""
+    var urlApiCreateFileByUrl = ""
+    var urlApiUploadSevers = ""
 
     var _orgClientId = ""
     let queue = DispatchQueue(label: "YunkuSwiftSDKQueue", attributes: [])
@@ -30,6 +30,21 @@ open class EntFileManager: SignAbility {
         super.init()
         _orgClientId = orgClientId
         _clientSecret = orgClientSecret
+        
+        urlApiFilelist = HostConfig.libHost + "/1/file/ls"
+        urlApiUpdateList = HostConfig.libHost + "/1/file/updates"
+        urlApiFileInfo = HostConfig.libHost + "/1/file/info"
+        urlApiCreateFolder = HostConfig.libHost + "/1/file/create_folder"
+        urlApiCreateFile = HostConfig.libHost + "/1/file/create_file"
+        urlApiDelFile = HostConfig.libHost + "/1/file/del"
+        urlApiMoveFile = HostConfig.libHost + "/1/file/move"
+        urlApiLinkFile = HostConfig.libHost + "/1/file/link"
+        urlApiSendmsg = HostConfig.libHost + "/1/file/sendmsg"
+        urlApiGetLink = HostConfig.libHost + "/1/file/links"
+        urlApiUpdateCount = HostConfig.libHost + "/1/file/updates_count"
+        urlApiGetServerSite = HostConfig.libHost + "/1/file/servers"
+        urlApiCreateFileByUrl = HostConfig.libHost + "/1/file/create_file_by_url"
+        urlApiUploadSevers = HostConfig.libHost + "/1/file/upload_servers"
     }
 
     //MARK:获取文件列表

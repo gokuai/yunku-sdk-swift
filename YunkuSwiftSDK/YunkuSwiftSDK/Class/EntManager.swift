@@ -7,24 +7,37 @@ import Foundation
 
 open class EntManager :ParentEngine {
 
-    let urlApiGetGroups =  HostConfig.libHost + "/1/ent/get_groups"
-    let urlApiGetMembers =  HostConfig.libHost + "/1/ent/get_members"
-    let urlApiGetMember =  HostConfig.libHost + "/1/ent/get_member"
-    let urlApiGetRoles =  HostConfig.libHost + "/1/ent/get_roles"
-    let urlApiSyncMember =  HostConfig.libHost + "/1/ent/sync_member"
-    let urlApiGetMemberFileLink =  HostConfig.libHost + "/1/ent/get_member_file_link"
+    var urlApiGetGroups =  ""
+    var urlApiGetMembers =  ""
+    var urlApiGetMember =  ""
+    var urlApiGetRoles =  ""
+    var urlApiSyncMember =  ""
+    var urlApiGetMemberFileLink =  ""
 //    let urlApiGetMemberByOutId =  HostConfig.libHost + "/1/ent/get_member_by_out_id"
 
-    let urlApiAddSyncMember =  HostConfig.libHost + "/1/ent/add_sync_member"
-    let urlApiDelSyncMember =  HostConfig.libHost + "/1/ent/del_sync_member"
-    let urlApiAddSyncGroup =  HostConfig.libHost + "/1/ent/add_sync_group"
-    let urlApiDelSyncGroup =  HostConfig.libHost + "/1/ent/del_sync_group"
-    let urlApiAddSyncGroupMember =  HostConfig.libHost + "/1/ent/add_sync_group_member"
-    let urlApiDelSyncGroupMember =  HostConfig.libHost + "/1/ent/del_sync_group_member"
-    let urlApiGetGroupMembers =  HostConfig.libHost + "/1/ent/get_group_members"
-    
+    var urlApiAddSyncMember =  ""
+    var urlApiDelSyncMember =  ""
+    var urlApiAddSyncGroup =  ""
+    var urlApiDelSyncGroup =  ""
+    var urlApiAddSyncGroupMember =  ""
+    var urlApiDelSyncGroupMember =  ""
+    var urlApiGetGroupMembers =  ""
+
     public override init(clientId: String, clientSecret: String,isEnt:Bool) {
         super.init(clientId:clientId,clientSecret:clientSecret,isEnt:isEnt)
+        urlApiGetGroups =  HostConfig.libHost + "/1/ent/get_groups"
+        urlApiGetMembers =  HostConfig.libHost + "/1/ent/get_members"
+        urlApiGetMember =  HostConfig.libHost + "/1/ent/get_member"
+        urlApiGetRoles =  HostConfig.libHost + "/1/ent/get_roles"
+        urlApiSyncMember =  HostConfig.libHost + "/1/ent/sync_member"
+        urlApiGetMemberFileLink =  HostConfig.libHost + "/1/ent/get_member_file_link"
+        urlApiAddSyncMember =  HostConfig.libHost + "/1/ent/add_sync_member"
+        urlApiDelSyncMember =  HostConfig.libHost + "/1/ent/del_sync_member"
+        urlApiAddSyncGroup =  HostConfig.libHost + "/1/ent/add_sync_group"
+        urlApiDelSyncGroup =  HostConfig.libHost + "/1/ent/del_sync_group"
+        urlApiAddSyncGroupMember =  HostConfig.libHost + "/1/ent/add_sync_group_member"
+        urlApiDelSyncGroupMember =  HostConfig.libHost + "/1/ent/del_sync_group_member"
+        urlApiGetGroupMembers =  HostConfig.libHost + "/1/ent/get_group_members"
     }
     
     public init(clientId: String, clientSecret: String,isEnt:Bool,token:String) {
