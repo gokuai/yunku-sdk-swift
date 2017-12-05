@@ -22,7 +22,7 @@ open class ParentEngine: SignAbility {
         urlApiToken = HostConfig.oauthHost + "/oauth2/token2"
     }
 
-    open func accessToken(_ username:String, password:String) -> Dictionary<String, AnyObject> {
+    @objc open func accessToken(_ username:String, password:String) -> Dictionary<String, AnyObject> {
         let url = urlApiToken;
         let methodString = "POST"
         var params = Dictionary<String, String?>()

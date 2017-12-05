@@ -26,7 +26,7 @@ open class EntFileManager: SignAbility {
     var _orgClientId = ""
     let queue = DispatchQueue(label: "YunkuSwiftSDKQueue", attributes: [])
 
-    public init(orgClientId: String, orgClientSecret: String) {
+    @objc public init(orgClientId: String, orgClientSecret: String) {
         super.init()
         _orgClientId = orgClientId
         _clientSecret = orgClientSecret
@@ -48,7 +48,7 @@ open class EntFileManager: SignAbility {
     }
 
     //MARK:获取文件列表
-    open func getFileList(_ start: Int, fullPath: String) -> Dictionary<String, AnyObject> {
+    @objc open func getFileList(_ start: Int, fullPath: String) -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiFilelist
         var params = Dictionary<String, String?>()
@@ -61,7 +61,7 @@ open class EntFileManager: SignAbility {
     }
 
     //MARK:获取更新列表
-    open func getUpdateList(_ isCompare: Bool, fetchDateline: Int) -> Dictionary<String, AnyObject> {
+    @objc open func getUpdateList(_ isCompare: Bool, fetchDateline: Int) -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiUpdateCount
         var params = Dictionary<String, String?>()
@@ -76,7 +76,7 @@ open class EntFileManager: SignAbility {
     }
 
     //MARK:获取文件信息
-    open func getFileInfo(_ fullPath: String, type: NetType) -> Dictionary<String, AnyObject> {
+    @objc open func getFileInfo(_ fullPath: String, type: NetType) -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiFileInfo
         var params = Dictionary<String, String?>()
@@ -96,7 +96,7 @@ open class EntFileManager: SignAbility {
     }
 
     //MARK:创建文件夹
-    open func createFolder(_ fullPath: String, opName: String) -> Dictionary<String, AnyObject> {
+    @objc open func createFolder(_ fullPath: String, opName: String) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiCreateFolder
         var params = Dictionary<String, String?>()
@@ -109,7 +109,7 @@ open class EntFileManager: SignAbility {
     }
 
     //MARK:文件分块上传
-    open func uploadByBlock(_ localPath: String, fullPath: String, opName: String, opId: Int, overwrite: Bool, delegate: UploadCallBack) -> UploadManager {
+    @objc open func uploadByBlock(_ localPath: String, fullPath: String, opName: String, opId: Int, overwrite: Bool, delegate: UploadCallBack) -> UploadManager {
 
         let uploadManager = UploadManager(apiUrl: self.urlApiCreateFile, localPath: localPath, fullPath: fullPath, opName: opName, opId: opId, orgClientId: self._orgClientId, dateline: Utils.getUnixDateline(), clientSecret: self._clientSecret, overWirte: overwrite)
 
@@ -123,7 +123,7 @@ open class EntFileManager: SignAbility {
     }
 
     //MARK:将文件数据上传至
-    open func createFile(_ fullPath: String, opName: String, data: Data) -> Dictionary<String, AnyObject> {
+    @objc open func createFile(_ fullPath: String, opName: String, data: Data) -> Dictionary<String, AnyObject> {
         if data.count > uploadLimitSize {
             LogPrint.error("The file more than 50 MB is not be allowed")
             return Dictionary<String, AnyObject>()
@@ -182,7 +182,7 @@ open class EntFileManager: SignAbility {
     }
 
     //MARK: 删除文件
-    open func del(_ fullPaths: String, opName: String) -> Dictionary<String, AnyObject> {
+    @objc open func del(_ fullPaths: String, opName: String) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiDelFile
         var params = Dictionary<String, String?>()
@@ -195,7 +195,7 @@ open class EntFileManager: SignAbility {
     }
 
     //MARK:移动文件
-    open func move(_ fullPath: String, destFullPath: String, opName: String) -> Dictionary<String, AnyObject> {
+    @objc open func move(_ fullPath: String, destFullPath: String, opName: String) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiMoveFile
         var params = Dictionary<String, String?>()
@@ -209,7 +209,7 @@ open class EntFileManager: SignAbility {
     }
 
     //MARK:获取文件链接
-    open func link(_ fullPath: String, deadline: Int, authType: AuthType, password: String?) -> Dictionary<String, AnyObject> {
+    @objc open func link(_ fullPath: String, deadline: Int, authType: AuthType, password: String?) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiLinkFile
         var params = Dictionary<String, String?>()
@@ -231,7 +231,7 @@ open class EntFileManager: SignAbility {
     }
 
     //MARK:发送消息
-    open func sendmsg(_ title: String, text: String, image: String?, linkUrl: String?, opName: String) -> Dictionary<String, AnyObject> {
+    @objc open func sendmsg(_ title: String, text: String, image: String?, linkUrl: String?, opName: String) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiSendmsg
         var params = Dictionary<String, String?>()
@@ -247,7 +247,7 @@ open class EntFileManager: SignAbility {
     }
 
     //MARK:获取当前库所有外链
-    open func links(_ fileOnly: Bool) -> Dictionary<String, AnyObject> {
+    @objc open func links(_ fileOnly: Bool) -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiGetLink
         var params = Dictionary<String, String?>()
@@ -262,7 +262,7 @@ open class EntFileManager: SignAbility {
     }
 
     //MARK:文件更新数量
-    open func getUpdateCounts(_ beginDateline: Int, endDateline: Int, showDelete: Bool) -> Dictionary<String, AnyObject> {
+    @objc open func getUpdateCounts(_ beginDateline: Int, endDateline: Int, showDelete: Bool) -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiUpdateCount
         var params = Dictionary<String, String?>()
@@ -276,7 +276,7 @@ open class EntFileManager: SignAbility {
     }
 
     //MARK:通过链接上传文件
-    open func createFileByUrl(_ fullPath: String, opId: Int, opName: String!, overwrite: Bool, fileUrl: String) -> Dictionary<String, AnyObject> {
+    @objc open func createFileByUrl(_ fullPath: String, opId: Int, opName: String!, overwrite: Bool, fileUrl: String) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiCreateFileByUrl
         var params = Dictionary<String, String?>()
@@ -295,7 +295,7 @@ open class EntFileManager: SignAbility {
     }
 
     //MARK:获取上传地址
-    open func getUploadServers() -> Dictionary<String, AnyObject> {
+    @objc open func getUploadServers() -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiUploadSevers
         var params = Dictionary<String, String?>()
@@ -306,7 +306,7 @@ open class EntFileManager: SignAbility {
     }
 
 
-    open func getServerSite(_ type: String) -> Dictionary<String, AnyObject> {
+    @objc open func getServerSite(_ type: String) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiUpdateCount
         var params = Dictionary<String, String?>()
@@ -318,7 +318,7 @@ open class EntFileManager: SignAbility {
     }
 
     //MARK:复制一个EntFileManager
-    open func clone() -> EntFileManager {
+    @objc open func clone() -> EntFileManager {
         return EntFileManager(orgClientId: _orgClientId, orgClientSecret: _clientSecret)
     }
 

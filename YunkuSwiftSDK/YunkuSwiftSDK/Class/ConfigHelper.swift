@@ -13,17 +13,17 @@ import Foundation
     var _apiHost = ""
     var _apiLibHost = ""
     
-    func apihost(apiHost:String) -> ConfigHelper{
+    @objc public func apihost(apiHost:String) -> ConfigHelper{
         _apiHost = apiHost
         return self
     }
     
-    func apiLibHost(apiLibHost:String) -> ConfigHelper {
+    @objc public func apiLibHost(apiLibHost:String) -> ConfigHelper {
         _apiLibHost = apiLibHost
         return self
     }
     
-    func config() ->  Void {
+   @objc public func config() ->  Void {
         HostConfig.libHost = _apiLibHost
         HostConfig.oauthHost = _apiHost
     }

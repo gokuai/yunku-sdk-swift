@@ -4,9 +4,13 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>.gitignore</key>
+		<data>
+		M3FFtM95DoHEjDs447E/67cObho=
+		</data>
 		<key>Headers/YunkuSwiftSDK-Swift.h</key>
 		<data>
-		L6OvcCCklR4qXEO55y0IkEamE3I=
+		Tb1zcZ/6/KHimFNt8A8J2qbjPxc=
 		</data>
 		<key>Headers/YunkuSwiftSDK.h</key>
 		<data>
@@ -14,40 +18,51 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		9DfWfjoghOgyPcwvHxSyjXqAOrs=
+		ObUMJItfePCf6jgV6ri/4olVQPI=
 		</data>
 		<key>Modules/YunkuSwiftSDK.swiftmodule/i386.swiftdoc</key>
 		<data>
-		qGD+c/8koZr7T7zaZF+sRVENPZ0=
+		QOxIM/33qAT6N7du3LK1GKSSHrE=
 		</data>
 		<key>Modules/YunkuSwiftSDK.swiftmodule/i386.swiftmodule</key>
 		<data>
-		0CVTKwMeagk0nLAqe4d8oCZBAJ4=
+		p9hEkQK73YZMkfI6cYE38VFuCiE=
 		</data>
 		<key>Modules/YunkuSwiftSDK.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		MgRAHOYfMMPj9d5Mj7I9ElvVdsE=
+		0DSXOUgFr7alkTbME9xC0NLT048=
 		</data>
 		<key>Modules/YunkuSwiftSDK.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		bY2I7UJbpOUdFwilOFYYo08IF3w=
+		31+dvMjVqrjpSZOVbouplD+MXEY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		ltsB+Rp1eDyHvigdAp1CDUA03cc=
+		sNcxUBp352UC8ceFxJ1hyMpdR/k=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>.gitignore</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			M3FFtM95DoHEjDs447E/67cObho=
+			</data>
+			<key>hash2</key>
+			<data>
+			fAilOE+4uN19WI3G63CkREkJFkSKHJrS0j/6uSRo2qQ=
+			</data>
+		</dict>
 		<key>Headers/YunkuSwiftSDK-Swift.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			L6OvcCCklR4qXEO55y0IkEamE3I=
+			Tb1zcZ/6/KHimFNt8A8J2qbjPxc=
 			</data>
 			<key>hash2</key>
 			<data>
-			8k1B3PkwSXGeawB9K7rHdkGNFXF2UB2m5D1i4ww3ITc=
+			mDlqq5vP6zgrlk9ShWuCj7ntoRDiBAYy4BGzN7kiyBE=
 			</data>
 		</dict>
 		<key>Headers/YunkuSwiftSDK.h</key>
@@ -65,55 +80,55 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			qGD+c/8koZr7T7zaZF+sRVENPZ0=
+			QOxIM/33qAT6N7du3LK1GKSSHrE=
 			</data>
 			<key>hash2</key>
 			<data>
-			P6YUsL9FZz5a9XQiZhrxSkKeYPrD1104h6ICeLnnyX0=
+			UM4QxfqvpG3C/ig3YtWot1FrsO+4oABH6qwDqYTmGeU=
 			</data>
 		</dict>
 		<key>Modules/YunkuSwiftSDK.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			0CVTKwMeagk0nLAqe4d8oCZBAJ4=
+			p9hEkQK73YZMkfI6cYE38VFuCiE=
 			</data>
 			<key>hash2</key>
 			<data>
-			AyI3fT8uExAkAP0b8OsRfyXAb2gbrOWItZePHvt1jE0=
+			UfsAP5oW/IKFTEbH62hQIukgnPK4zpCri+Y1lfEHkaM=
 			</data>
 		</dict>
 		<key>Modules/YunkuSwiftSDK.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			MgRAHOYfMMPj9d5Mj7I9ElvVdsE=
+			0DSXOUgFr7alkTbME9xC0NLT048=
 			</data>
 			<key>hash2</key>
 			<data>
-			rV+0E5fgDbC3f6yi+Q1SGJ6G/4u9AUeIDJSpvV6ZKz8=
+			4a8TXShMO7ik1BYQPSZk+2W8ZFkwSVRdrCxIigfa5n4=
 			</data>
 		</dict>
 		<key>Modules/YunkuSwiftSDK.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			bY2I7UJbpOUdFwilOFYYo08IF3w=
+			31+dvMjVqrjpSZOVbouplD+MXEY=
 			</data>
 			<key>hash2</key>
 			<data>
-			qmtvkthoh/tIUy0X5VY2e/LHuDFPNY63PgYHmoKw3Jc=
+			/MyeZNjEivN836g4qdKKe5IeIPojoW1IEPFTs2eszvM=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ltsB+Rp1eDyHvigdAp1CDUA03cc=
+			sNcxUBp352UC8ceFxJ1hyMpdR/k=
 			</data>
 			<key>hash2</key>
 			<data>
-			lueteBswYrNRJVhhoulzSTShFSJZc1swo58Z6k55OwU=
+			MNGzWwMC79K85yLpU2jQeVFEphcv2RoEp6dL0sYLnqU=
 			</data>
 		</dict>
 	</dict>

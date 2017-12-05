@@ -10,9 +10,9 @@ import Foundation
     static let connectTimeOut: TimeInterval = 30
 
     //如果想打印日志，则在外部调用设置为true
-    open static var logPrint = true
+    @objc open static var logPrint = true
     //设定输入日志的等级
-    open static var logLevel = LogLevel.error
+    @objc open static var logLevel = LogLevel.error
 }
 
 //MARK:日志等级

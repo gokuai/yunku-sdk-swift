@@ -20,12 +20,16 @@ class ViewController: UIViewController,UploadCallBack{
 
         //设置是否打印日志
         Config.logPrint = true
+        
+        
         //设置日志等级
         Config.logLevel = LogLevel.info
         
         //=======库操作========//
         
-        _libManager = EntLibManager(clientId: OauthConfig.clientId, clientSecret: OauthConfig.clientSecret, isEnt: true);
+        ConfigHelper().apihost(apiHost: "http://yk3-api-ent.gokuai.com").apiLibHost(apiLibHost:"http://yk3-api.gokuai.com").config()
+        
+        _libManager = EntLibManager(clientId: OauthConfig.clientId, clientSecret: OauthConfig.clientSecret, isEnt: true)
         
         //获取token 认证
         deserializeReturn(_libManager!.accessToken(OauthConfig.username,password: OauthConfig.password))

@@ -24,7 +24,7 @@ open class EntLibManager: ParentEngine {
     var urlApiSet = ""
     var urlApiGetInfo = ""
 
-    public override init(clientId: String, clientSecret: String,isEnt:Bool) {
+    @objc public override init(clientId: String, clientSecret: String,isEnt:Bool) {
         super.init(clientId: clientId, clientSecret: clientSecret,isEnt:isEnt)
         urlApiCreateLib = HostConfig.libHost + "/1/org/create"
         urlApiGetLibList = HostConfig.libHost + "/1/org/ls"
@@ -44,7 +44,7 @@ open class EntLibManager: ParentEngine {
         urlApiGetInfo = HostConfig.libHost + "/1/org/info"
     }
 
-    public init(clientId: String, clientSecret: String,isEnt:Bool,token:String) {
+    @objc public init(clientId: String, clientSecret: String,isEnt:Bool,token:String) {
         super.init(clientId: clientId, clientSecret: clientSecret,isEnt:isEnt)
         self._token = token
     }
@@ -52,7 +52,7 @@ open class EntLibManager: ParentEngine {
     
 
     //MARK:创建库
-    open func create(_ orgName: String, orgCapacity: String?, storagePointName: String?, orgDesc: String?, orgLogo: String?) -> Dictionary<String, AnyObject> {
+    @objc open func create(_ orgName: String, orgCapacity: String?, storagePointName: String?, orgDesc: String?, orgLogo: String?) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiCreateLib
         var params = Dictionary<String, String?>()
@@ -68,7 +68,7 @@ open class EntLibManager: ParentEngine {
     }
 
     //MARK:获取库列表
-    open func getLibList() -> Dictionary<String, AnyObject> {
+    @objc open func getLibList() -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiGetLibList
         var params = Dictionary<String, String?>()
@@ -79,7 +79,7 @@ open class EntLibManager: ParentEngine {
     }
 
     //MARK:绑定库
-    open func bindLib(_ orgId: Int, title: String?, linkUrl: String?) -> Dictionary<String, AnyObject> {
+    @objc open func bindLib(_ orgId: Int, title: String?, linkUrl: String?) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiBind
         var params = Dictionary<String, String?>()
@@ -94,7 +94,7 @@ open class EntLibManager: ParentEngine {
     }
 
     //MARK: 取消绑定
-    open func unbindLib(_ orgClientId: String) -> Dictionary<String, AnyObject> {
+    @objc open func unbindLib(_ orgClientId: String) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiUnbind
         var params = Dictionary<String, String?>()
@@ -106,7 +106,7 @@ open class EntLibManager: ParentEngine {
     }
 
     //MARK:获取库成员列表
-    open func getMembers(_ start: Int, size: Int, orgId: Int) -> Dictionary<String, AnyObject> {
+    @objc open func getMembers(_ start: Int, size: Int, orgId: Int) -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiGetMembers
         var params = Dictionary<String, String?>()
@@ -120,7 +120,7 @@ open class EntLibManager: ParentEngine {
     }
 
     //MARK:添加成员
-    open func addMembers(_ orgId: Int, roleId: Int, memberIds: [String]) -> Dictionary<String, AnyObject> {
+    @objc open func addMembers(_ orgId: Int, roleId: Int, memberIds: [String]) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiAddMembers
         var params = Dictionary<String, String?>()
@@ -134,7 +134,7 @@ open class EntLibManager: ParentEngine {
     }
 
     //MARK:修改库成员角色
-    open func setMemberRole(_ orgId: Int, roleId: Int, memberIds: [String]) -> Dictionary<String, AnyObject> {
+    @objc open func setMemberRole(_ orgId: Int, roleId: Int, memberIds: [String]) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiSetMemberRole
         var params = Dictionary<String, String?>()
@@ -148,7 +148,7 @@ open class EntLibManager: ParentEngine {
     }
 
     //MARK:删除库成员
-    open func delMember(_ orgId: Int, memberIds: [String]) -> Dictionary<String, AnyObject> {
+    @objc open func delMember(_ orgId: Int, memberIds: [String]) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiDelMember
         var params = Dictionary<String, String?>()
@@ -161,7 +161,7 @@ open class EntLibManager: ParentEngine {
     }
 
     //MARK:获取库分组列表
-    open func getGroups(_ orgId: Int) -> Dictionary<String, AnyObject> {
+    @objc open func getGroups(_ orgId: Int) -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiGetGroups
         var params = Dictionary<String, String?>()
@@ -173,7 +173,7 @@ open class EntLibManager: ParentEngine {
     }
 
     //MARK:库上添加分组
-    open func addGroup(_ orgId: Int, groupId: Int, roleId: Int) -> Dictionary<String, AnyObject> {
+    @objc open func addGroup(_ orgId: Int, groupId: Int, roleId: Int) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiAddGroup
         var params = Dictionary<String, String?>()
@@ -187,7 +187,7 @@ open class EntLibManager: ParentEngine {
     }
 
     //MARK:删除库上的分组
-    open func delGroup(_ orgId: Int, groupId: Int) -> Dictionary<String, AnyObject> {
+    @objc open func delGroup(_ orgId: Int, groupId: Int) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiDelGroup
         var params = Dictionary<String, String?>()
@@ -200,7 +200,7 @@ open class EntLibManager: ParentEngine {
     }
 
     //MARK:修改库上分组的角色
-    open func setGroupRole(_ orgId: Int, groupId: Int, roleId: Int) -> Dictionary<String, AnyObject> {
+    @objc open func setGroupRole(_ orgId: Int, groupId: Int, roleId: Int) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiSetGroupRole
         var params = Dictionary<String, String?>()
@@ -215,7 +215,7 @@ open class EntLibManager: ParentEngine {
     
 
     //MARK:删除库
-    open func destroy(_ orgClientId: String) -> Dictionary<String, AnyObject> {
+    @objc open func destroy(_ orgClientId: String) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiDestroy
         var params = Dictionary<String, String?>()
@@ -228,7 +228,7 @@ open class EntLibManager: ParentEngine {
 
 
     //MARK:修改库信息
-    open func set(_ orgId: Int, orgName: String?, orgCapacity: String?, orgDes: String?, orgLogo: String?) -> Dictionary<String, AnyObject> {
+    @objc open func set(_ orgId: Int, orgName: String?, orgCapacity: String?, orgDes: String?, orgLogo: String?) -> Dictionary<String, AnyObject> {
         let method = "POST"
         let url = urlApiSet
         var params = Dictionary<String, String?>()
@@ -244,7 +244,7 @@ open class EntLibManager: ParentEngine {
     }
 
     //MARK:查询库成员信息
-    open func getMember(_ orgId:Int,type:MemberType,ids:[String]) -> Dictionary<String, AnyObject>  {
+    @objc open func getMember(_ orgId:Int,type:MemberType,ids:[String]) -> Dictionary<String, AnyObject>  {
         let method = "GET"
         let url = urlApiGetMember
         var params = Dictionary<String, String?>()
@@ -258,7 +258,7 @@ open class EntLibManager: ParentEngine {
     }
 
     //MARK:获取库信息
-    open func getInfo(_ orgId:Int) -> Dictionary<String, AnyObject> {
+    @objc open func getInfo(_ orgId:Int) -> Dictionary<String, AnyObject> {
         let method = "GET"
         let url = urlApiGetInfo
         var params = Dictionary<String, String?>()
@@ -270,7 +270,7 @@ open class EntLibManager: ParentEngine {
     }
 
     //MARK:复制一个 EntLibManager
-    open func clone() -> EntLibManager {
+    @objc open func clone() -> EntLibManager {
         return EntLibManager(clientId: _clientId, clientSecret: _clientId,isEnt: _isEnt)
     }
 

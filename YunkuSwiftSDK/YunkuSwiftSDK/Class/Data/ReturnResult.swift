@@ -10,8 +10,8 @@ import Foundation
     internal static let keyCode = "code"
     internal static let keyResult = "return_result"
 
-    open var result: Dictionary<String, AnyObject>!
-    open var code = 0
+    @objc open var result: Dictionary<String, AnyObject>!
+    @objc open var code = 0
 
     override init() {
     }
@@ -21,7 +21,7 @@ import Foundation
         self.result = result
     }
 
-    open class func create(_ dic: Dictionary<String, AnyObject>) -> ReturnResult {
+    @objc open class func create(_ dic: Dictionary<String, AnyObject>) -> ReturnResult {
         let code = dic[keyCode] as? Int
         var result = dic[keyResult] as? Dictionary<String, AnyObject>
 
