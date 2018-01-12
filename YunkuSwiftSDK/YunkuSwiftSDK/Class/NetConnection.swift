@@ -100,7 +100,9 @@ import Foundation
         
         var returnResult = Dictionary<String, AnyObject>()
         returnResult[ReturnResult.keyCode] = httpcode as AnyObject
-        returnResult[ReturnResult.keyResult] = jsonResult as AnyObject
+        if jsonResult != nil {
+            returnResult[ReturnResult.keyResult] = jsonResult as AnyObject
+        }
         return returnResult
  
     }
