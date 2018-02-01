@@ -32,7 +32,7 @@ open class ParentEngine: SignAbility {
         if username.range(of: "\\") != nil || username.range(of: "/") != nil{
             passwordEncode = Utils.byteArrayToBase64([UInt8](username.utf8))
         }else{
-            passwordEncode = password.md5
+            passwordEncode = password.md5()
         }
         
         params["password"] = passwordEncode

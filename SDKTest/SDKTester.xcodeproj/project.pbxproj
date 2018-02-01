@@ -7,27 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA220041202331B000F2454B /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA220040202331AC00F2454B /* CryptoSwift.framework */; };
+		CA220042202331B000F2454B /* CryptoSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CA220040202331AC00F2454B /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CA71D9FC1B1C32B6004E119A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA71D9FB1B1C32B6004E119A /* AppDelegate.swift */; };
 		CA71D9FF1B1C32B6004E119A /* TestLib.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CA71D9FD1B1C32B6004E119A /* TestLib.xcdatamodeld */; };
 		CA71DA011B1C32B6004E119A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA71DA001B1C32B6004E119A /* ViewController.swift */; };
 		CA71DA041B1C32B6004E119A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA71DA021B1C32B6004E119A /* Main.storyboard */; };
 		CA71DA061B1C32B6004E119A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA71DA051B1C32B6004E119A /* Images.xcassets */; };
 		CA71DA091B1C32B6004E119A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA71DA071B1C32B6004E119A /* LaunchScreen.xib */; };
-		CA71DA151B1C32B6004E119A /* SDKTesterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA71DA141B1C32B6004E119A /* SDKTesterTests.swift */; };
 		CA74CB021B1EF84E00807C5A /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA74CB011B1EF84E00807C5A /* BaseData.swift */; };
 		CAB037C91B332D8200E84824 /* OauthConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB037C81B332D8200E84824 /* OauthConfig.swift */; };
 		CABC04451B3A4F2100FCD0C3 /* YunkuSwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CABC043D1B3A4B1100FCD0C3 /* YunkuSwiftSDK.framework */; };
 		CAC65E841C880B010005D36D /* YunkuSwiftSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CABC043D1B3A4B1100FCD0C3 /* YunkuSwiftSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CAC65E851C880B010005D36D /* CommonCrypto.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAC65E681C87FC350005D36D /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CA71DA0F1B1C32B6004E119A /* PBXContainerItemProxy */ = {
+		CA22003F202331AC00F2454B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = CA71D9EE1B1C32B6004E119A /* Project object */;
+			containerPortal = CABC04371B3A4B1100FCD0C3 /* YunkuSwiftSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CA22FFA02023132100F2454B;
+			remoteInfo = CryptoSwift;
+		};
+		CA220043202331B100F2454B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CABC04371B3A4B1100FCD0C3 /* YunkuSwiftSDK.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = CA71D9F51B1C32B6004E119A;
-			remoteInfo = TestLib;
+			remoteGlobalIDString = CA22FF9F2023132100F2454B;
+			remoteInfo = CryptoSwift;
 		};
 		CABC043C1B3A4B1100FCD0C3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -43,20 +50,6 @@
 			remoteGlobalIDString = CA1427D61B185A1800CC0302;
 			remoteInfo = YunkuSwiftSDK;
 		};
-		CAC65E671C87FC350005D36D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CABC04371B3A4B1100FCD0C3 /* YunkuSwiftSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CAC65E411C87E3EE0005D36D;
-			remoteInfo = CommonCrypto;
-		};
-		CAC65E691C87FC350005D36D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CABC04371B3A4B1100FCD0C3 /* YunkuSwiftSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CAC65E4A1C87E3EE0005D36D;
-			remoteInfo = CommonCryptoTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,7 +60,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				CAC65E841C880B010005D36D /* YunkuSwiftSDK.framework in CopyFiles */,
-				CAC65E851C880B010005D36D /* CommonCrypto.framework in CopyFiles */,
+				CA220042202331B000F2454B /* CryptoSwift.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,9 +75,6 @@
 		CA71DA031B1C32B6004E119A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CA71DA051B1C32B6004E119A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CA71DA081B1C32B6004E119A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		CA71DA0E1B1C32B6004E119A /* SDKTesterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SDKTesterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CA71DA131B1C32B6004E119A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CA71DA141B1C32B6004E119A /* SDKTesterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKTesterTests.swift; sourceTree = "<group>"; };
 		CA74CB011B1EF84E00807C5A /* BaseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseData.swift; sourceTree = "<group>"; };
 		CAB037C81B332D8200E84824 /* OauthConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OauthConfig.swift; sourceTree = "<group>"; };
 		CABC04371B3A4B1100FCD0C3 /* YunkuSwiftSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = YunkuSwiftSDK.xcodeproj; path = ../YunkuSwiftSDK/YunkuSwiftSDK.xcodeproj; sourceTree = "<group>"; };
@@ -96,13 +86,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CABC04451B3A4F2100FCD0C3 /* YunkuSwiftSDK.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CA71DA0B1B1C32B6004E119A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				CA220041202331B000F2454B /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +98,6 @@
 			children = (
 				CABC04371B3A4B1100FCD0C3 /* YunkuSwiftSDK.xcodeproj */,
 				CA71D9F81B1C32B6004E119A /* SDKTester */,
-				CA71DA111B1C32B6004E119A /* SDKTester */,
 				CA71D9F71B1C32B6004E119A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -123,7 +106,6 @@
 			isa = PBXGroup;
 			children = (
 				CA71D9F61B1C32B6004E119A /* SDKTester.app */,
-				CA71DA0E1B1C32B6004E119A /* SDKTesterTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -153,30 +135,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		CA71DA111B1C32B6004E119A /* SDKTester */ = {
-			isa = PBXGroup;
-			children = (
-				CA71DA141B1C32B6004E119A /* SDKTesterTests.swift */,
-				CA71DA121B1C32B6004E119A /* Supporting Files */,
-			);
-			name = SDKTester;
-			path = TestLibTests;
-			sourceTree = "<group>";
-		};
-		CA71DA121B1C32B6004E119A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				CA71DA131B1C32B6004E119A /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		CABC04381B3A4B1100FCD0C3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				CABC043D1B3A4B1100FCD0C3 /* YunkuSwiftSDK.framework */,
-				CAC65E681C87FC350005D36D /* CommonCrypto.framework */,
-				CAC65E6A1C87FC350005D36D /* CommonCryptoTests.xctest */,
+				CA220040202331AC00F2454B /* CryptoSwift.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -197,29 +160,12 @@
 			);
 			dependencies = (
 				CABC04421B3A4F1C00FCD0C3 /* PBXTargetDependency */,
+				CA220044202331B100F2454B /* PBXTargetDependency */,
 			);
 			name = SDKTester;
 			productName = TestLib;
 			productReference = CA71D9F61B1C32B6004E119A /* SDKTester.app */;
 			productType = "com.apple.product-type.application";
-		};
-		CA71DA0D1B1C32B6004E119A /* SDKTesterTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CA71DA1B1B1C32B6004E119A /* Build configuration list for PBXNativeTarget "SDKTesterTests" */;
-			buildPhases = (
-				CA71DA0A1B1C32B6004E119A /* Sources */,
-				CA71DA0B1B1C32B6004E119A /* Frameworks */,
-				CA71DA0C1B1C32B6004E119A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CA71DA101B1C32B6004E119A /* PBXTargetDependency */,
-			);
-			name = SDKTesterTests;
-			productName = TestLibTests;
-			productReference = CA71DA0E1B1C32B6004E119A /* SDKTesterTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -234,12 +180,9 @@
 				TargetAttributes = {
 					CA71D9F51B1C32B6004E119A = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 7F58SN6633;
+						DevelopmentTeam = 24N4P5U529;
 						LastSwiftMigration = 0830;
-					};
-					CA71DA0D1B1C32B6004E119A = {
-						CreatedOnToolsVersion = 6.3.1;
-						TestTargetID = CA71D9F51B1C32B6004E119A;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -263,31 +206,23 @@
 			projectRoot = "";
 			targets = (
 				CA71D9F51B1C32B6004E119A /* SDKTester */,
-				CA71DA0D1B1C32B6004E119A /* SDKTesterTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		CA220040202331AC00F2454B /* CryptoSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CryptoSwift.framework;
+			remoteRef = CA22003F202331AC00F2454B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		CABC043D1B3A4B1100FCD0C3 /* YunkuSwiftSDK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = YunkuSwiftSDK.framework;
 			remoteRef = CABC043C1B3A4B1100FCD0C3 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CAC65E681C87FC350005D36D /* CommonCrypto.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CommonCrypto.framework;
-			remoteRef = CAC65E671C87FC350005D36D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CAC65E6A1C87FC350005D36D /* CommonCryptoTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = CommonCryptoTests.xctest;
-			remoteRef = CAC65E691C87FC350005D36D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -300,13 +235,6 @@
 				CA71DA041B1C32B6004E119A /* Main.storyboard in Resources */,
 				CA71DA091B1C32B6004E119A /* LaunchScreen.xib in Resources */,
 				CA71DA061B1C32B6004E119A /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CA71DA0C1B1C32B6004E119A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,21 +253,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CA71DA0A1B1C32B6004E119A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CA71DA151B1C32B6004E119A /* SDKTesterTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		CA71DA101B1C32B6004E119A /* PBXTargetDependency */ = {
+		CA220044202331B100F2454B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CA71D9F51B1C32B6004E119A /* SDKTester */;
-			targetProxy = CA71DA0F1B1C32B6004E119A /* PBXContainerItemProxy */;
+			name = CryptoSwift;
+			targetProxy = CA220043202331B100F2454B /* PBXContainerItemProxy */;
 		};
 		CABC04421B3A4F1C00FCD0C3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -453,70 +373,47 @@
 		CA71DA191B1C32B6004E119A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7F58SN6633;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 24N4P5U529;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = TestLib/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Brandon.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gokuai.tester;
 				PRODUCT_NAME = SDKTester;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		CA71DA1A1B1C32B6004E119A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7F58SN6633;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 24N4P5U529;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = TestLib/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Brandon.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gokuai.tester;
 				PRODUCT_NAME = SDKTester;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		CA71DA1C1B1C32B6004E119A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = TestLibTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Brandon.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = SDKTesterTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestLib.app/TestLib";
-			};
-			name = Debug;
-		};
-		CA71DA1D1B1C32B6004E119A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = TestLibTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Brandon.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = SDKTesterTests;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestLib.app/TestLib";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -537,15 +434,6 @@
 			buildConfigurations = (
 				CA71DA191B1C32B6004E119A /* Debug */,
 				CA71DA1A1B1C32B6004E119A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CA71DA1B1B1C32B6004E119A /* Build configuration list for PBXNativeTarget "SDKTesterTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CA71DA1C1B1C32B6004E119A /* Debug */,
-				CA71DA1D1B1C32B6004E119A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

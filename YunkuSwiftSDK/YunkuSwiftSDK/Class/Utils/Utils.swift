@@ -4,7 +4,8 @@
 //
 
 import Foundation
-import CommonCrypto
+import CryptoSwift
+//import CommonCrypto
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
 // Consider refactoring the code to use the non-optional operators.
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -71,14 +72,29 @@ open class Utils {
         
         while handler?.offsetInFile < fileSize{
             let readData = handler?.readData(ofLength: partSize)
-
-            let ptr = (readData! as NSData).bytes.bindMemory(to: UInt8.self, capacity: readData!.count)
-             let bytes = UnsafeBufferPointer<UInt8>(start: ptr, count: (readData?.count)!)
-            sha1.append(bytes)
+//            let ptr = (readData! as NSData).bytes.bindMemory(to: UInt8.self, capacity: readData!.count)
+            var buffer = [UInt8](repeating:0,count: readData!.count)
+            (readData! as NSData).getBytes(&buffer, length: readData!.count)
+            
+            do{
+                try sha1.update(withBytes: buffer)
+            }catch(let e){
+                LogPrint.error(NetConnection.logTag,msg:e)
+            }
+            
+        }
+    
+        var s:String = "";
+        
+        var  bytesArray = [UInt8]()
+        
+        do{
+            bytesArray = try sha1.finish()
+            
+        }catch(let e){
+            LogPrint.error(NetConnection.logTag,msg:e)
         }
         
-        var s:String = "";
-        let  bytesArray = sha1.finish()
         for byte in bytesArray {
             s = s + String(format:"%02x", byte)
         }

@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YunkuSwiftSDK'
-  s.version          = '1.0.11'
-  s.summary          = 'Pod first init'
+  s.version          = '1.0.12'
+  s.summary          = '修复无网络情况状态，会发生崩溃的问题'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?

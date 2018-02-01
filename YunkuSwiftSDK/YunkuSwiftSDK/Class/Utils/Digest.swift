@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CommonCrypto
+//import CommonCrypto
 
 /// Digest is an immutable object representing a completed digest. Use the Digest
 /// object to fetch the completed digest in various forms.
