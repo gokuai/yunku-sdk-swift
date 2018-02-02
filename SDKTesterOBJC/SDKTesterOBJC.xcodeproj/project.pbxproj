@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA22004D20240AD200F2454B /* YunkuSwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA22004B20240AD200F2454B /* YunkuSwiftSDK.framework */; };
+		CA22004E20240AD200F2454B /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA22004C20240AD200F2454B /* CryptoSwift.framework */; };
+		CA22004F20240B0300F2454B /* CryptoSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CA22004C20240AD200F2454B /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CA22005020240B0300F2454B /* YunkuSwiftSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CA22004B20240AD200F2454B /* YunkuSwiftSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CAC64FFA1B39392100B4E5B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC64FF91B39392100B4E5B4 /* main.m */; };
 		CAC64FFD1B39392100B4E5B4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC64FFC1B39392100B4E5B4 /* AppDelegate.m */; };
 		CAC650001B39392100B4E5B4 /* SDKTesterOBJC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CAC64FFE1B39392100B4E5B4 /* SDKTesterOBJC.xcdatamodeld */; };
@@ -15,10 +19,6 @@
 		CAC650081B39392100B4E5B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAC650071B39392100B4E5B4 /* Images.xcassets */; };
 		CAC6500B1B39392100B4E5B4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAC650091B39392100B4E5B4 /* LaunchScreen.xib */; };
 		CAC650171B39392100B4E5B4 /* SDKTesterOBJCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC650161B39392100B4E5B4 /* SDKTesterOBJCTests.m */; };
-		CAC65E6D1C88020A0005D36D /* YunkuSwiftSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC65E6C1C88020A0005D36D /* YunkuSwiftSDK.framework */; };
-		CAC65E6F1C88035E0005D36D /* YunkuSwiftSDK.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAC65E6C1C88020A0005D36D /* YunkuSwiftSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CAC65E711C8803970005D36D /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAC65E701C8803970005D36D /* CommonCrypto.framework */; };
-		CAC65E721C88039E0005D36D /* CommonCrypto.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CAC65E701C8803970005D36D /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +38,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CAC65E721C88039E0005D36D /* CommonCrypto.framework in CopyFiles */,
-				CAC65E6F1C88035E0005D36D /* YunkuSwiftSDK.framework in CopyFiles */,
+				CA22004F20240B0300F2454B /* CryptoSwift.framework in CopyFiles */,
+				CA22005020240B0300F2454B /* YunkuSwiftSDK.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +56,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CA22004B20240AD200F2454B /* YunkuSwiftSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YunkuSwiftSDK.framework; sourceTree = "<group>"; };
+		CA22004C20240AD200F2454B /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CryptoSwift.framework; sourceTree = "<group>"; };
 		CAC64FF41B39392100B4E5B4 /* SDKTesterOBJC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDKTesterOBJC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAC64FF81B39392100B4E5B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CAC64FF91B39392100B4E5B4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -72,8 +74,6 @@
 		CAC650161B39392100B4E5B4 /* SDKTesterOBJCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDKTesterOBJCTests.m; sourceTree = "<group>"; };
 		CAC650771B39614000B4E5B4 /* Constant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		CAC650831B3966E400B4E5B4 /* SDKTesterOBJC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SDKTesterOBJC-Bridging-Header.h"; sourceTree = "<group>"; };
-		CAC65E6C1C88020A0005D36D /* YunkuSwiftSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YunkuSwiftSDK.framework; sourceTree = "<group>"; };
-		CAC65E701C8803970005D36D /* CommonCrypto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CommonCrypto.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +81,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAC65E711C8803970005D36D /* CommonCrypto.framework in Frameworks */,
-				CAC65E6D1C88020A0005D36D /* YunkuSwiftSDK.framework in Frameworks */,
+				CA22004D20240AD200F2454B /* YunkuSwiftSDK.framework in Frameworks */,
+				CA22004E20240AD200F2454B /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,8 +99,8 @@
 		CAC64FEB1B39392100B4E5B4 = {
 			isa = PBXGroup;
 			children = (
-				CAC65E701C8803970005D36D /* CommonCrypto.framework */,
-				CAC65E6C1C88020A0005D36D /* YunkuSwiftSDK.framework */,
+				CA22004C20240AD200F2454B /* CryptoSwift.framework */,
+				CA22004B20240AD200F2454B /* YunkuSwiftSDK.framework */,
 				CAC64FF61B39392100B4E5B4 /* SDKTesterOBJC */,
 				CAC650131B39392100B4E5B4 /* SDKTesterOBJCTests */,
 				CAC64FF51B39392100B4E5B4 /* Products */,
@@ -405,6 +405,7 @@
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/SDKTester-gnpenpocichxzwfrhurpavxdymjd/Build/Products/Debug-iphonesimulator",
 				);
 				INFOPLIST_FILE = SDKTesterOBJC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -434,6 +435,7 @@
 					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/SDKTester-gnpenpocichxzwfrhurpavxdymjd/Build/Products/Debug-iphonesimulator",
 				);
 				INFOPLIST_FILE = SDKTesterOBJC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
