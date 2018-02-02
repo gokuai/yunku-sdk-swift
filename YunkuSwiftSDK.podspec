@@ -29,7 +29,7 @@ DESC
 #  s.social_media_url = 'http://www.gokuai.com'
 
   s.platform = :osx, '10.13'
-  s.platform = :ios, '9.0'
+  s.platform = :ios, '8.0'
 #  s.public_header_files = 'Headers/iOS/YunkuSwiftSDK.h'
   s.osx.source_files = 'YunkuSwiftSDK/YunkuSwiftSDK/Class/**/*'
   s.ios.source_files = 'YunkuSwiftSDK/YunkuSwiftSDK/Class/**/*'
