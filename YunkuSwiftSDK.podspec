@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YunkuSwiftSDK'
-  s.version          = '1.0.12'
-  s.summary          = '修复无网络情况状态，会发生崩溃的问题'
+  s.version          = '1.0.13'
+  s.summary          = '根据 appstore 审核标准更换 hmac 算法库'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -29,13 +29,13 @@ DESC
 #  s.social_media_url = 'http://www.gokuai.com'
 
   s.platform = :osx, '10.13'
-  s.platform = :ios, '8.0'
+  s.platform = :ios, '9.0'
 #  s.public_header_files = 'Headers/iOS/YunkuSwiftSDK.h'
   s.osx.source_files = 'YunkuSwiftSDK/YunkuSwiftSDK/Class/**/*'
   s.ios.source_files = 'YunkuSwiftSDK/YunkuSwiftSDK/Class/**/*'
 #  s.frameworks = 'YunkuSwiftSDK'
-  s.osx.vendored_frameworks = 'Frameworks/CommonCrypto.framework'
-  s.ios.vendored_frameworks = 'Frameworks/CommonCrypto.framework'
+  s.osx.vendored_frameworks = 'Frameworks/CryptoSwift.framework'
+  s.ios.vendored_frameworks = 'Frameworks/CryptoSwift.framework'
 
 #  s.libraries = "libz.tbd"
 
