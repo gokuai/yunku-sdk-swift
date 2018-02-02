@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6B6E2B90B4A848A80ECAC682 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6B6E20C3DC679DFA94D328E9 /* .gitignore */; };
 		6B6E2C5B3D3EF3BCBB688A6B /* CRC32.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6E22BC40E5DEB281F788AC /* CRC32.swift */; };
 		CA1427DD1B185A1800CC0302 /* YunkuSwiftSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = CA1427DC1B185A1800CC0302 /* YunkuSwiftSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CA2200002023137300F2454B /* ECB.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA22FFBE2023136F00F2454B /* ECB.swift */; };
@@ -116,7 +115,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6B6E20C3DC679DFA94D328E9 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		6B6E22BC40E5DEB281F788AC /* CRC32.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRC32.swift; sourceTree = "<group>"; };
 		CA1427D71B185A1800CC0302 /* YunkuSwiftSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YunkuSwiftSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1427DB1B185A1800CC0302 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -247,7 +245,6 @@
 				CA22FFA12023132100F2454B /* CryptoSwift */,
 				CAC65E611C87E44F0005D36D /* Frameworks */,
 				CA1427D81B185A1800CC0302 /* Products */,
-				6B6E20C3DC679DFA94D328E9 /* .gitignore */,
 			);
 			sourceTree = "<group>";
 		};
@@ -570,7 +567,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B6E2B90B4A848A80ECAC682 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
