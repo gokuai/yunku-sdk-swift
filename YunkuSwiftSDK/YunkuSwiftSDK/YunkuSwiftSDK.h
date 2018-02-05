@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 goukuai. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import Foundation;
 
 //! Project version number for YunkuSwiftSDK.
 FOUNDATION_EXPORT double YunkuSwiftSDKVersionNumber;

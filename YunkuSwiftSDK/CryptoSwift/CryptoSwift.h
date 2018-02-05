@@ -6,7 +6,7 @@
 //  Copyright © 2018年 goukuai. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import Foundation;
 
 //! Project version number for CryptoSwift.
 FOUNDATION_EXPORT double CryptoSwiftVersionNumber;
